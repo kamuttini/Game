@@ -1,0 +1,18 @@
+cmake_minimum_required(VERSION 3.14)
+project(game)
+
+set(CMAKE_CXX_STANDARD 14)
+
+add_subdirectory(test)
+
+set (SOURCE_FILES main.cpp GameCharacter.cpp GameCharacter.h DynamicComponent.cpp DynamicComponent.h StaticComponent.cpp StaticComponent.h Weapon.cpp Weapon.h Player.cpp Player.h Game.cpp Game.h Enemy.cpp Enemy.h Subject.h collisionObserver.h)
+
+add_executable(game ${SOURCE_FILES})
+add_library( core ${SOURCE_FILES})
+target_link_libraries(game core)
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
+find_package(SFML 2.5 REQUIRED system window graphics network audio)
+if (SFML_FOUND)
+    include_directories(${SFML_INCLUDE_DIR})
+    target_link_libraries( game ${SFML_LIBRARIES})
+endif()
