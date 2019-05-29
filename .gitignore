@@ -1,0 +1,6 @@
+# ignore following folders
+
+
+/cmake-build-debug/
+/cmake_modules/
+/.idea/
