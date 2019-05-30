@@ -50,8 +50,11 @@ void Player::getInput() {
         move();
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && attackClock.getElapsedTime()>attackDelay)
+    {
         isFighting= true;
+        attackClock.restart();
+    }
 }
 
 void Player::dead() {

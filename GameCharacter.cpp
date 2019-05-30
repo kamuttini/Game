@@ -8,14 +8,9 @@ GameCharacter::GameCharacter(int s): DynamicComponent (s), isFighting(false){}
 
 void GameCharacter::fight() {
 
-    if ( attackClock.getElapsedTime()> attackDelay)
-    {
-        if( isFighting) {
-            weaponVec.push_back(std::unique_ptr<Weapon>(new Weapon(targetList, direction, rect.getPosition())));
-            isFighting = false;
-        }
-
-        attackClock.restart();
+    if( isFighting) {
+        weaponVec.push_back(std::unique_ptr<Weapon>(new Weapon(targetList, direction, rect.getPosition())));
+        isFighting = false;
     }
 
     for (int i = 0; i < weaponVec.size(); i++)

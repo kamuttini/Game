@@ -23,11 +23,13 @@ void Enemy::randomPosition()
 }
 
 void Enemy::fight(){
-    if ( attackClock.getElapsedTime()> attackDelay)
-    {
-        isFighting=true;
-    }
+    float distance;
+    distance= sqrt(pow(posX- player->getRect().getPosition().x, 2) + pow(posY- player->getRect().getPosition().y, 2));
 
+    if (attackClock.getElapsedTime() > attackDelay && distance<200) {
+        isFighting = true;
+        attackClock.restart();
+    }
     GameCharacter::fight();
 }
 
