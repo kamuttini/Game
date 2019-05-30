@@ -6,6 +6,7 @@
 
 Player::Player()
 {
+    attackDelay=sf::seconds(0.5);
     rect.setPosition(600,600);
     rect.setFillColor(sf::Color::Red);
 }
@@ -48,7 +49,18 @@ void Player::getInput() {
         direction = left;
         move();
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         isFighting= true;
+}
+
+void Player::dead() {
+    if(isDestroyed) {
+        rect.setFillColor(sf::Color::Black);
+        // game.stop()
     }
+}
+
+void Player::updateSituation(CollisionObserver* enemy) {
+    targetList.push_back(enemy);
 }

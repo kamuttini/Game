@@ -6,15 +6,15 @@
 #define GAME_SUBJECT_H
 
 #include <list>
-#include "collisionObserver.h"
+#include "CollisionObserver.h"
 
 
 class Subject {
 public:
     Subject(){};
     virtual ~Subject(){};
-    virtual void addObserver (collisionObserver* o) = 0;
-    virtual void removeObserver(collisionObserver* o) = 0;
+    virtual void addObserver (CollisionObserver* o) = 0;
+    virtual void removeObserver(CollisionObserver* o) = 0;
     virtual void notify() const=0;
 
 };

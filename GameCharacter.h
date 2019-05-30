@@ -10,22 +10,21 @@
 #include "Subject.h"
 
 
-class GameCharacter: public DynamicComponent,public collisionObserver{
+class GameCharacter: public DynamicComponent,public CollisionObserver{
 
 public:
     GameCharacter(int s=5);
     typedef std::unique_ptr<Weapon>  weaponPtr;
+
     virtual void fight();
-    std::vector<weaponPtr> weaponVec;
     void update(sf::FloatRect weapon);
 
-    //int getHp() const;
-    //void setHp(int hp);
+    std::vector<weaponPtr> weaponVec;
+    std::list<CollisionObserver*> targetList;
 
 protected:
-    Subject* enemyWeapons;
     bool isFighting;
-    //int hp;
-
+    sf::Clock attackClock;
+    sf::Time attackDelay;
 };
 #endif //GAME_GAMECHARACTER_H

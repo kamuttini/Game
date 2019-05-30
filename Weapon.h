@@ -13,18 +13,15 @@ class Weapon: public DynamicComponent, public Subject  {
     enum id {cafe, pasta, book};
 
 public:
-    Weapon (orientation targetDir, sf::Vector2f vector, int s=7);
+
+    Weapon (std::list<CollisionObserver*>& targetList, orientation targetDir, sf::Vector2f vector, int s=7);
     void attack();
-    void addObserver(collisionObserver* o) override ;
-    void removeObserver(collisionObserver* o) override;
+    void addObserver(CollisionObserver* o) override ;
+    void removeObserver(CollisionObserver* o) override;
     void notify() const override;
 
-    // void makeSound();
-
 protected:
-    std::list<collisionObserver*> characters;
-    // int damage;
-    //id ID;
+    std::list<CollisionObserver*> characters;
 };
 
 

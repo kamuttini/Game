@@ -14,8 +14,9 @@ public:
     Player ();
     void move();
     void getInput();
+    void dead();
+    void updateSituation(CollisionObserver* enemy);
 
-private:
 };
 
 

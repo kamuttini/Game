@@ -11,14 +11,13 @@
 
 class Enemy: public GameCharacter {
 public:
-    Enemy(Player* player1);
-    void setPosition();
+    Enemy(Player* player);
+    void randomPosition();
+    void fight() override;
     void destroy(std::vector<std::unique_ptr<Enemy>>& enemy,std::vector<std::unique_ptr<Enemy>>::const_iterator iter1);
-    void fight() override ;
 
-private:
+protected:
     Player* player;
-    sf::Clock attackClock;
 };
 
 

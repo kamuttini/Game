@@ -6,10 +6,10 @@
 #define GAME_COLLISIONOBSERVER_H
 
 
-class collisionObserver {
+class CollisionObserver {
 public:
-    collisionObserver(){};
-    virtual ~collisionObserver(){};
+    CollisionObserver(){};
+    virtual ~CollisionObserver(){};
     virtual void update(sf::FloatRect rect)=0;
 
 };
