@@ -15,7 +15,7 @@ public:
     virtual ~Subject(){};
     virtual void addObserver (CollisionObserver* o) = 0;
     virtual void removeObserver(CollisionObserver* o) = 0;
-    virtual void notify() const=0;
+    virtual void notify() =0;
 
 };
 

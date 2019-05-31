@@ -6,11 +6,15 @@
 #define GAME_COLLISIONOBSERVER_H
 
 
+#include "Weapon.h"
+
+class Weapon;
+
 class CollisionObserver {
 public:
     CollisionObserver(){};
     virtual ~CollisionObserver(){};
-    virtual void update(sf::FloatRect rect)=0;
+    virtual void update(Weapon* weapon)=0;
 
 };
 

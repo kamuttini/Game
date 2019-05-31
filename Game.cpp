@@ -82,6 +82,21 @@ void Game::update() {
         i++;
     }
 
+                                                                                    //delete enemy if collision detected
+    for(i=0; i!=enemyVec.size(); i++)
+    {
+        for(int j=0; j!= enemyVec[i]->weaponVec.size(); j++)
+        {
+            std::vector<std::unique_ptr<Weapon>>::const_iterator iter2=enemyVec[i]->weaponVec.begin();
+            if(enemyVec[i]->weaponVec[j]->isDestroyed1())
+            {
+                enemyVec[i]->weaponVec[j]->destroy(enemyVec[i]->weaponVec,iter2);
+                break;
+            }
+            iter2++;
+        }
+    }
+
     player.dead();
 }
 

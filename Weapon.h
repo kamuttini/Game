@@ -18,7 +18,8 @@ public:
     void attack();
     void addObserver(CollisionObserver* o) override ;
     void removeObserver(CollisionObserver* o) override;
-    void notify() const override;
+    void notify() override;
+    void destroy(std::vector<std::unique_ptr<Weapon>>& enemy,std::vector<std::unique_ptr<Weapon>>::const_iterator iter1);
 
 protected:
     std::list<CollisionObserver*> characters;

@@ -17,7 +17,7 @@ public:
     typedef std::unique_ptr<Weapon>  weaponPtr;
 
     virtual void fight(sf::Vector2f targetDir);
-    void update(sf::FloatRect weapon);
+    void update(Weapon* weapon);
 
     std::vector<weaponPtr> weaponVec;
     std::list<CollisionObserver*> targetList;

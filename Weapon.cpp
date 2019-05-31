@@ -24,10 +24,10 @@ void Weapon::removeObserver(CollisionObserver *o){
     characters.remove(o);
 }
 
-void Weapon::notify() const{
+void Weapon::notify() {
     std::list<CollisionObserver *, std::allocator<CollisionObserver *>>::const_iterator itr;
     for(itr = characters.begin(); characters.end() != itr; itr++){
-        (*itr)->update(rect.getGlobalBounds());
+        (*itr)->update(this);
     }
 }
 
@@ -36,7 +36,10 @@ void Weapon::attack() {
     notify();
 }
 
+void Weapon::destroy(std::vector<std::unique_ptr<Weapon>>& weapon,std::vector<std::unique_ptr<Weapon>>::const_iterator iter) {
 
+    weapon.erase(iter);
+}
 
 
 

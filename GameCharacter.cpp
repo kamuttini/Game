@@ -19,9 +19,10 @@ void GameCharacter::fight(sf::Vector2f targetDir) {
     }
 }
 
-void GameCharacter::update(sf::FloatRect weapon) {
-    if (weapon.intersects( rect.getGlobalBounds()))
+void GameCharacter::update(Weapon* weapon) {
+    if (weapon->getRect().getGlobalBounds().intersects( rect.getGlobalBounds()))
     {
         isDestroyed=true;
+        weapon->setIsDestroyed(true);
     }
 }
