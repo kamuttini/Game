@@ -24,7 +24,7 @@ public:
     void setSpeed(int speed);
 
 protected:
-    int speed;
+    float speed;
     orientation direction;
     bool isDestroyed;
 

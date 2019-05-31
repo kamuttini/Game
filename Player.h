@@ -14,9 +14,12 @@ public:
     Player ();
     void move();
     void getInput();
+    void fight();
     void dead();
     void updateSituation(CollisionObserver* enemy);
 
+protected:
+    sf::Vector2f movement;
 };
 
 

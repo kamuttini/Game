@@ -14,7 +14,7 @@ class Weapon: public DynamicComponent, public Subject  {
 
 public:
 
-    Weapon (std::list<CollisionObserver*>& targetList, orientation targetDir, sf::Vector2f vector, int s=7);
+    Weapon (std::list<CollisionObserver*>& targetList, sf::Vector2f targetDir, sf::Vector2f position, int s=3);
     void attack();
     void addObserver(CollisionObserver* o) override ;
     void removeObserver(CollisionObserver* o) override;
@@ -22,6 +22,7 @@ public:
 
 protected:
     std::list<CollisionObserver*> characters;
+    sf::Vector2f targetDir;
 };
 
 

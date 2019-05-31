@@ -16,7 +16,7 @@ public:
     GameCharacter(int s=5);
     typedef std::unique_ptr<Weapon>  weaponPtr;
 
-    virtual void fight();
+    virtual void fight(sf::Vector2f targetDir);
     void update(sf::FloatRect weapon);
 
     std::vector<weaponPtr> weaponVec;

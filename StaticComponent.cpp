@@ -7,7 +7,6 @@
 
 StaticComponent:: StaticComponent(){
     rect.setSize(sf::Vector2f(30.f,51.f));
-
 }
 
 void StaticComponent::draw(sf::RenderWindow &window)

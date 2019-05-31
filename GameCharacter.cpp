@@ -6,10 +6,10 @@
 
 GameCharacter::GameCharacter(int s): DynamicComponent (s), isFighting(false){}
 
-void GameCharacter::fight() {
+void GameCharacter::fight(sf::Vector2f targetDir) {
 
     if( isFighting) {
-        weaponVec.push_back(std::unique_ptr<Weapon>(new Weapon(targetList, direction, rect.getPosition())));
+        weaponVec.push_back(std::unique_ptr<Weapon>(new Weapon(targetList, targetDir, rect.getPosition())));
         isFighting = false;
     }
 

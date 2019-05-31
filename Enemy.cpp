@@ -22,15 +22,21 @@ void Enemy::randomPosition()
     rect.setPosition(posX,posY);
 }
 
-void Enemy::fight(){
+void Enemy::fight()
+{
     float distance;
     distance= sqrt(pow(posX- player->getRect().getPosition().x, 2) + pow(posY- player->getRect().getPosition().y, 2));
 
-    if (attackClock.getElapsedTime() > attackDelay && distance<200) {
+    if (attackClock.getElapsedTime() > attackDelay && distance<300) {
         isFighting = true;
         attackClock.restart();
     }
-    GameCharacter::fight();
+
+    sf::Vector2f playerDir;
+    playerDir.x=(player->getRect().getPosition().x-posX)/distance;
+    playerDir.y=(player->getRect().getPosition().y-posY)/ distance;
+
+    GameCharacter::fight(playerDir);
 }
 
 
