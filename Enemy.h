@@ -14,8 +14,10 @@ public:
     Enemy(Player* player);
     void fight();
     void destroy(std::vector<std::unique_ptr<Enemy>>& enemy,std::vector<std::unique_ptr<Enemy>>::const_iterator iter1);
+    std::vector<weaponPtr> weaponVec;
 
 private:
+    Factory weaponFactory;
     Player* player;
 };
 

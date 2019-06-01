@@ -5,7 +5,7 @@
 #include "Factory.h"
 #include "Enemy.h"
 
-std::unique_ptr<Weapon> Factory::createEnemyWeapon(std::list<CollisionObserver*>& targetList, sf::Vector2f targetDir, sf::Vector2f position) {
+std::unique_ptr<Weapon> Factory::createWeapon(std::list<CollisionObserver *> &targetList, sf::Vector2f targetDir, sf::Vector2f position) {
 
     std::unique_ptr<Weapon> weapon;
     weapon= std::unique_ptr<Weapon>(new Weapon(targetList,targetDir, position));

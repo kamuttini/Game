@@ -8,19 +8,6 @@
 
 GameCharacter::GameCharacter(int s): DynamicComponent (s), isFighting(false){}
 
-void GameCharacter::fight(sf::Vector2f targetDir) {
-
-    if( isFighting) {
-        weaponVec.push_back(std::unique_ptr<Weapon>(weaponFactory.createEnemyWeapon(targetList, targetDir, rect.getPosition())));
-        isFighting = false;
-    }
-
-    for (int i = 0; i < weaponVec.size(); i++)
-    {
-        weaponVec[i]->attack();
-    }
-}
-
 
 
 void GameCharacter::update(Weapon* weapon) {

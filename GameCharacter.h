@@ -17,14 +17,12 @@ public:
     GameCharacter(int s=15);
     typedef std::unique_ptr<Weapon>  weaponPtr;
 
-    virtual void fight(sf::Vector2f targetDir);
     virtual void update(Weapon* weapon);
+    virtual void fight()=0;
 
-    std::vector<weaponPtr> weaponVec;
     std::list<CollisionObserver*> targetList;
 
 protected:
-    Factory weaponFactory;
     bool isFighting;
     sf::Clock attackClock;
     sf::Time attackDelay;

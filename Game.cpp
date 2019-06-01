@@ -7,7 +7,7 @@
 sf::Clock enemyClock;
 sf::Time enemyDelay=sf::seconds(3.f);
 sf::Clock playerWeaponClock;
-sf::Time playerWeaponDelay=sf::seconds(4.5f);
+sf::Time playerWeaponDelay=sf::seconds(2.5f);
 
 void Game::run(sf::RenderWindow& window)
 {
@@ -54,8 +54,8 @@ void Game::render(sf::RenderWindow& window)
     for (i = 0; i < weaponToCollect.size(); i++)
         weaponToCollect[i]->draw(window);
 
-    for (i = 0; i < player.weaponVec.size(); i++)
-        player.weaponVec[i]->draw(window);
+    for (i = 0; i < player.inventory.weaponVec.size(); i++)
+        player.inventory.weaponVec[i]->draw(window);
 
     player.draw(window);
     window.display();
@@ -114,11 +114,11 @@ void Game::update() {
     }
 
     i=0;
-    for (iter2=player.weaponVec.begin(); iter2!=player.weaponVec.end(); iter2++)      //delete weapon if collision detected
+    for (iter2=player.inventory.weaponVec.begin(); iter2!=player.inventory.weaponVec.end(); iter2++)      //delete weapon if collision detected
     {
-        if (player.weaponVec[i]->isDestroyed1())
+        if (player.inventory.weaponVec[i]->isDestroyed1())
         {
-            player.weaponVec[i]->destroy(player.weaponVec,iter2);
+            player.inventory.weaponVec[i]->destroy(player.inventory.weaponVec,iter2);
             break;
         }
         i++;

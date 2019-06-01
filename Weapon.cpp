@@ -45,6 +45,10 @@ void Weapon::destroy(std::vector<std::unique_ptr<Weapon>>& weapon,std::vector<st
     weapon.erase(iter);
 }
 
+std::unique_ptr<Weapon> Weapon::clone() const {
+
+    return std::unique_ptr<Weapon>( new Weapon(*this));
+}
 
 
 

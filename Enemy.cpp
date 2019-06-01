@@ -30,16 +30,25 @@ void Enemy::fight()
     playerDir.x=(player->getRect().getPosition().x-posX)/distance;
     playerDir.y=(player->getRect().getPosition().y-posY)/ distance;
 
-    GameCharacter::fight(playerDir);
+    if( isFighting) {
+        weaponVec.push_back(std::unique_ptr<Weapon>(
+                weaponFactory.createWeapon(targetList, playerDir, rect.getPosition())));
+        isFighting = false;
+    }
+
+    for (int i = 0; i < weaponVec.size(); i++)
+    {
+        weaponVec[i]->attack();
+    }
 }
 
 
 void Enemy::destroy(std::vector<std::unique_ptr<Enemy>>& enemy,std::vector<std::unique_ptr<Enemy>>::const_iterator iter1)
 {
     player->targetList.remove(this);
-    for(int i=0; i< player->weaponVec.size(); i++)
+    for(int i=0; i< player->inventory.weaponVec.size(); i++)
     {
-        player->weaponVec[i]->removeObserver(this);
+        player->inventory.weaponVec[i]->removeObserver(this);
     }
     enemy.erase(iter1);
 }

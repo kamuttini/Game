@@ -60,7 +60,15 @@ void Player::move() {
 
 void Player::fight() {
 
-    GameCharacter::fight(movement);
+    if( isFighting) {
+        inventory.useWeapon(targetList, movement, rect.getPosition());
+        isFighting = false;
+    }
+
+    for (int i = 0; i < inventory.weaponVec.size(); i++)
+    {
+        inventory.weaponVec[i]->attack();
+    }
 }
 
 void Player::dead() {
@@ -72,4 +80,21 @@ void Player::dead() {
 
 void Player::updateSituation(CollisionObserver* enemy) {
     targetList.push_back(enemy);
+}
+
+void Player::update(Weapon *weapon) {
+    if (weapon->getRect().getGlobalBounds().intersects( rect.getGlobalBounds()))
+    {
+        const std::type_info& type_info = typeid(*weapon);
+        if( type_info== typeid(PlayerWeapon))
+        {
+            inventory.addToCollection(*weapon);
+            weapon->setIsDestroyed(true);
+        }
+        else
+        {
+            isDestroyed=true;
+            weapon->setIsDestroyed(true);
+        }
+    }
 }
