@@ -11,15 +11,16 @@ class StaticComponent {
 
 public:
     StaticComponent();
+
+    void draw (sf::RenderWindow& window);
+    void randomPosition();
+
     int getPosX() const;
     void setPosX(int posX);
     int getPosY() const;
     void setPosY(int posY);
     const sf::RectangleShape &getRect() const;
     void setRect(const sf::RectangleShape &rect);
-
-    void draw (sf::RenderWindow& window);
-
 
 protected:
     int posX, posY;

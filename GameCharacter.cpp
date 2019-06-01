@@ -1,15 +1,17 @@
 //
 // Created by camut on 24/05/19.
 //
-
+#include <typeinfo>
 #include "GameCharacter.h"
+#include "Factory.h"
+
 
 GameCharacter::GameCharacter(int s): DynamicComponent (s), isFighting(false){}
 
 void GameCharacter::fight(sf::Vector2f targetDir) {
 
     if( isFighting) {
-        weaponVec.push_back(std::unique_ptr<Weapon>(new Weapon(targetList, targetDir, rect.getPosition())));
+        weaponVec.push_back(std::unique_ptr<Weapon>(weaponFactory.createEnemyWeapon(targetList, targetDir, rect.getPosition())));
         isFighting = false;
     }
 
@@ -19,10 +21,22 @@ void GameCharacter::fight(sf::Vector2f targetDir) {
     }
 }
 
+
+
 void GameCharacter::update(Weapon* weapon) {
     if (weapon->getRect().getGlobalBounds().intersects( rect.getGlobalBounds()))
     {
-        isDestroyed=true;
-        weapon->setIsDestroyed(true);
+        const std::type_info& type_info = typeid(*weapon);
+        if( type_info== typeid(PlayerWeapon))
+        {
+            weapon->setIsDestroyed(true);
+        }
+        else
+        {
+            isDestroyed=true;
+            weapon->setIsDestroyed(true);
+        }
     }
 }
+
+

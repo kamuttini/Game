@@ -14,13 +14,7 @@ Enemy:: Enemy(Player* player1): player(player1) {
     rect.setFillColor(sf::Color::Green);
 }
 
-void Enemy::randomPosition()
-{
-    srand((unsigned)time(0));
-    posX=rand()%1350;
-    posY=rand()%950;
-    rect.setPosition(posX,posY);
-}
+
 
 void Enemy::fight()
 {

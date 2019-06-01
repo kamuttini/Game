@@ -4,7 +4,7 @@
 
 #include "Player.h"
 
-Player::Player(): movement(0.f, 0.f)
+Player::Player(): movement(1.f, 0.f)
 {
     attackDelay=sf::seconds(0.5);
     rect.setPosition(600,600);

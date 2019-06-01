@@ -15,7 +15,7 @@ class DynamicComponent: public StaticComponent {
 public:
     enum orientation { down, up,left,right};
 
-    DynamicComponent(int s, orientation dir=down);
+    DynamicComponent(float s, orientation dir=down);
     orientation getDirection() const;
     void setDirection(orientation direction);
     bool isDestroyed1() const;

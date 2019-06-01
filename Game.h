@@ -5,21 +5,23 @@
 #ifndef GAME_GAME_H
 #define GAME_GAME_H
 
-
 #include <SFML/Graphics.hpp>
-#include "Player.h"
 #include "Enemy.h"
-typedef std::unique_ptr<Enemy>  enemyPtr;
 
 class Game {
 public:
+    typedef std::unique_ptr<Enemy>  enemyPtr;
+    typedef std::unique_ptr<PlayerWeapon> playerWeaponPtr;
     void run(sf::RenderWindow& window);
     void processEvents(sf::RenderWindow& window);
     void update();
     void render(sf::RenderWindow& window);
     std::vector<enemyPtr> enemyVec;
 
-protected:
+private:
+    Factory factory;
+    std::vector<playerWeaponPtr> weaponToCollect;
+
     Player player;
 };
 

@@ -7,7 +7,6 @@
 
 
 #include "GameCharacter.h"
-#include "Weapon.h"
 
 class Player: public GameCharacter {
 public:
@@ -18,7 +17,7 @@ public:
     void dead();
     void updateSituation(CollisionObserver* enemy);
 
-protected:
+private:
     sf::Vector2f movement;
 };
 

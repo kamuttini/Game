@@ -14,6 +14,14 @@ void StaticComponent::draw(sf::RenderWindow &window)
     window.draw(rect);
 }
 
+void StaticComponent::randomPosition()
+{
+    srand(clock());
+    posX=rand()%1350;
+    posY=rand()%950;
+    rect.setPosition(posX,posY);
+}
+
 int StaticComponent::getPosX() const {
     return posX;
 }

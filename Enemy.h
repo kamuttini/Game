@@ -12,11 +12,10 @@
 class Enemy: public GameCharacter {
 public:
     Enemy(Player* player);
-    void randomPosition();
     void fight();
     void destroy(std::vector<std::unique_ptr<Enemy>>& enemy,std::vector<std::unique_ptr<Enemy>>::const_iterator iter1);
 
-protected:
+private:
     Player* player;
 };
 

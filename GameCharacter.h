@@ -7,22 +7,24 @@
 
 #include "DynamicComponent.h"
 #include "Weapon.h"
-#include "Subject.h"
+#include "CollisionObserver.h"
+#include "Factory.h"
 
 
 class GameCharacter: public DynamicComponent,public CollisionObserver{
 
 public:
-    GameCharacter(int s=5);
+    GameCharacter(int s=15);
     typedef std::unique_ptr<Weapon>  weaponPtr;
 
     virtual void fight(sf::Vector2f targetDir);
-    void update(Weapon* weapon);
+    virtual void update(Weapon* weapon);
 
     std::vector<weaponPtr> weaponVec;
     std::list<CollisionObserver*> targetList;
 
 protected:
+    Factory weaponFactory;
     bool isFighting;
     sf::Clock attackClock;
     sf::Time attackDelay;

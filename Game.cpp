@@ -6,6 +6,8 @@
 
 sf::Clock enemyClock;
 sf::Time enemyDelay=sf::seconds(3.f);
+sf::Clock playerWeaponClock;
+sf::Time playerWeaponDelay=sf::seconds(4.5f);
 
 void Game::run(sf::RenderWindow& window)
 {
@@ -41,15 +43,19 @@ void Game::processEvents(sf::RenderWindow& window)
 void Game::render(sf::RenderWindow& window)
 {
     window.clear();
-    for (int i = 0; i < enemyVec.size(); i++)
-    {
+    int i,j;
+
+    for (i = 0; i < enemyVec.size(); i++){
         enemyVec[i]->draw(window);
-        for (int j = 0; j < enemyVec[i]->weaponVec.size(); j++)
+        for (j = 0; j < enemyVec[i]->weaponVec.size(); j++)
             enemyVec[i]->weaponVec[j]->draw(window);
     }
 
-    for (int d = 0; d < player.weaponVec.size(); d++)
-        player.weaponVec[d]->draw(window);
+    for (i = 0; i < weaponToCollect.size(); i++)
+        weaponToCollect[i]->draw(window);
+
+    for (i = 0; i < player.weaponVec.size(); i++)
+        player.weaponVec[i]->draw(window);
 
     player.draw(window);
     window.display();
@@ -60,17 +66,27 @@ void Game::update() {
 
     player.fight();
 
-    if( enemyClock.getElapsedTime()>=enemyDelay)                                    //generate enemy
-    {
-        enemyVec.push_back(std::unique_ptr<Enemy>(new Enemy(&player)));
-        enemyClock.restart();
+    int i=0;
+    for (i = 0; i < weaponToCollect.size(); i++) {
+        weaponToCollect[i]->notify();
+        weaponToCollect[i]->updateState();
     }
 
-    int i=0;
-    for( int i=0; i < enemyVec.size(); i++)                                         //generate enemyWeapon
+    if( enemyClock.getElapsedTime()>=enemyDelay)                                    //generate enemy
+    {
+        enemyVec.push_back(factory.createEnemy(&player));
+        enemyClock.restart();
+    }
+    if( playerWeaponClock.getElapsedTime()>=playerWeaponDelay)                     //generate playerWeapon
+    {
+        weaponToCollect.push_back(factory.createPlayerWeapon(&player));
+        playerWeaponClock.restart();
+    }
+
+    for( i=0; i < enemyVec.size(); i++)                                         //generate enemyWeapon
         enemyVec[i]->fight();
 
-    std::vector<std::unique_ptr<Enemy>>::const_iterator iter1;                      //delete enemy if collision detected
+    std::vector<std::unique_ptr<Enemy>>::const_iterator iter1;                  //delete enemy if collision detected
     i=0;
     for (iter1=enemyVec.begin(); iter1!=enemyVec.end(); iter1++)
     {
@@ -82,7 +98,7 @@ void Game::update() {
         i++;
     }
 
-    std::vector<std::unique_ptr<Weapon>>::const_iterator iter2;                            //delete enemy weapon if collision detected
+    std::vector<std::unique_ptr<Weapon>>::const_iterator iter2;                     //delete enemy weapon if collision detected
     for(i=0; i!=enemyVec.size(); i++)
     {
         for(int j=0; j!= enemyVec[i]->weaponVec.size(); j++)
@@ -98,7 +114,7 @@ void Game::update() {
     }
 
     i=0;
-    for (iter2=player.weaponVec.begin(); iter2!=player.weaponVec.end(); iter2++)
+    for (iter2=player.weaponVec.begin(); iter2!=player.weaponVec.end(); iter2++)      //delete weapon if collision detected
     {
         if (player.weaponVec[i]->isDestroyed1())
         {
@@ -106,6 +122,13 @@ void Game::update() {
             break;
         }
         i++;
+    }
+
+    std::vector<std::unique_ptr<PlayerWeapon>>::const_iterator iter3= weaponToCollect.begin();
+    for (i = 0; i < weaponToCollect.size(); i++) {
+        if (weaponToCollect[i]->isDestroyed1())
+            weaponToCollect[i]->destroy(weaponToCollect, iter3);
+        iter3++;
     }
 
     player.dead();
