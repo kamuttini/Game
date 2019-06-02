@@ -21,18 +21,19 @@ void Enemy::fight()
     float distance;
     distance= sqrt(pow(posX- player->getRect().getPosition().x, 2) + pow(posY- player->getRect().getPosition().y, 2));
 
+    sf::Vector2f playerDir;
+    playerDir.x=(player->getRect().getPosition().x-posX)/distance;
+    playerDir.y=(player->getRect().getPosition().y-posY)/ distance;
+    if(hp>1 && distance <300)
+        rect.move((playerDir));
+
     if (attackClock.getElapsedTime() > attackDelay && distance<300) {
         isFighting = true;
         attackClock.restart();
     }
 
-    sf::Vector2f playerDir;
-    playerDir.x=(player->getRect().getPosition().x-posX)/distance;
-    playerDir.y=(player->getRect().getPosition().y-posY)/ distance;
-
     if( isFighting) {
-        weaponVec.push_back(std::unique_ptr<Weapon>(
-                weaponFactory.createWeapon(targetList, playerDir, rect.getPosition())));
+        weaponVec.push_back(std::unique_ptr<Weapon>(weaponFactory.createWeapon(targetList, playerDir, rect.getPosition())));
         isFighting = false;
     }
 
