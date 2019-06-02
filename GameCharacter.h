@@ -14,7 +14,7 @@
 class GameCharacter: public DynamicComponent,public CollisionObserver{
 
 public:
-    GameCharacter(int s=15);
+    GameCharacter(int s=15, int h=2);
     typedef std::unique_ptr<Weapon>  weaponPtr;
 
     virtual void update(Weapon* weapon);
@@ -23,6 +23,7 @@ public:
     std::list<CollisionObserver*> targetList;
 
 protected:
+    int hp;
     bool isFighting;
     sf::Clock attackClock;
     sf::Time attackDelay;

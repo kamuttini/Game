@@ -93,8 +93,15 @@ void Player::update(Weapon *weapon) {
         }
         else
         {
-            isDestroyed=true;
-            weapon->setIsDestroyed(true);
+            if(hp>1)
+            {
+                hp--;
+                weapon->setIsDestroyed(true);
+            }
+            else{
+                isDestroyed=true;
+                weapon->setIsDestroyed(true);
+            }
         }
     }
 }
