@@ -2,11 +2,13 @@
 // Created by camut on 24/05/19.
 //
 
+#include <unistd.h>
 #include "Player.h"
 
-Player::Player(): movement(1.f, 0.f)
+Player::Player(Sidebar* sidebar): movement(1.f, 0.f), stats(sidebar)
 {
     attackDelay=sf::seconds(0.5);
+    addObserver(sidebar);
     rect.setPosition(600,600);
     rect.setFillColor(sf::Color::Red);
 }
@@ -72,11 +74,12 @@ void Player::fight() {
     }
 }
 
-void Player::dead() {
+bool Player::dead() {
     if(isDestroyed) {
-        rect.setFillColor(sf::Color::Black);
-        // game.stop()
+        delete(this);
+        return true;
     }
+    return false;
 }
 
 void Player::updateSituation(CollisionObserver* enemy) {
@@ -105,6 +108,7 @@ void Player::update(Weapon *weapon) {
                 isDestroyed=true;
                 weapon->setIsDestroyed(true);
                 stats->updateHp(hp);
+                sf::sleep(sf::seconds(1));
             }
         }
     }

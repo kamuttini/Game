@@ -9,23 +9,24 @@ sf::Time enemyDelay=sf::seconds(3.f);
 sf::Clock playerWeaponClock;
 sf::Time playerWeaponDelay=sf::seconds(2.5f);
 
-Game::Game(){
-    player.addObserver(&sidebar);
+Game::Game(sf::RenderWindow& window1):window(window1), menu(window1), gameOver(window1){
 }
 
 
-void Game::run(sf::RenderWindow& window)
+void Game::run()
 {
+    sidebar= new Sidebar;
+    player=new Player(sidebar);
     while (window.isOpen())
     {
-        processEvents(window);
+        processEvents();
         update();
-        render(window);
+        render();
     }
 }
 
 
-void Game::processEvents(sf::RenderWindow& window)
+void Game::processEvents()
 {
     sf::Event event;
 
@@ -36,10 +37,9 @@ void Game::processEvents(sf::RenderWindow& window)
             case sf::Event::KeyPressed:
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
                 {
-                    run(window);
-                    delete menu;
+                    run();
                 }
-                player.getInput();
+                player->getInput();
                 break;
 
             case sf::Event::Closed:
@@ -50,10 +50,10 @@ void Game::processEvents(sf::RenderWindow& window)
 }
 
 
-void Game::render(sf::RenderWindow& window)
+void Game::render()
 {
     window.clear();
-    sidebar.draw(window);
+    sidebar->draw(window);
 
     int i,j;
     for (i = 0; i < enemyVec.size(); i++){
@@ -65,17 +65,17 @@ void Game::render(sf::RenderWindow& window)
     for (i = 0; i < weaponToCollect.size(); i++)
         weaponToCollect[i]->draw(window);
 
-    for (i = 0; i < player.inventory.weaponVec.size(); i++)
-        player.inventory.weaponVec[i]->draw(window);
+    for (i = 0; i < player->inventory.weaponVec.size(); i++)
+        player->inventory.weaponVec[i]->draw(window);
 
-    player.draw(window);
+    player->draw(window);
     window.display();
 }
 
 
 void Game::update() {
 
-    player.fight();
+    player->fight();
 
     int i=0;
     for (i = 0; i < weaponToCollect.size(); i++) {
@@ -85,12 +85,12 @@ void Game::update() {
 
     if(enemyVec.size()<=5 && enemyClock.getElapsedTime()>=enemyDelay)                                    //generate enemy
     {
-        enemyVec.push_back(factory.createEnemy(&player));
+        enemyVec.push_back(factory.createEnemy(player));
         enemyClock.restart();
     }
     if( playerWeaponClock.getElapsedTime()>=playerWeaponDelay)                     //generate playerWeapon
     {
-        weaponToCollect.push_back(factory.createPlayerWeapon(&player));
+        weaponToCollect.push_back(factory.createPlayerWeapon(player));
         playerWeaponClock.restart();
     }
 
@@ -114,7 +114,7 @@ void Game::update() {
         enemyVec[i]->updateState();
     }
 
-    player.inventory.updateState();
+    player->inventory.updateState();
 
     std::vector<std::unique_ptr<PlayerWeapon>>::const_iterator iter3= weaponToCollect.begin();    //delete weapon if collision detected
     for (i = 0; i < weaponToCollect.size(); i++) {
@@ -123,17 +123,30 @@ void Game::update() {
         iter3++;
     }
 
-    player.dead();
+    if(player->dead())
+        stop();
 }
 
-void Game::start(sf::RenderWindow& window) {
-    menu= new MainMenu(window);
+void Game::start() {
     while (window.isOpen())
     {
-
-        processEvents(window);
+        processEvents();
         window.clear(sf::Color(86, 126, 199));
-        menu->draw(window);
+        menu.draw(window);
         window.display();
     }
+}
+
+void Game::stop() {
+    enemyVec.clear();
+    weaponToCollect.clear();
+    delete(sidebar);
+    while (window.isOpen())
+    {
+        processEvents();
+        window.clear();
+        gameOver.draw(window);
+        window.display();
+    }
+
 }

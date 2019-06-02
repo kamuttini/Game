@@ -21,7 +21,7 @@ protected:
     sf::Text startText;
     sf::Text enterText;
     sf::Font font;
-    sf::Vector2u TextureSize;  //Added to store texture size.
+    sf::Vector2u TextureSize;
     sf::Vector2u WindowSize;
 };
 

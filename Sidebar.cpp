@@ -7,8 +7,7 @@
 #include <iostream>
 
 
-Sidebar::Sidebar() {
-
+Sidebar::Sidebar (){
     font.loadFromFile("/home/camut/CLionProjects/game/assets/fonts/sf-atarian-system/Atarian/SFAtarianSystem.ttf");
     hpText.setFont(font);
     hpText.setString("HP: 2/2");

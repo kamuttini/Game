@@ -13,12 +13,12 @@
 
 class Player: public GameCharacter {
 public:
-    Player ();
+    Player (Sidebar* sidebar);
     void move();
     void getInput();
     void update(Weapon* weapon);
     void fight();
-    void dead();
+    bool dead();
     void updateSituation(CollisionObserver* enemy);
     void addObserver (Sidebar* o);
     Inventory inventory;

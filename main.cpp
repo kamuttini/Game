@@ -5,9 +5,9 @@
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(1400, 1000), "game window");
-    Game game;
+    Game game(window);
     window.setFramerateLimit(60);
-    game.start(window);
+    game.start();
 
     return 0;
 }
