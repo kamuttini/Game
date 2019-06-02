@@ -53,3 +53,17 @@ void Enemy::destroy(std::vector<std::unique_ptr<Enemy>>& enemy,std::vector<std::
     }
     enemy.erase(iter1);
 }
+
+void Enemy::updateState() {
+    std::vector<std::unique_ptr<Weapon>>::const_iterator iter2;
+    for(int j=0; j!=weaponVec.size(); j++)
+    {
+        iter2=weaponVec.begin();
+        if(weaponVec[j]->isDestroyed1())
+        {
+            weaponVec[j]->destroy(weaponVec,iter2);
+            break;
+        }
+        iter2++;
+    }
+}

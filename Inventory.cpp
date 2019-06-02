@@ -28,3 +28,17 @@ int Inventory::collectionSize() {
     return weaponCollection.size();
 }
 
+void Inventory::updateState() {
+    std::vector<std::unique_ptr<Weapon>>::const_iterator iter2;
+    int i=0;
+    for (iter2=weaponVec.begin(); iter2!=weaponVec.end(); iter2++)      //delete weapon if collision detected
+    {
+        if (weaponVec[i]->isDestroyed1())
+        {
+            weaponVec[i]->destroy(weaponVec,iter2);
+            break;
+        }
+        i++;
+    }
+}
+

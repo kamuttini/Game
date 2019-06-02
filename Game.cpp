@@ -104,33 +104,14 @@ void Game::update() {
         i++;
     }
 
-    std::vector<std::unique_ptr<Weapon>>::const_iterator iter2;                     //delete enemy weapon if collision detected
     for(i=0; i!=enemyVec.size(); i++)
     {
-        for(int j=0; j!= enemyVec[i]->weaponVec.size(); j++)
-        {
-            iter2=enemyVec[i]->weaponVec.begin();
-            if(enemyVec[i]->weaponVec[j]->isDestroyed1())
-            {
-                enemyVec[i]->weaponVec[j]->destroy(enemyVec[i]->weaponVec,iter2);
-                break;
-            }
-            iter2++;
-        }
+        enemyVec[i]->updateState();
     }
 
-    i=0;
-    for (iter2=player.inventory.weaponVec.begin(); iter2!=player.inventory.weaponVec.end(); iter2++)      //delete weapon if collision detected
-    {
-        if (player.inventory.weaponVec[i]->isDestroyed1())
-        {
-            player.inventory.weaponVec[i]->destroy(player.inventory.weaponVec,iter2);
-            break;
-        }
-        i++;
-    }
+    player.inventory.updateState();
 
-    std::vector<std::unique_ptr<PlayerWeapon>>::const_iterator iter3= weaponToCollect.begin();
+    std::vector<std::unique_ptr<PlayerWeapon>>::const_iterator iter3= weaponToCollect.begin();    //delete weapon if collision detected
     for (i = 0; i < weaponToCollect.size(); i++) {
         if (weaponToCollect[i]->isDestroyed1())
             weaponToCollect[i]->destroy(weaponToCollect, iter3);

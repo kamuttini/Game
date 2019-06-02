@@ -16,6 +16,7 @@ public:
     void removeWeapon();
     void useWeapon(std::list<CollisionObserver*>& targetList, sf::Vector2f targetDir, sf::Vector2f position);
     int collectionSize();
+    void updateState();
     std::vector<weaponPtr> weaponVec;
 
 private:
