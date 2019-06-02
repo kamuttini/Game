@@ -9,7 +9,7 @@ sf::Time enemyDelay=sf::seconds(3.f);
 sf::Clock playerWeaponClock;
 sf::Time playerWeaponDelay=sf::seconds(2.5f);
 
-Game::Game() {
+Game::Game(){
     player.addObserver(&sidebar);
 }
 
@@ -34,6 +34,11 @@ void Game::processEvents(sf::RenderWindow& window)
         switch(event.type)
         {
             case sf::Event::KeyPressed:
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+                {
+                    run(window);
+                    delete menu;
+                }
                 player.getInput();
                 break;
 
@@ -119,4 +124,16 @@ void Game::update() {
     }
 
     player.dead();
+}
+
+void Game::start(sf::RenderWindow& window) {
+    menu= new MainMenu(window);
+    while (window.isOpen())
+    {
+
+        processEvents(window);
+        window.clear(sf::Color(86, 126, 199));
+        menu->draw(window);
+        window.display();
+    }
 }

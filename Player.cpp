@@ -101,8 +101,10 @@ void Player::update(Weapon *weapon) {
                 stats->updateHp(hp);
             }
             else{
+                hp--;
                 isDestroyed=true;
                 weapon->setIsDestroyed(true);
+                stats->updateHp(hp);
             }
         }
     }
