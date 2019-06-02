@@ -30,4 +30,12 @@ void GameCharacter::update(Weapon* weapon) {
     }
 }
 
+int GameCharacter::getHp() const {
+    return hp;
+}
+
+void GameCharacter::setHp(int hp) {
+    GameCharacter::hp = hp;
+}
+
 

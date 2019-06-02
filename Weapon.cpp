@@ -11,7 +11,7 @@ Weapon:: Weapon(std::list<CollisionObserver*>& targetList, sf::Vector2f targetDi
     {
         addObserver(*iter);
     }
-
+    rect.setSize(sf::Vector2f(15.f,15.f));
     rect.setFillColor(sf::Color::White);
     rect.setPosition(position);
 }

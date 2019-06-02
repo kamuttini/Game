@@ -7,7 +7,6 @@
 
 #include "DynamicComponent.h"
 #include "Weapon.h"
-#include "CollisionObserver.h"
 #include "Factory.h"
 
 
@@ -22,8 +21,12 @@ public:
 
     std::list<CollisionObserver*> targetList;
 
+    int getHp() const;
+    void setHp(int hp);
+
 protected:
     int hp;
+
     bool isFighting;
     sf::Clock attackClock;
     sf::Time attackDelay;

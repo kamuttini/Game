@@ -24,3 +24,7 @@ void Inventory::removeWeapon() {
     weaponCollection[0]->destroy(weaponCollection, iter);
 }
 
+int Inventory::collectionSize() {
+    return weaponCollection.size();
+}
+

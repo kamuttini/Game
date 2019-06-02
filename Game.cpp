@@ -9,6 +9,11 @@ sf::Time enemyDelay=sf::seconds(3.f);
 sf::Clock playerWeaponClock;
 sf::Time playerWeaponDelay=sf::seconds(2.5f);
 
+Game::Game() {
+    player.addObserver(&sidebar);
+}
+
+
 void Game::run(sf::RenderWindow& window)
 {
     while (window.isOpen())
@@ -43,8 +48,9 @@ void Game::processEvents(sf::RenderWindow& window)
 void Game::render(sf::RenderWindow& window)
 {
     window.clear();
-    int i,j;
+    sidebar.draw(window);
 
+    int i,j;
     for (i = 0; i < enemyVec.size(); i++){
         enemyVec[i]->draw(window);
         for (j = 0; j < enemyVec[i]->weaponVec.size(); j++)
@@ -133,5 +139,3 @@ void Game::update() {
 
     player.dead();
 }
-
-

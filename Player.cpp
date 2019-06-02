@@ -68,6 +68,7 @@ void Player::fight() {
     for (int i = 0; i < inventory.weaponVec.size(); i++)
     {
         inventory.weaponVec[i]->attack();
+        stats->updateWeapons(inventory.collectionSize());
     }
 }
 
@@ -90,12 +91,14 @@ void Player::update(Weapon *weapon) {
         {
             inventory.addToCollection(*weapon);
             weapon->setIsDestroyed(true);
+            stats->updateWeapons(inventory.collectionSize());
         }
         else
         {
             if(hp>1){
                 hp--;
                 weapon->setIsDestroyed(true);
+                stats->updateHp(hp);
             }
             else{
                 isDestroyed=true;
@@ -104,3 +107,10 @@ void Player::update(Weapon *weapon) {
         }
     }
 }
+
+void Player::addObserver(Sidebar* o){
+    stats =o;
+}
+
+
+

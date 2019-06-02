@@ -7,6 +7,8 @@
 
 PlayerWeapon::PlayerWeapon(Player *player): Weapon(), targetList(player->targetList), caught(false)
 {
+    rect.setSize(sf::Vector2f(25.f,25.f));
+    rect.setFillColor(sf::Color::Yellow);
     randomPosition();
     CollisionObserver* target= player;
     addObserver(target);
