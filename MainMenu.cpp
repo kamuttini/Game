@@ -4,7 +4,7 @@
 
 #include "MainMenu.h"
 MainMenu::MainMenu(sf::RenderWindow& window1):  window(window1),
-                                                titleText("UNIVERISTY SURVIVAL",150, sf::Color::Blue),
+                                                titleText("UNIVERSITY SURVIVAL",150, sf::Color::Blue),
                                                 enterText("press ENTER to start",80, sf::Color::Blue)
 {
     texture.loadFromFile("assets/morgagni.jpg");
