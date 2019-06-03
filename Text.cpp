@@ -5,7 +5,7 @@
 #include "Text.h"
 
 Text::Text(std::string text1,int size,sf::Color color) {
-    font.loadFromFile("/home/camut/CLionProjects/game/assets/fonts/sf-atarian-system/Atarian/SFAtarianSystem.ttf");
+    font.loadFromFile("assets/fonts/sf-atarian-system/Atarian/SFAtarianSystem.ttf");
     text.setFont(font);
     text.setString(text1);
     text.setFillColor(color);

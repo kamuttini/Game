@@ -3,12 +3,11 @@
 //
 
 #include "MainMenu.h"
-
 MainMenu::MainMenu(sf::RenderWindow& window1):  window(window1),
                                                 titleText("UNIVERISTY SURVIVAL",150, sf::Color::Blue),
                                                 enterText("press ENTER to start",80, sf::Color::Blue)
 {
-    texture.loadFromFile("/home/camut/CLionProjects/game/assets/morgagni.jpg");
+    texture.loadFromFile("assets/morgagni.jpg");
     background.setTexture(texture);
     TextureSize = texture.getSize(); //Get size of texture.
     WindowSize = window.getSize();             //Get size of window.
