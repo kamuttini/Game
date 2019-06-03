@@ -13,19 +13,21 @@
 
 class Player: public GameCharacter {
 public:
-    Player (Sidebar* sidebar);
+    Player (Sidebar* sidebar, sf::Color=sf::Color::Red);
     void move();
     void getInput();
     void update(Weapon* weapon);
     void fight();
     bool dead();
     void updateSituation(CollisionObserver* enemy);
+    void updateState()override;
     void addObserver (Sidebar* o);
     Inventory inventory;
+    Sidebar* stats;
+
 
 private:
     sf::Vector2f movement;
-    Sidebar* stats;
 };
 
 

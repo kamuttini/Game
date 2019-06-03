@@ -3,26 +3,21 @@
 //
 
 #include "GameOver.h"
+#include <string>
 
-GameOver::GameOver(sf::RenderWindow& window1): window(window1) {
-
+GameOver::GameOver(sf::RenderWindow& window1, int score):  window(window1),
+                                                title("GAME OVER",150,sf::Color::Red),
+                                                enterText("press ENTER to replay",80, sf::Color::White),
+                                                scoreText("score: "+ std::to_string(score),70)
+{
     WindowSize = window.getSize();
-
-    font.loadFromFile("/home/camut/CLionProjects/game/assets/fonts/sf-atarian-system/Atarian/SFAtarianSystem.ttf");
-    text.setFont(font);
-    text.setString("GAME OVER");
-    text.setCharacterSize(150);
-    text.setFillColor(sf::Color::Red);
-    text.setPosition((window.getSize().x/2)-(text.getGlobalBounds().width/2),(window.getSize().y/2)-(text.getGlobalBounds().height/2));
-
-    enterText.setFont(font);
-    enterText.setString("press ENTER to replay");
-    enterText.setCharacterSize(80);
-    enterText.setFillColor(sf::Color::White);
-    enterText.setPosition((window.getSize().x/2)-(enterText.getGlobalBounds().width/2),(window.getSize().y/2)-(text.getGlobalBounds().height/2)+200);
+    title.setPosition((window.getSize().x/2)-(title.text.getGlobalBounds().width/2),(window.getSize().y/2)-(title.text.getGlobalBounds().height/2));
+    enterText.setPosition((window.getSize().x/2)-(enterText.text.getGlobalBounds().width/2),(window.getSize().y/2)-((title.text.getGlobalBounds().height/2)-200));
+    scoreText.setPosition((window.getSize().x/2)-(scoreText.text.getGlobalBounds().width/2),(window.getSize().y/2)-((title.text.getGlobalBounds().height/2)+200));
 }
 
 void GameOver::draw(sf::RenderWindow &window) {
-    window.draw(text);
-    window.draw(enterText);
+    title.draw(window);
+    enterText.draw(window);
+    scoreText.draw(window);
 }

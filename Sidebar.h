@@ -7,6 +7,7 @@
 
 
 #include <SFML/Graphics.hpp>
+#include "Text.h"
 class Player;
 class Sidebar {
 
@@ -15,10 +16,13 @@ public:
     void draw(sf::RenderWindow& window);
     void updateHp(int hp) ;
     void updateWeapons(int weapons);
+    void updateScore(int bonus);
+    int getScore();
 private:
-    sf::Text hpText;
-    sf::Text weaponsText;
-    sf::Font font;
+    int score;
+    Text hpText;
+    Text weaponsText;
+    Text scoreText;
 };
 
 

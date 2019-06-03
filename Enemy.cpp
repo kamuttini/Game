@@ -11,7 +11,6 @@ Enemy:: Enemy(Player* player1): player(player1) {
     player1->updateSituation(this);
     attackDelay=sf::seconds(2.f);
     randomPosition();
-    rect.setFillColor(sf::Color::Green);
 }
 
 
@@ -52,9 +51,34 @@ void Enemy::destroy(std::vector<std::unique_ptr<Enemy>>& enemy,std::vector<std::
         player->inventory.weaponVec[i]->removeObserver(this);
     }
     enemy.erase(iter1);
+    player->stats->updateScore(25);
 }
 
+void Enemy::update(Weapon* weapon) {
+    if (weapon->getRect().getGlobalBounds().intersects( rect.getGlobalBounds()))       //controllo collisioni in base alla posizione di Weapon
+    {
+        const std::type_info& type_info = typeid(*weapon);                          //verifica il tipo di arma
+        if( type_info== typeid(PlayerWeapon))
+            weapon->setIsDestroyed(true);
+
+        else
+        {
+            wounded=true;
+            woundedClock.restart();
+            if(hp>1){
+                hp--;
+                weapon->setIsDestroyed(true);
+                player->stats->updateScore(10);
+            }
+            else{
+                isDestroyed=true;
+                weapon->setIsDestroyed(true);
+            }
+        }
+    }
+}
 void Enemy::updateState() {
+    GameCharacter::updateState();
     std::vector<std::unique_ptr<Weapon>>::const_iterator iter2;
     for(int j=0; j!=weaponVec.size(); j++)
     {

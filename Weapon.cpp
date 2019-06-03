@@ -5,7 +5,8 @@
 #include <list>
 #include "Weapon.h"
 
-Weapon:: Weapon(std::list<CollisionObserver*>& targetList, sf::Vector2f targetDir, sf::Vector2f position, float s): DynamicComponent (s), targetDir(targetDir*speed)
+Weapon:: Weapon(std::list<CollisionObserver*>& targetList, sf::Vector2f targetDir, sf::Vector2f position, float s): DynamicComponent (s),
+                                                                                                                    targetDir(targetDir*speed)
 {
     for (std::list<CollisionObserver*>::iterator iter = targetList.begin(); iter != targetList.end(); ++iter)
     {

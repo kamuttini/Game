@@ -5,7 +5,9 @@
 #include "DynamicComponent.h"
 
 
-DynamicComponent:: DynamicComponent(float s, orientation dir): speed(s), isDestroyed(false), direction(dir){}
+DynamicComponent:: DynamicComponent(float s, orientation dir):  speed(s),
+                                                                isDestroyed(false),
+                                                                direction(dir){}
 
 DynamicComponent::orientation DynamicComponent::getDirection() const {
     return direction;

@@ -4,31 +4,17 @@
 #include <typeinfo>
 #include "GameCharacter.h"
 #include "Factory.h"
+sf::Time woundedTime=sf::seconds(0.3f);
 
-
-GameCharacter::GameCharacter(int s, int h): DynamicComponent (s), hp(h), isFighting(false){}
-
-void GameCharacter::update(Weapon* weapon) {
-    if (weapon->getRect().getGlobalBounds().intersects( rect.getGlobalBounds()))       //controllo collisioni in base alla posizione di Weapon
-    {
-        const std::type_info& type_info = typeid(*weapon);                          //verifica il tipo di arma
-        if( type_info== typeid(PlayerWeapon))
-        {
-            weapon->setIsDestroyed(true);
-        }
-        else
-        {
-            if(hp>1){
-                hp--;
-                weapon->setIsDestroyed(true);
-            }
-            else{
-                isDestroyed=true;
-                weapon->setIsDestroyed(true);
-            }
-        }
-    }
+GameCharacter::GameCharacter(sf::Color color1, int s, int h):   DynamicComponent (s),
+                                                                hp(h),
+                                                                isFighting(false),
+                                                                wounded(false),
+                                                                color(color1){
+    rect.setFillColor(color);
 }
+
+
 
 int GameCharacter::getHp() const {
     return hp;
@@ -36,6 +22,18 @@ int GameCharacter::getHp() const {
 
 void GameCharacter::setHp(int hp) {
     GameCharacter::hp = hp;
+}
+
+void GameCharacter::updateState() {
+    fight();
+    if(wounded==true){
+        rect.setFillColor(sf::Color(192,192,192));
+        wounded= false;
+    }
+
+    else
+        if (woundedClock.getElapsedTime()>woundedTime)
+        rect.setFillColor(color);
 }
 
 

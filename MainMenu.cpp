@@ -4,7 +4,10 @@
 
 #include "MainMenu.h"
 
-MainMenu::MainMenu(sf::RenderWindow& window1): window(window1) {
+MainMenu::MainMenu(sf::RenderWindow& window1):  window(window1),
+                                                titleText("UNIVERISTY SURVIVAL",150, sf::Color::Blue),
+                                                enterText("press ENTER to start",80, sf::Color::Blue)
+{
     texture.loadFromFile("/home/camut/CLionProjects/game/assets/morgagni.jpg");
     background.setTexture(texture);
     TextureSize = texture.getSize(); //Get size of texture.
@@ -14,28 +17,23 @@ MainMenu::MainMenu(sf::RenderWindow& window1): window(window1) {
 
     background.setTexture(texture);
     background.setScale(ScaleX, ScaleY);
-    font.loadFromFile("/home/camut/CLionProjects/game/assets/fonts/sf-atarian-system/Atarian/SFAtarianSystem.ttf");
-    startText.setFont(font);
-    startText.setString("UNIVERISTY SURVIVAL");
-    startText.setCharacterSize(150);
-    startText.setFillColor(sf::Color::Blue);
-    startText.setPosition((window.getSize().x/2)-(startText.getGlobalBounds().width/2),(window.getSize().y/2)-(startText.getGlobalBounds().height/2));
-
-    enterText.setFont(font);
-    enterText.setString("press ENTER to start");
-    enterText.setCharacterSize(80);
-    enterText.setFillColor(sf::Color::Blue);
-    enterText.setPosition((window.getSize().x/2)-(enterText.getGlobalBounds().width/2),(window.getSize().y/2)-(startText.getGlobalBounds().height/2)+200);
+    titleText.setPosition((window.getSize().x/2)-(titleText.text.getGlobalBounds().width/2),(window.getSize().y/2)-(titleText.text.getGlobalBounds().height/2));
+    enterText.setPosition((window.getSize().x/2)-(enterText.text.getGlobalBounds().width/2),(window.getSize().y/2)-(titleText.text.getGlobalBounds().height/2)+200);
 
     rect.setSize(sf::Vector2f(1200,150));
     rect.setFillColor(sf::Color::White);
+    rect2.setSize(sf::Vector2f(600,90));
+    rect2.setFillColor(sf::Color::White);
     rect.setPosition((window.getSize().x/2)-(rect.getGlobalBounds().width/2),(window.getSize().y/2)-(rect.getGlobalBounds().height/2)+50);
+    rect2.setPosition((window.getSize().x/2)-(rect2.getGlobalBounds().width/2),(window.getSize().y/2)-(rect2.getGlobalBounds().height/2)+200);
+
 }
 
 void MainMenu::draw(sf::RenderWindow &window) {
     window.draw(background);
     window.draw(rect);
-    window.draw(startText);
-    window.draw(enterText);
+    window.draw(rect2);
+    titleText.draw(window);
+    enterText.draw(window);
 }
 

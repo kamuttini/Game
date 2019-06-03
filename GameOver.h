@@ -6,17 +6,18 @@
 #define GAME_GAMEOVER_H
 
 #include <SFML/Graphics.hpp>
+#include "Text.h"
 
 class GameOver {
 public:
-    GameOver(sf::RenderWindow& window);
+    GameOver(sf::RenderWindow& window, int score);
     void draw(sf::RenderWindow& window);
 
 protected:
     sf::RenderWindow& window;
-    sf::Text text;
-    sf::Text enterText;
-    sf::Font font;
+    Text title;
+    Text enterText;
+    Text scoreText;
     sf::Vector2u WindowSize;
 
 };

@@ -27,7 +27,7 @@ public:
 
 private:
     MainMenu menu;
-    GameOver gameOver;
+    GameOver* gameOver;
     Factory factory;
     std::vector<playerWeaponPtr> weaponToCollect;
     sf::RenderWindow& window;

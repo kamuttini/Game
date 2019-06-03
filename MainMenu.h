@@ -5,7 +5,7 @@
 #ifndef GAME_MAINMENU_H
 #define GAME_MAINMENU_H
 #include <SFML/Graphics.hpp>
-
+#include "Text.h"
 
 
 class MainMenu {
@@ -15,12 +15,12 @@ public:
 
 protected:
     sf::RectangleShape rect;
+    sf::RectangleShape rect2;
     sf::RenderWindow& window;
     sf::Texture texture;
     sf::Sprite background;
-    sf::Text startText;
-    sf::Text enterText;
-    sf::Font font;
+    Text titleText;
+    Text enterText;
     sf::Vector2u TextureSize;
     sf::Vector2u WindowSize;
 };

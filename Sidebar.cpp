@@ -4,33 +4,38 @@
 
 #include "Sidebar.h"
 #include <string>
-#include <iostream>
 
 
-Sidebar::Sidebar (){
-    font.loadFromFile("/home/camut/CLionProjects/game/assets/fonts/sf-atarian-system/Atarian/SFAtarianSystem.ttf");
-    hpText.setFont(font);
-    hpText.setString("HP: 2/2");
-    hpText.setCharacterSize(50);
-    hpText.setFillColor(sf::Color::White);
+Sidebar::Sidebar ():    hpText("HP: 2/2"),
+                        weaponsText("Weapons: 0"),
+                        scoreText("Score: 0")
+
+{
     hpText.setPosition(80,50);
-    weaponsText.setFont(font);
-    weaponsText.setString("Weapons: 0");
-    weaponsText.setCharacterSize(50);
-    weaponsText.setFillColor(sf::Color::White);
     weaponsText.setPosition(80,100);
-
+    scoreText.setPosition(80,150);
+    score=0;
 }
 
 void Sidebar::draw(sf::RenderWindow& window) {
-window.draw(hpText);
-window.draw(weaponsText);
+    hpText.draw(window);
+    weaponsText.draw(window);
+    scoreText.draw(window);
 }
 
 void Sidebar::updateHp(int hp) {
-    hpText.setString("HP:"+ std::to_string(hp)+"/2");
+    hpText.text.setString("HP:"+ std::to_string(hp)+"/2");
 }
 
 void Sidebar::updateWeapons(int weapons) {
-    weaponsText.setString("Weapons: "+ std::to_string(weapons));
+    weaponsText.text.setString("Weapons: "+ std::to_string(weapons));
+}
+
+void Sidebar::updateScore(int bonus) {
+    scoreText.text.setString("Score: "+ std::to_string(score=score+bonus));
+
+}
+
+int Sidebar::getScore() {
+    return score;
 }

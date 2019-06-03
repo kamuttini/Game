@@ -9,9 +9,8 @@ sf::Time enemyDelay=sf::seconds(3.f);
 sf::Clock playerWeaponClock;
 sf::Time playerWeaponDelay=sf::seconds(2.5f);
 
-Game::Game(sf::RenderWindow& window1):window(window1), menu(window1), gameOver(window1){
-}
-
+Game::Game(sf::RenderWindow& window1):  window(window1),
+                                        menu(window1){}
 
 void Game::run()
 {
@@ -75,7 +74,7 @@ void Game::render()
 
 void Game::update() {
 
-    player->fight();
+    player->updateState();
 
     int i=0;
     for (i = 0; i < weaponToCollect.size(); i++) {
@@ -95,7 +94,7 @@ void Game::update() {
     }
 
     for( i=0; i < enemyVec.size(); i++)                                         //generate enemyWeapon
-        enemyVec[i]->fight();
+        enemyVec[i]->updateState();
 
     std::vector<std::unique_ptr<Enemy>>::const_iterator iter1;                  //delete enemy if collision detected
     i=0;
@@ -109,12 +108,6 @@ void Game::update() {
         i++;
     }
 
-    for(i=0; i!=enemyVec.size(); i++)
-    {
-        enemyVec[i]->updateState();
-    }
-
-    player->inventory.updateState();
 
     std::vector<std::unique_ptr<PlayerWeapon>>::const_iterator iter3= weaponToCollect.begin();    //delete weapon if collision detected
     for (i = 0; i < weaponToCollect.size(); i++) {
@@ -138,6 +131,7 @@ void Game::start() {
 }
 
 void Game::stop() {
+    gameOver=new GameOver(window,sidebar->getScore());
     enemyVec.clear();
     weaponToCollect.clear();
     delete(sidebar);
@@ -145,7 +139,7 @@ void Game::stop() {
     {
         processEvents();
         window.clear();
-        gameOver.draw(window);
+        gameOver->draw(window);
         window.display();
     }
 

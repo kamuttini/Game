@@ -5,12 +5,16 @@
 #include <unistd.h>
 #include "Player.h"
 
-Player::Player(Sidebar* sidebar): movement(1.f, 0.f), stats(sidebar)
+
+sf::Clock playerWoundedClock;
+
+Player::Player(Sidebar* sidebar, sf::Color color1): GameCharacter(color1),
+                                                    movement(1.f, 0.f),
+                                                    stats(sidebar)
 {
     attackDelay=sf::seconds(0.5);
     addObserver(sidebar);
     rect.setPosition(600,600);
-    rect.setFillColor(sf::Color::Red);
 }
 
 void Player::getInput() {
@@ -74,13 +78,6 @@ void Player::fight() {
     }
 }
 
-bool Player::dead() {
-    if(isDestroyed) {
-        delete(this);
-        return true;
-    }
-    return false;
-}
 
 void Player::updateSituation(CollisionObserver* enemy) {
     targetList.push_back(enemy);
@@ -95,13 +92,18 @@ void Player::update(Weapon *weapon) {
             inventory.addToCollection(*weapon);
             weapon->setIsDestroyed(true);
             stats->updateWeapons(inventory.collectionSize());
+            stats->updateScore(5);
         }
         else
         {
+            wounded=true;
+            woundedClock.restart();
+
             if(hp>1){
                 hp--;
                 weapon->setIsDestroyed(true);
                 stats->updateHp(hp);
+
             }
             else{
                 hp--;
@@ -118,5 +120,16 @@ void Player::addObserver(Sidebar* o){
     stats =o;
 }
 
+bool Player::dead() {
+    if(isDestroyed) {
+        delete(this);
+        return true;
+    }
+    return false;
+}
 
+void Player::updateState() {
+    GameCharacter::updateState();
+    inventory.updateState();
+}
 
