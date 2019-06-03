@@ -5,8 +5,10 @@
 #include "StaticComponent.h"
 
 
-StaticComponent:: StaticComponent(){
+StaticComponent:: StaticComponent(sf::Color color1){
+    color=color1;
     rect.setSize(sf::Vector2f(30.f,51.f));
+    rect.setFillColor(color);
 }
 
 void StaticComponent::draw(sf::RenderWindow &window)

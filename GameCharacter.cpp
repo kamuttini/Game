@@ -6,13 +6,11 @@
 #include "Factory.h"
 sf::Time woundedTime=sf::seconds(0.3f);
 
-GameCharacter::GameCharacter(sf::Color color1, int s, int h):   DynamicComponent (s),
+GameCharacter::GameCharacter(int s,sf::Color color1, int h):   DynamicComponent (s, color1),
                                                                 hp(h),
                                                                 isFighting(false),
-                                                                wounded(false),
-                                                                color(color1){
-    rect.setFillColor(color);
-}
+                                                                wounded(false)
+                                                                {}
 
 
 

@@ -10,7 +10,7 @@
 
 class MainMenu {
 public:
-    MainMenu(sf::RenderWindow& window);
+    explicit MainMenu(sf::RenderWindow& window);
     void draw(sf::RenderWindow& window);
 
 protected:

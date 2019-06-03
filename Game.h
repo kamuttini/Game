@@ -6,6 +6,7 @@
 #define GAME_GAME_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "Enemy.h"
 #include "Player.h"
 #include "MainMenu.h"
@@ -16,11 +17,12 @@ public:
     typedef std::unique_ptr<Enemy>  enemyPtr;
     typedef std::unique_ptr<PlayerWeapon> playerWeaponPtr;
 
-    Game(sf::RenderWindow& window);
+    explicit Game(sf::RenderWindow& window);
     void start();
     void run();
     void stop();
-    void processEvents();
+    void playProcessEvent();
+    void ProcessEvent();
     void update();
     void render();
     std::vector<enemyPtr> enemyVec;
@@ -28,11 +30,12 @@ public:
 private:
     MainMenu menu;
     GameOver* gameOver;
+    Sidebar* sidebar;
+    Player* player;
+    sf::Music soundTrack;
     Factory factory;
     std::vector<playerWeaponPtr> weaponToCollect;
     sf::RenderWindow& window;
-    Player* player;
-    Sidebar* sidebar;
 };
 
 

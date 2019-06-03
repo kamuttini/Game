@@ -13,10 +13,10 @@
 class GameCharacter: public DynamicComponent,public CollisionObserver{
 
 public:
-    GameCharacter(sf::Color color=sf::Color::Green, int s=15, int h=2);
+     GameCharacter(int s=15,sf::Color color=sf::Color::White,int h=2);
     typedef std::unique_ptr<Weapon>  weaponPtr;
 
-    virtual void update(Weapon* weapon)=0;
+    void update(Weapon* weapon) override =0;
     virtual void fight()=0;
     virtual void updateState();
     std::list<CollisionObserver*> targetList;
@@ -30,7 +30,6 @@ protected:
     bool isFighting;
     sf::Clock attackClock;
     sf::Time attackDelay;
-    sf::Color color;
     sf::Clock woundedClock;
 };
 #endif //GAME_GAMECHARACTER_H

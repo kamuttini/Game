@@ -5,7 +5,7 @@
 #include <list>
 #include "Weapon.h"
 
-Weapon:: Weapon(std::list<CollisionObserver*>& targetList, sf::Vector2f targetDir, sf::Vector2f position, float s): DynamicComponent (s),
+Weapon:: Weapon(std::list<CollisionObserver*>& targetList,sf::Color color1, sf::Vector2f targetDir, sf::Vector2f position, float s): DynamicComponent (s, color1),
                                                                                                                     targetDir(targetDir*speed)
 {
     for (std::list<CollisionObserver*>::iterator iter = targetList.begin(); iter != targetList.end(); ++iter)
@@ -13,12 +13,10 @@ Weapon:: Weapon(std::list<CollisionObserver*>& targetList, sf::Vector2f targetDi
         addObserver(*iter);
     }
     rect.setSize(sf::Vector2f(15.f,15.f));
-    rect.setFillColor(sf::Color::White);
     rect.setPosition(position);
 }
 
-Weapon::Weapon(float s): DynamicComponent(s){
-    rect.setFillColor(sf::Color::White);
+Weapon::Weapon( sf::Color color1,float s ): DynamicComponent(s, color1){
 }
 
 void Weapon::addObserver(CollisionObserver* o){

@@ -11,9 +11,9 @@ class Player;
 
 class PlayerWeapon: public Weapon {
 public:
-    PlayerWeapon(Player* player);
+    explicit PlayerWeapon(Player* player);
     void updateState();
-    void destroy(std::vector<std::unique_ptr<PlayerWeapon>>& enemy,std::vector<std::unique_ptr<PlayerWeapon>>::const_iterator iter);
+    static void destroy(std::vector<std::unique_ptr<PlayerWeapon>>& enemy,std::vector<std::unique_ptr<PlayerWeapon>>::const_iterator iter);
 
 private:
     bool caught;

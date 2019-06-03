@@ -10,7 +10,7 @@
 class StaticComponent {
 
 public:
-    StaticComponent();
+    StaticComponent(sf::Color color);
 
     void draw (sf::RenderWindow& window);
     void randomPosition();
@@ -25,6 +25,7 @@ public:
 protected:
     int posX, posY;
     sf::RectangleShape rect;
+    sf::Color color;
 };
 
 

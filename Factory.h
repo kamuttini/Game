@@ -9,9 +9,9 @@
 class Enemy;
 class Factory {
 public:
-    std::unique_ptr<Weapon> createWeapon(std::list<CollisionObserver *> &targetList, sf::Vector2f targetDir,sf::Vector2f position);
-    std::unique_ptr<PlayerWeapon> createPlayerWeapon(Player* player);
-    std::unique_ptr<Enemy> createEnemy(Player* player);
+    static std::unique_ptr<Weapon> createWeapon(std::list<CollisionObserver *> &targetList, sf::Vector2f targetDir,sf::Vector2f position);
+    static std::unique_ptr<PlayerWeapon> createPlayerWeapon(Player* player);
+    static std::unique_ptr<Enemy> createEnemy(Player* player);
 };
 
 

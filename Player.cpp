@@ -8,7 +8,7 @@
 
 sf::Clock playerWoundedClock;
 
-Player::Player(Sidebar* sidebar, sf::Color color1): GameCharacter(color1),
+Player::Player(Sidebar* sidebar, sf::Color color1): GameCharacter(16,color1),
                                                     movement(1.f, 0.f),
                                                     stats(sidebar)
 {
@@ -120,13 +120,6 @@ void Player::addObserver(Sidebar* o){
     stats =o;
 }
 
-bool Player::dead() {
-    if(isDestroyed) {
-        delete(this);
-        return true;
-    }
-    return false;
-}
 
 void Player::updateState() {
     GameCharacter::updateState();

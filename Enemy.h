@@ -11,11 +11,11 @@
 
 class Enemy: public GameCharacter {
 public:
-    Enemy(Player* player);
-    void fight();
+    explicit Enemy(Player* player);
+    void fight() override;
     void destroy(std::vector<std::unique_ptr<Enemy>>& enemy,std::vector<std::unique_ptr<Enemy>>::const_iterator iter1);
     void updateState()override;
-    void update(Weapon* weapon);
+    void update(Weapon* weapon) override;
     std::vector<weaponPtr> weaponVec;
 
 private:

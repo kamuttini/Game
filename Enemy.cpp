@@ -43,17 +43,6 @@ void Enemy::fight()
 }
 
 
-void Enemy::destroy(std::vector<std::unique_ptr<Enemy>>& enemy,std::vector<std::unique_ptr<Enemy>>::const_iterator iter1)
-{
-    player->targetList.remove(this);
-    for(int i=0; i< player->inventory.weaponVec.size(); i++)
-    {
-        player->inventory.weaponVec[i]->removeObserver(this);
-    }
-    enemy.erase(iter1);
-    player->stats->updateScore(25);
-}
-
 void Enemy::update(Weapon* weapon) {
     if (weapon->getRect().getGlobalBounds().intersects( rect.getGlobalBounds()))       //controllo collisioni in base alla posizione di Weapon
     {
@@ -90,4 +79,16 @@ void Enemy::updateState() {
         }
         iter2++;
     }
+}
+
+
+void Enemy::destroy(std::vector<std::unique_ptr<Enemy>>& enemy,std::vector<std::unique_ptr<Enemy>>::const_iterator iter1)
+{
+    player->targetList.remove(this);
+    for(int i=0; i< player->inventory.weaponVec.size(); i++)
+    {
+        player->inventory.weaponVec[i]->removeObserver(this);
+    }
+    enemy.erase(iter1);
+    player->stats->updateScore(25);
 }

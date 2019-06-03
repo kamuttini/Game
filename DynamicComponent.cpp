@@ -5,7 +5,7 @@
 #include "DynamicComponent.h"
 
 
-DynamicComponent:: DynamicComponent(float s, orientation dir):  speed(s),
+DynamicComponent:: DynamicComponent(float s, sf::Color color1, orientation dir): StaticComponent(color1),  speed(s),
                                                                 isDestroyed(false),
                                                                 direction(dir){}
 

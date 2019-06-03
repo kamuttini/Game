@@ -15,7 +15,7 @@ class DynamicComponent: public StaticComponent {
 public:
     enum orientation { down, up,left,right};
 
-    DynamicComponent(float s, orientation dir=down);
+    explicit DynamicComponent(float s,sf::Color color1, orientation dir=down);
     orientation getDirection() const;
     void setDirection(orientation direction);
     bool isDestroyed1() const;

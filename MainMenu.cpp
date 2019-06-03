@@ -7,7 +7,7 @@ MainMenu::MainMenu(sf::RenderWindow& window1):  window(window1),
                                                 titleText("UNIVERSITY SURVIVAL",150, sf::Color::Blue),
                                                 enterText("press ENTER to start",80, sf::Color::Blue)
 {
-    texture.loadFromFile("assets/morgagni.jpg");
+    texture.loadFromFile("assets/sprites/morgagni.jpg");
     background.setTexture(texture);
     TextureSize = texture.getSize(); //Get size of texture.
     WindowSize = window.getSize();             //Get size of window.

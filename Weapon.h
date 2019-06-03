@@ -14,13 +14,13 @@ class Weapon: public DynamicComponent, public Subject  {
 
 public:
 
-    Weapon (std::list<CollisionObserver*>& targetList, sf::Vector2f targetDir, sf::Vector2f position, float s=3);
-    Weapon(float s=3);
+    Weapon (std::list<CollisionObserver*>& targetList, sf::Color color1, sf::Vector2f targetDir, sf::Vector2f position, float s=3);
+    Weapon(sf::Color color1,float s=3);
     void attack();
     void addObserver(CollisionObserver* o) override ;
     void removeObserver(CollisionObserver* o) override;
     void notify() override;
-    void destroy(std::vector<std::unique_ptr<Weapon>>& enemy,std::vector<std::unique_ptr<Weapon>>::const_iterator iter1);
+    static void destroy(std::vector<std::unique_ptr<Weapon>>& enemy,std::vector<std::unique_ptr<Weapon>>::const_iterator iter1);
     std::unique_ptr<Weapon> clone() const;
 
 protected:

@@ -10,22 +10,29 @@ sf::Clock playerWeaponClock;
 sf::Time playerWeaponDelay=sf::seconds(2.5f);
 
 Game::Game(sf::RenderWindow& window1):  window(window1),
-                                        menu(window1){}
+                                        menu(window1)
+                                        {
+    player= nullptr;
+    soundTrack.openFromFile("assets/music/mario.wav");
+    soundTrack.setVolume(10);
+                                        }
+
 
 void Game::run()
 {
     sidebar= new Sidebar;
     player=new Player(sidebar);
+    soundTrack.play();
     while (window.isOpen())
     {
-        processEvents();
+        playProcessEvent();
         update();
         render();
     }
 }
 
 
-void Game::processEvents()
+void Game::playProcessEvent()
 {
     sf::Event event;
 
@@ -34,12 +41,11 @@ void Game::processEvents()
         switch(event.type)
         {
             case sf::Event::KeyPressed:
-                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
-                {
-                    run();
+
+                {  player->getInput();
+                    break;
                 }
-                player->getInput();
-                break;
+
 
             case sf::Event::Closed:
                 window.close();
@@ -48,6 +54,23 @@ void Game::processEvents()
     }
 }
 
+void Game::ProcessEvent()
+{
+    sf::Event event;
+
+    while (window.pollEvent(event))
+    {
+        switch(event.type)
+        {
+            case sf::Event::KeyPressed:
+                    run();
+
+            case sf::Event::Closed:
+                window.close();
+                break;
+        }
+    }
+}
 
 void Game::render()
 {
@@ -73,6 +96,9 @@ void Game::render()
 
 
 void Game::update() {
+
+    if(player->isDestroyed1())
+        stop();
 
     player->updateState();
 
@@ -116,14 +142,12 @@ void Game::update() {
         iter3++;
     }
 
-    if(player->dead())
-        stop();
 }
 
 void Game::start() {
     while (window.isOpen())
     {
-        processEvents();
+        ProcessEvent();
         window.clear(sf::Color(86, 126, 199));
         menu.draw(window);
         window.display();
@@ -134,10 +158,13 @@ void Game::stop() {
     gameOver=new GameOver(window,sidebar->getScore());
     enemyVec.clear();
     weaponToCollect.clear();
+    delete(player);
     delete(sidebar);
+    player= nullptr;
+
     while (window.isOpen())
     {
-        processEvents();
+        ProcessEvent();
         window.clear();
         gameOver->draw(window);
         window.display();
