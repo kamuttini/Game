@@ -5,14 +5,15 @@
 #include "Enemy.h"
 #include <cmath>
 
-Enemy:: Enemy(Player* player1): player(player1) {
+Enemy:: Enemy(Player* player1,type& ID1, sf::Color color1): player (player1),
+                                                            GameCharacter(5,color1),
+                                                            ID(ID1){
     CollisionObserver* target=player1;
     targetList.push_back(target);
     player1->updateSituation(this);
     attackDelay=sf::seconds(2.f);
     randomPosition();
 }
-
 
 
 void Enemy::fight()
@@ -32,7 +33,7 @@ void Enemy::fight()
     }
 
     if( isFighting) {
-        weaponVec.push_back(std::unique_ptr<Weapon>(weaponFactory.createWeapon(targetList, playerDir, rect.getPosition())));
+        weaponVec.push_back(std::unique_ptr<Weapon>(weaponFactory.createWeapon(targetList, playerDir, rect.getPosition(), this)));
         isFighting = false;
     }
 
@@ -91,4 +92,8 @@ void Enemy::destroy(std::vector<std::unique_ptr<Enemy>>& enemy,std::vector<std::
     }
     enemy.erase(iter1);
     player->stats->updateScore(25);
+}
+
+Enemy::type Enemy::getId() const {
+    return ID;
 }

@@ -11,14 +11,18 @@
 
 class Enemy: public GameCharacter {
 public:
-    explicit Enemy(Player* player);
+    enum type {student, barMan, chef};
+    explicit Enemy(Player* player,type& ID,sf::Color color1);
     void fight() override;
     void destroy(std::vector<std::unique_ptr<Enemy>>& enemy,std::vector<std::unique_ptr<Enemy>>::const_iterator iter1);
     void updateState()override;
     void update(Weapon* weapon) override;
+    type getId() const;
+
     std::vector<weaponPtr> weaponVec;
 
 private:
+    type ID;
     Factory weaponFactory;
     Player* player;
 };
