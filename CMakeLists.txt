@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_subdirectory(test)
 
-set (SOURCE_FILES main.cpp GameCharacter.cpp GameCharacter.h DynamicComponent.cpp DynamicComponent.h StaticComponent.cpp StaticComponent.h Weapon.cpp Weapon.h Player.cpp Player.h Game.cpp Game.h Enemy.cpp Enemy.h Subject.h CollisionObserver.h Factory.cpp Factory.h PlayerWeapon.cpp PlayerWeapon.h Inventory.cpp Inventory.h Sidebar.cpp Sidebar.h MainMenu.cpp MainMenu.h GameOver.cpp GameOver.h Text.cpp Text.h)
+set (SOURCE_FILES main.cpp GameCharacter.cpp GameCharacter.h DynamicComponent.cpp DynamicComponent.h StaticComponent.cpp StaticComponent.h Weapon.cpp Weapon.h Player.cpp Player.h Game.cpp Game.h Enemy.cpp Enemy.h Subject.h CollisionObserver.h Factory.cpp Factory.h PlayerWeapon.cpp PlayerWeapon.h Inventory.cpp Inventory.h Sidebar.cpp Sidebar.h MenuState.cpp MenuState.h GameOverState.cpp GameOverState.h Text.cpp Text.h GameState.cpp GameState.h State.h StateMachine.cpp StateMachine.h Def.h)
 
 add_executable(game ${SOURCE_FILES})
 add_library( core ${SOURCE_FILES})

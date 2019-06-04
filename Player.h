@@ -18,7 +18,6 @@ public:
     void getInput();
     void update(Weapon* weapon) override;
     void fight() override;
-    bool dead();
     void updateSituation(CollisionObserver* enemy);
     void updateState()override;
     void addObserver (Sidebar* o);

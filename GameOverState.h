@@ -1,0 +1,31 @@
+//
+// Created by camut on 03/06/19.
+//
+
+#ifndef GAME_GAMEOVERSTATE_H
+#define GAME_GAMEOVERSTATE_H
+
+#include <SFML/Graphics.hpp>
+#include "Text.h"
+#include "State.h"
+#include "Game.h"
+
+class GameOverState: public State {
+public:
+    GameOverState(int score, GameDataRef data);
+
+    void Init() override ;
+    void HandleInput() override ;
+    void Update()  override;
+    void Draw() override ;
+protected:
+    GameDataRef _data;
+    Text title;
+    Text enterText;
+    Text scoreText;
+    sf::Vector2u WindowSize;
+
+};
+
+
+#endif //GAME_GAMEOVERSTATE_H

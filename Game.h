@@ -5,37 +5,32 @@
 #ifndef GAME_GAME_H
 #define GAME_GAME_H
 
+#include <memory>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include "Enemy.h"
-#include "Player.h"
-#include "MainMenu.h"
-#include "GameOver.h"
+
+#include "StateMachine.h"
+
+
+    struct GameData
+    {
+        StateMachine machine;
+        sf::RenderWindow window;
+        sf::Music soundTrack;
+        //assetManager assets;
+    };
+
+
+    typedef std::shared_ptr<GameData> GameDataRef;
 
 class Game {
 public:
-    typedef std::unique_ptr<Enemy>  enemyPtr;
-    typedef std::unique_ptr<PlayerWeapon> playerWeaponPtr;
-
-    explicit Game(sf::RenderWindow& window);
-    void start();
-    void run();
-    void stop();
-    void playProcessEvent();
-    void ProcessEvent();
-    void update();
-    void render();
-    std::vector<enemyPtr> enemyVec;
+    Game(int width, int height, std::string title);
 
 private:
-    MainMenu menu;
-    GameOver* gameOver;
-    Sidebar* sidebar;
-    Player* player;
-    sf::Music soundTrack;
-    Factory factory;
-    std::vector<playerWeaponPtr> weaponToCollect;
-    sf::RenderWindow& window;
+    void Run();
+    GameDataRef _data=std::make_shared<GameData>();
+
 };
 
 
