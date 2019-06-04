@@ -15,7 +15,8 @@ class Weapon: public DynamicComponent, public Subject  {
 public:
 
     Weapon (std::list<CollisionObserver*>& targetList, sf::Color color1, sf::Vector2f targetDir, sf::Vector2f position, float s=3);
-    Weapon(sf::Color color1,float s=3);
+    Weapon(sf::Color color1,float s=7);
+    ~Weapon(){};
     void attack();
     void addObserver(CollisionObserver* o) override ;
     void removeObserver(CollisionObserver* o) override;

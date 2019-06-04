@@ -5,7 +5,8 @@
 #include "Factory.h"
 #include "Enemy.h"
 
-std::unique_ptr<Weapon> Factory::createWeapon(std::list<CollisionObserver *> &targetList, sf::Vector2f targetDir, sf::Vector2f position, Enemy* refEnemy){
+std::unique_ptr<Weapon> Factory::createWeapon(std::list<CollisionObserver *> &targetList, sf::Vector2f targetDir, sf::Vector2f position, Enemy* refEnemy)
+{
     std::unique_ptr<Weapon> weapon;
 
     if(refEnemy!= nullptr) {
@@ -26,10 +27,10 @@ std::unique_ptr<Weapon> Factory::createWeapon(std::list<CollisionObserver *> &ta
         }
     }
 
-    else{
+    else
         weapon= std::unique_ptr<Weapon>(new Weapon(targetList,sf::Color::White,targetDir, position));
-        return weapon;
-    }
+
+    return weapon;
 }
 
 

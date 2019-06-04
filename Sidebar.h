@@ -13,6 +13,7 @@ class Sidebar {
 
 public:
     Sidebar();
+    ~Sidebar(){};
     void draw(sf::RenderWindow& window);
     void updateHp(int hp) ;
     void updateWeapons(int weapons);

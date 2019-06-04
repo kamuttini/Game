@@ -8,7 +8,7 @@
 
 sf::Clock playerWoundedClock;
 
-Player::Player(Sidebar* sidebar, sf::Color color1): GameCharacter(16,color1),
+Player::Player(Sidebar* sidebar, sf::Color color1): GameCharacter(16,color1,3),
                                                     movement(1.f, 0.f),
                                                     stats(sidebar)
 {
@@ -47,18 +47,23 @@ void Player::getInput() {
 void Player::move() {
     movement.x=0.f;
     movement.y=0.f;
+    switch(direction)
+    {
+        case left:
+            movement.x -= speed;
+            break;
 
-    if (direction == left)
-        movement.x -= speed;
+        case right:
+            movement.x += speed;
+            break;
 
-    if (direction == right)
-        movement.x += speed;;
-
-    if (direction == down)
-        movement.y += speed;
-
-    if (direction == up)
-        movement.y -= speed;
+        case down:
+            movement.y += speed;
+            break;
+        case up:
+            movement.y -= speed;
+            break;
+    }
 
     rect.move(movement);
     movement/=speed;

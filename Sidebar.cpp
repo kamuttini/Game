@@ -6,7 +6,7 @@
 #include <string>
 
 
-Sidebar::Sidebar ():    hpText("HP: 2/2"),
+Sidebar::Sidebar ():    hpText("HP: 3/3"),
                         weaponsText("Weapons: 0"),
                         scoreText("Score: 0")
 

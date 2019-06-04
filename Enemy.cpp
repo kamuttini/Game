@@ -24,10 +24,10 @@ void Enemy::fight()
     sf::Vector2f playerDir;
     playerDir.x=(player->getRect().getPosition().x-posX)/distance;
     playerDir.y=(player->getRect().getPosition().y-posY)/ distance;
-    if(hp>1 && distance <300)
+    if(hp>1 && distance <500)
         rect.move((playerDir));
 
-    if (attackClock.getElapsedTime() > attackDelay && distance<300) {
+    if (attackClock.getElapsedTime() > attackDelay && distance<600) {
         isFighting = true;
         attackClock.restart();
     }
