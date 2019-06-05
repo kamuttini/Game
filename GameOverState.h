@@ -13,7 +13,7 @@
 class GameOverState: public State {
 public:
     GameOverState(int score, GameDataRef data);
-
+    ~GameOverState(){};
     void Init() override ;
     void HandleInput() override ;
     void Update()  override;
@@ -23,8 +23,9 @@ protected:
     Text title;
     Text enterText;
     Text scoreText;
-    sf::Vector2u WindowSize;
-
+    Text bestScoreText;
+    int score;
+    int  highScore;
 };
 
 

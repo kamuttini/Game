@@ -24,7 +24,7 @@ void Sidebar::draw(sf::RenderWindow& window) {
 }
 
 void Sidebar::updateHp(int hp) {
-    hpText.text.setString("HP:"+ std::to_string(hp)+"/2");
+    hpText.text.setString("HP:"+ std::to_string(hp)+"/3");
 }
 
 void Sidebar::updateWeapons(int weapons) {
