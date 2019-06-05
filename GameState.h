@@ -17,7 +17,7 @@ class GameState: public State {
 public:
 
     GameState(GameDataRef data);
-
+    ~GameState(){};
     void Init() override ;
     void HandleInput() override ;
     void Update()  override;
@@ -25,7 +25,7 @@ public:
     std::vector<enemyPtr> enemyVec;
 
 private:
-    GameDataRef _data;
+    GameDataRef data;
     Sidebar* sidebar;
     Player* player;
     Factory factory;

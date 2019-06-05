@@ -4,16 +4,16 @@
 
 #include <unistd.h>
 #include "Player.h"
+#include "Game.h"
 
 
 sf::Clock playerWoundedClock;
 
-Player::Player(Sidebar* sidebar, sf::Color color1): GameCharacter(16,color1,3),
-                                                    movement(1.f, 0.f),
-                                                    stats(sidebar)
+Player::Player(Sidebar& sidebar, sf::Color color1):     GameCharacter(16,color1,3),
+                                                        stats(sidebar),
+                                                        movement(1.f, 0.f)
 {
     attackDelay=sf::seconds(0.5);
-    addObserver(sidebar);
     rect.setPosition(600,600);
 }
 
@@ -79,12 +79,12 @@ void Player::fight() {
     for (int i = 0; i < inventory.weaponVec.size(); i++)
     {
         inventory.weaponVec[i]->attack();
-        stats->updateWeapons(inventory.collectionSize());
+        stats.updateWeapons(inventory.collectionSize());
     }
 }
 
 
-void Player::updateSituation(CollisionObserver* enemy) {
+void Player::updateTarget(CollisionObserver *enemy) {
     targetList.push_back(enemy);
 }
 
@@ -96,8 +96,8 @@ void Player::update(Weapon *weapon) {
         {
             inventory.addToCollection(*weapon);
             weapon->setIsDestroyed(true);
-            stats->updateWeapons(inventory.collectionSize());
-            stats->updateScore(5);
+            stats.updateWeapons(inventory.collectionSize());
+            stats.updateScore(5);
         }
         else
         {
@@ -107,22 +107,18 @@ void Player::update(Weapon *weapon) {
             if(hp>1){
                 hp--;
                 weapon->setIsDestroyed(true);
-                stats->updateHp(hp);
+                stats.updateHp(hp);
 
             }
             else{
                 hp--;
                 isDestroyed=true;
                 weapon->setIsDestroyed(true);
-                stats->updateHp(hp);
+                stats.updateHp(hp);
                 sf::sleep(sf::seconds(1));
             }
         }
     }
-}
-
-void Player::addObserver(Sidebar* o){
-    stats =o;
 }
 
 
@@ -130,4 +126,5 @@ void Player::updateState() {
     GameCharacter::updateState();
     inventory.updateState();
 }
+
 

@@ -12,7 +12,9 @@
 class Enemy: public GameCharacter {
 public:
     enum type {student, barMan, chef};
+
     explicit Enemy(Player* player,type& ID,sf::Color color1);
+    ~Enemy(){};
     void fight() override;
     void destroy(std::vector<std::unique_ptr<Enemy>>& enemy,std::vector<std::unique_ptr<Enemy>>::const_iterator iter1);
     void updateState()override;

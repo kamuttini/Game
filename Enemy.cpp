@@ -58,7 +58,7 @@ void Enemy::update(Weapon* weapon) {
             if(hp>1){
                 hp--;
                 weapon->setIsDestroyed(true);
-                player->stats->updateScore(10);
+                player->stats.updateScore(10);
             }
             else{
                 isDestroyed=true;
@@ -91,7 +91,7 @@ void Enemy::destroy(std::vector<std::unique_ptr<Enemy>>& enemy,std::vector<std::
         player->inventory.weaponVec[i]->removeObserver(this);
     }
     enemy.erase(iter1);
-    player->stats->updateScore(25);
+    player->stats.updateScore(25);
 }
 
 Enemy::type Enemy::getId() const {

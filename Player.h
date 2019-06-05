@@ -13,16 +13,17 @@
 
 class Player: public GameCharacter {
 public:
-    explicit Player (Sidebar* sidebar, sf::Color=sf::Color::Red);
+    explicit Player (Sidebar& sidebar, sf::Color=sf::Color::Red);
+    ~Player(){};
     void move();
     void getInput();
     void update(Weapon* weapon) override;
     void fight() override;
-    void updateSituation(CollisionObserver* enemy);
+    void updateTarget(CollisionObserver *enemy);
     void updateState()override;
-    void addObserver (Sidebar* o);
+
     Inventory inventory;
-    Sidebar* stats;
+    Sidebar& stats;
 
 
 private:

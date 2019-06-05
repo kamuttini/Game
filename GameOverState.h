@@ -19,7 +19,7 @@ public:
     void Update()  override;
     void Draw() override ;
 protected:
-    GameDataRef _data;
+    GameDataRef data;
     Text title;
     Text enterText;
     Text scoreText;
