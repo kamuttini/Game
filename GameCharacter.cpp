@@ -13,15 +13,6 @@ GameCharacter::GameCharacter(int s,sf::Color color1, int h):   DynamicComponent 
                                                                 {}
 
 
-
-int GameCharacter::getHp() const {
-    return hp;
-}
-
-void GameCharacter::setHp(int hp) {
-    GameCharacter::hp = hp;
-}
-
 void GameCharacter::updateState() {
     fight();
     if(wounded==true){

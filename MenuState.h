@@ -14,23 +14,20 @@
 class MenuState: public State {
 public:
     MenuState(GameDataRef data);
-
+    ~MenuState(){};
     void Init() override ;
     void HandleInput() override ;
     void Update()  override;
     void Draw() override ;
 
-
 private:
-    GameDataRef _data;
+    GameDataRef data;
     sf::RectangleShape rect;
     sf::RectangleShape rect2;
     sf::Texture texture;
     sf::Sprite background;
     Text titleText;
     Text enterText;
-    sf::Vector2u TextureSize;
-    sf::Vector2u WindowSize;
 };
 
 #endif //GAME_MENUSTATE_H

@@ -16,12 +16,8 @@ public:
     enum orientation { down, up,left,right};
 
     explicit DynamicComponent(float s,sf::Color color1, orientation dir=down);
-    orientation getDirection() const;
-    void setDirection(orientation direction);
     bool isDestroyed1() const;
     void setIsDestroyed(bool isDestroyed);
-    int getSpeed() const;
-    void setSpeed(int speed);
 
 protected:
     float speed;

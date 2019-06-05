@@ -21,8 +21,6 @@ public:
     virtual void updateState();
     std::list<CollisionObserver*> targetList;
 
-    int getHp() const;
-    void setHp(int hp);
 
 protected:
     int hp;

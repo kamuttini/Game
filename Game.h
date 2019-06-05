@@ -26,10 +26,11 @@
 class Game {
 public:
     Game(int width, int height, std::string title);
+    ~Game(){};
 
 private:
     void Run();
-    GameDataRef _data=std::make_shared<GameData>();
+    GameDataRef data=std::make_shared<GameData>();
 
 };
 

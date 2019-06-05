@@ -12,6 +12,7 @@ class Player;
 class PlayerWeapon: public Weapon {
 public:
     explicit PlayerWeapon(Player* player);
+    ~PlayerWeapon(){};
     void updateState();
     static void destroy(std::vector<std::unique_ptr<PlayerWeapon>>& enemy,std::vector<std::unique_ptr<PlayerWeapon>>::const_iterator iter);
 
