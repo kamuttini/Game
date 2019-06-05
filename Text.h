@@ -13,10 +13,17 @@ public:
     explicit Text(std::string text1, int size=50, sf::Color color=sf::Color::White);
     void setPosition(float x, float y);
     void draw(sf::RenderWindow& window);
+    void startDisplaying();
+    void stopDisplaying();
+    bool isDisplay() const;
+
     sf::Text text;
 
 private:
+    bool display;
     sf::Font font;
+    sf::Clock displayClock;
+    sf::Time displayTime;
 };
 
 

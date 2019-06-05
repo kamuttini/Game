@@ -5,6 +5,10 @@
 #include <deque>
 #include "Inventory.h"
 
+Inventory::Inventory():alert("Weapon inventory is empty!", 50)
+{
+    alert.setPosition(400,200);
+}
 
 
 void Inventory::addToCollection(Weapon weaponCaught) {
@@ -17,6 +21,8 @@ void Inventory::useWeapon(std::list<CollisionObserver*>& targetList, sf::Vector2
         weaponVec.push_back(weaponFactory.createWeapon(targetList, targetDir, position));
         removeWeapon();
     }
+    else
+        alert.startDisplaying();
 }
 
 void Inventory::removeWeapon() {
@@ -41,4 +47,5 @@ void Inventory::updateState() {
         i++;
     }
 }
+
 

@@ -8,16 +8,22 @@
 
 #include "Weapon.h"
 #include "Factory.h"
+#include "Text.h"
+
+typedef std::unique_ptr<Weapon>  weaponPtr;
 
 class Inventory {
 public:
-    typedef std::unique_ptr<Weapon>  weaponPtr;
+
+    Inventory();
+    ~Inventory(){};
     void addToCollection(Weapon weapon);
     void removeWeapon();
     void useWeapon(std::list<CollisionObserver*>& targetList, sf::Vector2f targetDir, sf::Vector2f position);
     int collectionSize();
     void updateState();
     std::vector<weaponPtr> weaponVec;
+    Text alert;
 
 private:
     Factory weaponFactory;
