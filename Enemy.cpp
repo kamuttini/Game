@@ -10,7 +10,7 @@ Enemy:: Enemy(Player* player1,type& ID1, sf::Color color1): player (player1),
                                                             ID(ID1){
     CollisionObserver* target=player1;
     targetList.push_back(target);
-    player1->updateSituation(this);
+    player1->updateTarget(this);
     attackDelay=sf::seconds(2.f);
     randomPosition();
 }
