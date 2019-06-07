@@ -3,7 +3,7 @@
 //
 
 #include "MenuState.h"
-#include "GameState.h"
+#include "SplashState.h"
 
 
 MenuState::MenuState(GameDataRef data1): titleText("UNIVERSITY SURVIVAL",150, sf::Color::Blue),
@@ -49,7 +49,7 @@ void MenuState::HandleInput() {
             case sf::Event::KeyPressed:
                 switch(event.key.code) {
                     case sf::Keyboard::Return:
-                        this->data->machine.AddState(StateRef(new GameState(data)), true);
+                        this->data->machine.AddState(StateRef(new SplashState(data)), true);
                         break;
                 }
         }
