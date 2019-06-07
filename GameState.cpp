@@ -26,6 +26,7 @@ void GameState::HandleInput()
             case sf::Event::KeyPressed:
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
                     this->data->machine.AddState(StateRef(new PauseState(data)));
+                    this->data->soundTrack.setVolume(0);
                 }
                 else { player->getInput(); }
                 break;

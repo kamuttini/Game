@@ -30,7 +30,8 @@ private:
     std::stack<StateRef> states;
     StateRef newState;
 
-    bool isAdding, isReplacing, isRemoving;
+    bool isRemoving;
+    bool isAdding, isReplacing;
 };
 
 #endif //GAME_STATEMACHINE_H

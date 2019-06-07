@@ -25,8 +25,10 @@ public:
     void HandleInput() override ;
     void Update()  override;
     void Draw() override ;
-    
+
 protected:
     GameDataRef data;
+    Text title;
+    Text enterText;
 
 };
