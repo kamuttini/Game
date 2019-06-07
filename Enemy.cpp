@@ -9,7 +9,7 @@
 #include <cmath>
 
 Enemy:: Enemy(Player* player1,type& ID1, sf::Color color1): player (player1),
-                                                            GameCharacter(5,color1),
+                                                            GameCharacter(3,color1),
                                                             ID(ID1){
     strategy=new RandomMove;
     CollisionObserver* target=player1;
@@ -106,17 +106,14 @@ void Enemy::move() {
     distance= sqrt(pow(posX- player->getRect().getPosition().x, 2) + pow(posY- player->getRect().getPosition().y, 2));
 
     if(hp>1 && distance <400) {
-        delete (strategy);
         strategy = new Follow;
     }
     else {
         if (hp > 1) {
-            delete (strategy);
             strategy = new RandomMove();
         }
 
         else {
-            delete(strategy);
             strategy = new Static;
         }
 
