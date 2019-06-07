@@ -30,5 +30,6 @@ protected:
     GameDataRef data;
     Text title;
     Text enterText;
+    Text enterText2;
 
 };

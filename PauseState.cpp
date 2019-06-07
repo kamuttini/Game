@@ -8,7 +8,8 @@
 #include <fstream>
 
 PauseState::PauseState(GameDataRef data) : title("Pause", 100, sf::Color::White),
-                                           enterText("press P to Return",50,sf::Color::Red),
+                                           enterText("press P to Resume",50,sf::Color::Red),
+                                           enterText2("press R to Restart",50, sf::Color::Red),
                                            data(data)
 {
 
@@ -17,8 +18,12 @@ PauseState::PauseState(GameDataRef data) : title("Pause", 100, sf::Color::White)
 
 void PauseState::Init() {
     sf::Vector2u WindowSize = this->data->window.getSize();
-    title.setPosition((this->data->window.getSize().x/2)-(title.text.getGlobalBounds().width/2),(this->data->window.getSize().y/2)-(title.text.getGlobalBounds().height/2));
-    enterText.setPosition((this->data->window.getSize().x/2)-(enterText.text.getGlobalBounds().width/2),(this->data->window.getSize().y/2)-((title.text.getGlobalBounds().height/2)-200));
+    title.setPosition((this->data->window.getSize().x / 2) - (title.text.getGlobalBounds().width / 2),
+                      (this->data->window.getSize().y / 2) - (title.text.getGlobalBounds().height / 2) -100);
+    enterText.setPosition((this->data->window.getSize().x / 2) - (enterText.text.getGlobalBounds().width / 2),
+                          (this->data->window.getSize().y / 2) - ((title.text.getGlobalBounds().height / 2) - 200));
+    enterText2.setPosition((this->data->window.getSize().x / 2) - (enterText2.text.getGlobalBounds().width / 2),
+                          (this->data->window.getSize().y / 2) - ((title.text.getGlobalBounds().height / 2) - 250));
 }
 
 void PauseState::HandleInput() {
@@ -36,10 +41,12 @@ void PauseState::HandleInput() {
             case sf::Event::KeyPressed:
                 switch(event.key.code) {
                     case sf::Keyboard::P:
-                        this->data->machine.RemoveState();
+                        this->data->machine.RemoveState(true);
+                        this->data->soundTrack.setVolume(10);
                         break;
                     case sf::Keyboard::R:
                         this->data->machine.AddState(StateRef(new GameState(data)), true);
+                        this->data->soundTrack.setVolume(10);
                         break;
 
                 }
@@ -57,5 +64,6 @@ void PauseState::Draw() {
     this->data->window.clear();
     title.draw(this->data->window);
     enterText.draw(this->data->window);
+    enterText2.draw(this->data->window);
     this->data->window.display();
 }

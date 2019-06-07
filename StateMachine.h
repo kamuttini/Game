@@ -18,8 +18,8 @@ public:
     StateMachine() { }
     ~StateMachine() { }
 
-    void AddState(StateRef newState, bool isReplacing = true);
-    void RemoveState();
+    void AddState(StateRef newState, bool isReplacing = false);
+    void RemoveState(bool isRemoving = false);
 
     // Run at start of each loop in Game.cpp
     void ProcessStateChanges();

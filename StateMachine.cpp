@@ -12,7 +12,7 @@ void StateMachine::AddState(StateRef newState, bool isReplacing)
     this->newState = std::move(newState);
 }
 
-void StateMachine::RemoveState()
+void StateMachine::RemoveState(bool isRemoving)
 {
     this->isRemoving = true;
 
@@ -20,16 +20,16 @@ void StateMachine::RemoveState()
 
 void StateMachine::ProcessStateChanges()
 {
-    if (this->isRemoving && !this->states.empty())
-    {
+    if (this->isRemoving && !this->states.empty()) {
         this->states.pop();
 
-        if (!this->states.empty())
-        {
+        if (!this->states.empty()) {
             this->states.top()->Resume();
-        }}
+        }
+
 
         this->isRemoving = false;
+    }
 
 
     if (this->isAdding)
