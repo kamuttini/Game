@@ -4,6 +4,7 @@
 
 #include "GameState.h"
 #include "GameOverState.h"
+#include "PauseState.h"
 
 GameState::GameState(GameDataRef data1) :   data(data1) {}
 
@@ -23,18 +24,26 @@ void GameState::HandleInput()
         switch(event.type)
         {
             case sf::Event::KeyPressed:
-                player->getInput();
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+                    this->data->machine.AddState(StateRef(new PauseState(data)));
+                }
+                else { player->getInput(); }
                 break;
 
             case sf::Event::Closed:
                 this->data->window.close();
                 break;
+
+
+
         }
     }
 }
 
 void GameState::Update()
 {
+
+    if (!paused)
     player->updateState();
 
     int i = 0;

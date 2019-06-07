@@ -22,7 +22,9 @@ public:
     void HandleInput() override ;
     void Update()  override;
     void Draw() override ;
+    
     std::vector<enemyPtr> enemyVec;
+    bool paused = true;
 
 private:
     GameDataRef data;

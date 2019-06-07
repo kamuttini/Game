@@ -11,7 +11,6 @@
 
 typedef std::unique_ptr<State> StateRef;
 
-
 class StateMachine
 {
 public:
@@ -28,11 +27,10 @@ public:
     StateRef &GetActiveState();
 
 private:
-    std::stack<StateRef> _states;
-    StateRef _newState;
+    std::stack<StateRef> states;
+    StateRef newState;
 
-    bool _isRemoving;
-    bool _isAdding, _isReplacing;
+    bool isAdding, isReplacing, isRemoving;
 };
 
 #endif //GAME_STATEMACHINE_H
