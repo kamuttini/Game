@@ -24,11 +24,11 @@ void GameState::HandleInput()
         switch(event.type)
         {
             case sf::Event::KeyPressed:
+                player->getInput();
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
                     this->data->machine.AddState(StateRef(new PauseState(data)));
                     this->data->soundTrack.setVolume(0);
                 }
-                else { player->getInput(); }
                 break;
 
             case sf::Event::Closed:
@@ -43,8 +43,6 @@ void GameState::HandleInput()
 
 void GameState::Update()
 {
-
-    if (!paused)
     player->updateState();
 
     int i = 0;

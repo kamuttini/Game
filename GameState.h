@@ -24,7 +24,6 @@ public:
     void Draw() override ;
     
     std::vector<enemyPtr> enemyVec;
-    bool paused = true;
 
 private:
     GameDataRef data;
