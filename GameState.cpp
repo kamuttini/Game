@@ -24,11 +24,11 @@ void GameState::HandleInput()
         switch(event.type)
         {
             case sf::Event::KeyPressed:
-                player->getInput();
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)){
                     this->data->machine.AddState(StateRef(new PauseState(data)));
-                    this->data->soundTrack.setVolume(0);
-                }
+                } else
+                    player->getInput();
                 break;
 
             case sf::Event::Closed:

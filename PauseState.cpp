@@ -8,22 +8,20 @@
 #include <fstream>
 
 PauseState::PauseState(GameDataRef data) : title("Pause", 100, sf::Color::White),
-                                           enterText("press P to Resume",50,sf::Color::Red),
-                                           enterText2("press R to Restart",50, sf::Color::Red),
-                                           data(data)
-{
-
-}
+                                           resumeText("Resume",60,sf::Color::Red),
+                                           replayText("Restart",50),
+                                           data(data) {}
 
 
 void PauseState::Init() {
+    this->data->soundTrack.setVolume(0);
     sf::Vector2u WindowSize = this->data->window.getSize();
     title.setPosition((this->data->window.getSize().x / 2) - (title.text.getGlobalBounds().width / 2),
-                      (this->data->window.getSize().y / 2) - (title.text.getGlobalBounds().height / 2) -100);
-    enterText.setPosition((this->data->window.getSize().x / 2) - (enterText.text.getGlobalBounds().width / 2),
-                          (this->data->window.getSize().y / 2) - ((title.text.getGlobalBounds().height / 2) - 200));
-    enterText2.setPosition((this->data->window.getSize().x / 2) - (enterText2.text.getGlobalBounds().width / 2),
-                          (this->data->window.getSize().y / 2) - ((title.text.getGlobalBounds().height / 2) - 250));
+                      (this->data->window.getSize().y / 2) - (title.text.getGlobalBounds().height / 2) -400);
+    resumeText.setPosition((this->data->window.getSize().x / 2) - (resumeText.text.getGlobalBounds().width / 2),
+                          (this->data->window.getSize().y / 2) - (title.text.getGlobalBounds().height / 2));
+    replayText.setPosition((this->data->window.getSize().x / 2) - (replayText.text.getGlobalBounds().width / 2),
+                          (this->data->window.getSize().y / 2) - ((title.text.getGlobalBounds().height / 2) - 100));
 }
 
 void PauseState::HandleInput() {
@@ -40,13 +38,24 @@ void PauseState::HandleInput() {
 
             case sf::Event::KeyPressed:
                 switch(event.key.code) {
-                    case sf::Keyboard::P:
-                        this->data->machine.RemoveState(true);
-                        this->data->soundTrack.setVolume(10);
+                    case sf::Keyboard::Down:
+                        MoveDown();
+
                         break;
-                    case sf::Keyboard::R:
-                        this->data->machine.AddState(StateRef(new GameState(data)), true);
-                        this->data->soundTrack.setVolume(10);
+                    case sf::Keyboard::Up:
+                        MoveUp();
+                        break;
+                    case sf::Keyboard::Return:
+                        if(resumeText.text.getFillColor()==sf::Color::Red)
+                        {
+                            this->data->machine.RemoveState(true);
+                            this->data->soundTrack.setVolume(10);
+                        }
+                        else
+                        {
+                            this->data->machine.AddState(StateRef(new GameState(data)), true);
+                            this->data->soundTrack.setVolume(10);
+                        }
                         break;
 
                 }
@@ -63,7 +72,31 @@ void PauseState::Draw() {
 
     this->data->window.clear();
     title.draw(this->data->window);
-    enterText.draw(this->data->window);
-    enterText2.draw(this->data->window);
+    resumeText.draw(this->data->window);
+    replayText.draw(this->data->window);
     this->data->window.display();
+}
+
+void PauseState::MoveUp() {
+    SwapColor();
+    SwapSize();
+}
+
+void PauseState::MoveDown() {
+    SwapColor();
+    SwapSize();
+}
+
+void PauseState::SwapColor(){
+    sf::Color color1=resumeText.text.getFillColor();
+    sf::Color color2=replayText.text.getFillColor();
+    resumeText.text.setFillColor(color2);
+    replayText.text.setFillColor(color1);
+}
+
+void PauseState::SwapSize() {
+     int size1 =resumeText.text.getCharacterSize();
+     int size2 =replayText.text.getCharacterSize();
+     resumeText.text.setCharacterSize(size2);
+     replayText.text.setCharacterSize(size1);
 }

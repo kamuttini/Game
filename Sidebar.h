@@ -24,6 +24,7 @@ private:
     Text hpText;
     Text weaponsText;
     Text scoreText;
+    Text pauseText;
 };
 
 

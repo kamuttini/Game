@@ -25,11 +25,14 @@ public:
     void HandleInput() override ;
     void Update()  override;
     void Draw() override ;
+    void MoveUp();
+    void MoveDown();
+    void SwapColor();
+    void SwapSize();
 
 protected:
     GameDataRef data;
     Text title;
-    Text enterText;
-    Text enterText2;
-
+    Text resumeText;
+    Text replayText;
 };
