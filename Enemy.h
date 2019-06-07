@@ -8,6 +8,7 @@
 
 #include "GameCharacter.h"
 #include "Player.h"
+#include "Strategy.h"
 
 class Enemy: public GameCharacter {
 public:
@@ -16,6 +17,7 @@ public:
     explicit Enemy(Player* player,type& ID,sf::Color color1);
     ~Enemy(){};
     void fight() override;
+    void move() override;
     void destroy(std::vector<std::unique_ptr<Enemy>>& enemy,std::vector<std::unique_ptr<Enemy>>::const_iterator iter1);
     void updateState()override;
     void update(Weapon* weapon) override;
@@ -24,6 +26,7 @@ public:
     std::vector<weaponPtr> weaponVec;
 
 private:
+    Strategy* strategy;
     type ID;
     Factory weaponFactory;
     Player* player;

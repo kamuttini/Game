@@ -15,7 +15,7 @@ class Player: public GameCharacter {
 public:
     explicit Player (Sidebar& sidebar, sf::Color=sf::Color::Red);
     ~Player(){};
-    void move();
+    void move() override ;
     void getInput();
     void update(Weapon* weapon) override;
     void fight() override;

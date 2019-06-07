@@ -3,6 +3,8 @@
 //
 
 #include "Enemy.h"
+#include "Follow.h"
+#include "RandomMove.h"
 #include <cmath>
 
 Enemy:: Enemy(Player* player1,type& ID1, sf::Color color1): player (player1),
@@ -24,8 +26,6 @@ void Enemy::fight()
     sf::Vector2f playerDir;
     playerDir.x=(player->getRect().getPosition().x-posX)/distance;
     playerDir.y=(player->getRect().getPosition().y-posY)/ distance;
-    if(hp>1 && distance <500)
-        rect.move((playerDir));
 
     if (attackClock.getElapsedTime() > attackDelay && distance<600) {
         isFighting = true;
@@ -69,6 +69,7 @@ void Enemy::update(Weapon* weapon) {
 }
 void Enemy::updateState() {
     GameCharacter::updateState();
+    move();
     std::vector<std::unique_ptr<Weapon>>::const_iterator iter2;
     for(int j=0; j!=weaponVec.size(); j++)
     {
@@ -96,4 +97,16 @@ void Enemy::destroy(std::vector<std::unique_ptr<Enemy>>& enemy,std::vector<std::
 
 Enemy::type Enemy::getId() const {
     return ID;
+}
+
+void Enemy::move() {
+    float distance;
+    distance= sqrt(pow(posX- player->getRect().getPosition().x, 2) + pow(posY- player->getRect().getPosition().y, 2));
+
+    if(hp>1 && distance <500)
+        strategy=new Follow;
+    else
+        strategy=new RandomMove;
+
+    strategy->move(rect, *player);
 }

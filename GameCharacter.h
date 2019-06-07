@@ -18,6 +18,7 @@ public:
 
     void update(Weapon* weapon) override =0;
     virtual void fight()=0;
+    virtual void move()=0;
     virtual void updateState();
     std::list<CollisionObserver*> targetList;
 
