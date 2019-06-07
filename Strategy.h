@@ -12,7 +12,8 @@ class Strategy {
 public:
     Strategy(){};
     ~Strategy(){};
-    virtual void move(sf::RectangleShape& rect, Player& player)=0;
+    virtual void
+    move(Enemy &enemy, Player &player) =0;
 };
 
 

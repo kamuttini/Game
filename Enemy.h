@@ -24,6 +24,7 @@ public:
     type getId() const;
 
     std::vector<weaponPtr> weaponVec;
+    sf::Clock changeDirectionClock;
 
 private:
     Strategy* strategy;

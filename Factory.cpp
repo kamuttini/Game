@@ -44,23 +44,18 @@ std::unique_ptr<PlayerWeapon> Factory::createPlayerWeapon(Player* player){
 
 std::unique_ptr<Enemy> Factory::createEnemy(Player *player) {
     sf::Color color;
-    Enemy::type ID;
-    srand(clock());
-    int x=rand()%3;
-    switch(x)
+    Enemy::type ID= Enemy::type (rand() % 3);
+    switch(ID)
     {
-        case 0:
-            ID=Enemy::type::student;
+        case Enemy::type::student:
             color=sf::Color::Cyan;
             break;
 
-        case 1:
-            ID=Enemy::type::chef;
+        case Enemy::type::chef:
             color=sf::Color::Blue;
             break;
 
-        case 2:
-            ID=Enemy::type::barMan;
+        case Enemy::type::barMan:
             color=sf::Color::Green;
             break;
     }

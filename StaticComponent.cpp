@@ -25,8 +25,7 @@ void StaticComponent::randomPosition()
 }
 
 
-const sf::RectangleShape &StaticComponent::getRect() const {
+sf::RectangleShape &StaticComponent::getRect()  {
     return rect;
 }
-
 

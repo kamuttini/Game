@@ -25,7 +25,6 @@ public:
     Inventory inventory;
     Sidebar& stats;
 
-
 private:
     sf::Vector2f movement;
 };

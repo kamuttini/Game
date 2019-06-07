@@ -65,7 +65,10 @@ void Player::move() {
             break;
     }
 
-    rect.move(movement);
+    if(rect.getPosition().x<1350 && rect.getPosition().x>0 && rect.getPosition().y<950 && rect.getPosition().y>0)
+        rect.move(movement);
+    else
+        rect.move(-movement.x*2, -movement.y*2);
     movement/=speed;
 }
 

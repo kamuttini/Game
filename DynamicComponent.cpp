@@ -6,8 +6,8 @@
 
 
 DynamicComponent:: DynamicComponent(float s, sf::Color color1, orientation dir): StaticComponent(color1),  speed(s),
-                                                                isDestroyed(false),
-                                                                direction(dir){}
+                                                                                 isDestroyed(false),
+                                                                                 direction(dir){}
 
 
 bool DynamicComponent::isDestroyed1() const {
@@ -16,6 +16,18 @@ bool DynamicComponent::isDestroyed1() const {
 
 void DynamicComponent::setIsDestroyed(bool isDestroyed) {
     DynamicComponent::isDestroyed = isDestroyed;
+}
+
+float DynamicComponent::getSpeed() const {
+    return speed;
+}
+
+DynamicComponent::orientation DynamicComponent::getDirection() const {
+    return direction;
+}
+
+void DynamicComponent::setDirection(DynamicComponent::orientation direction) {
+    DynamicComponent::direction = direction;
 }
 
 

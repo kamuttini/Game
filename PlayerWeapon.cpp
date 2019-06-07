@@ -13,7 +13,7 @@ PlayerWeapon::PlayerWeapon(Player *player): Weapon(sf::Color::Yellow),
     randomPosition();
     CollisionObserver* target= player;
     addObserver(target);
-    displayTime=sf::seconds(6);
+    displayTime=sf::seconds(8);
 }
 
 void PlayerWeapon::updateState() {

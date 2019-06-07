@@ -5,11 +5,13 @@
 #include "Enemy.h"
 #include "Follow.h"
 #include "RandomMove.h"
+#include "Static.h"
 #include <cmath>
 
 Enemy:: Enemy(Player* player1,type& ID1, sf::Color color1): player (player1),
                                                             GameCharacter(5,color1),
                                                             ID(ID1){
+    strategy=new RandomMove;
     CollisionObserver* target=player1;
     targetList.push_back(target);
     player1->updateTarget(this);
@@ -21,11 +23,11 @@ Enemy:: Enemy(Player* player1,type& ID1, sf::Color color1): player (player1),
 void Enemy::fight()
 {
     float distance;
-    distance= sqrt(pow(posX- player->getRect().getPosition().x, 2) + pow(posY- player->getRect().getPosition().y, 2));
+    distance= sqrt(pow(rect.getPosition().x- player->getRect().getPosition().x, 2) + pow(rect.getPosition().y- player->getRect().getPosition().y, 2));
 
     sf::Vector2f playerDir;
-    playerDir.x=(player->getRect().getPosition().x-posX)/distance;
-    playerDir.y=(player->getRect().getPosition().y-posY)/ distance;
+    playerDir.x=(player->getRect().getPosition().x-rect.getPosition().x)/distance;
+    playerDir.y=(player->getRect().getPosition().y-rect.getPosition().y)/ distance;
 
     if (attackClock.getElapsedTime() > attackDelay && distance<600) {
         isFighting = true;
@@ -103,10 +105,21 @@ void Enemy::move() {
     float distance;
     distance= sqrt(pow(posX- player->getRect().getPosition().x, 2) + pow(posY- player->getRect().getPosition().y, 2));
 
-    if(hp>1 && distance <500)
-        strategy=new Follow;
-    else
-        strategy=new RandomMove;
+    if(hp>1 && distance <400) {
+        delete (strategy);
+        strategy = new Follow;
+    }
+    else {
+        if (hp > 1) {
+            delete (strategy);
+            strategy = new RandomMove();
+        }
 
-    strategy->move(rect, *player);
+        else {
+            delete(strategy);
+            strategy = new Static;
+        }
+
+    }
+    strategy->move(*this, *player);
 }

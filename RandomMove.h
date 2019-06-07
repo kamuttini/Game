@@ -10,9 +10,13 @@
 
 class RandomMove: public Strategy {
 public:
-    RandomMove(){};
-    ~RandomMove(){};
-    void move(sf::RectangleShape &rect, Player& player) override;
+
+    RandomMove();
+    ~RandomMove()= default;;
+    void move(Enemy &enemy, Player &player) override;
+
+private:
+    sf::Time changeDirectionTime;
 };
 
 

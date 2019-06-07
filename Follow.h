@@ -8,14 +8,14 @@
 
 #include "Strategy.h"
 #include "Player.h"
+#include "Enemy.h"
 
 class Follow: public Strategy {
 public:
-    Follow(){};
-    ~Follow(){};
-    void move(sf::RectangleShape &rect, Player& player ) override ;
+    Follow()= default;;
+    ~Follow()= default;;
+    void move(Enemy &enemy, Player &player) override ;
 
-private:
 };
 
 

@@ -14,7 +14,7 @@ public:
     ~StaticComponent(){};
     void draw (sf::RenderWindow& window);
     void randomPosition();
-    const sf::RectangleShape &getRect() const;
+    sf::RectangleShape &getRect();
 
 protected:
     int posX, posY;
