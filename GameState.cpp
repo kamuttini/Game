@@ -25,7 +25,7 @@ void GameState::HandleInput()
         {
             case sf::Event::KeyPressed:
 
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)){
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)){
                     this->data->machine.AddState(StateRef(new PauseState(data)));
                 } else
                     player->getInput();

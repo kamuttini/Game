@@ -9,7 +9,7 @@
 Sidebar::Sidebar ():    hpText("HP: 3/3"),
                         weaponsText("Weapons: 0"),
                         scoreText("Score: 0"),
-                        pauseText("PRESS F1 TO PAUSE",30)
+                        pauseText("PRESS P TO PAUSE",30)
 
 {
     hpText.setPosition(80,50);
