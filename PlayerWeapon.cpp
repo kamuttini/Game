@@ -5,20 +5,22 @@
 #include "PlayerWeapon.h"
 #include "Player.h"
 
-PlayerWeapon::PlayerWeapon(Player *player): Weapon(sf::Color::Yellow),
-                                            targetList(player->targetList),
-                                            caught(false)
+PlayerWeapon::PlayerWeapon(Player *player,type id):     Weapon(id),
+                                                        targetList(player->targetList),
+                                                        caught(false)
 {
-    rect.setSize(sf::Vector2f(25.f,25.f));
     randomPosition();
+    rect.setSize(sf::Vector2f(25.f,25.f));
     CollisionObserver* target= player;
     addObserver(target);
-    displayTime=sf::seconds(8);
+    displayTime=sf::seconds(12);
+    sprite= new Sprite(setSprite(), *this);
+    sprite->setScale(sf::Vector2f(0.8,0.8));
 }
 
 void PlayerWeapon::updateState() {
 
-    if(displayClock.getElapsedTime()>= displayTime && caught==false)
+    if(displayClock.getElapsedTime()>= displayTime && !caught)
         isDestroyed=true;
 }
 

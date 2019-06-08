@@ -14,7 +14,7 @@ class Enemy: public GameCharacter {
 public:
     enum type {student, barMan, chef};
 
-    explicit Enemy(Player* player,type& ID,sf::Color color1);
+    explicit Enemy(Player* player,type& ID);
     ~Enemy(){};
     void fight() override;
     void move() override;
@@ -22,6 +22,7 @@ public:
     void updateState()override;
     void update(Weapon* weapon) override;
     type getId() const;
+    std::string setSprite();
 
     std::vector<weaponPtr> weaponVec;
     sf::Clock changeDirectionClock;

@@ -34,9 +34,6 @@ void GameState::HandleInput()
             case sf::Event::Closed:
                 this->data->window.close();
                 break;
-
-
-
         }
     }
 }
@@ -51,7 +48,7 @@ void GameState::Update()
         weaponToCollect[i]->updateState();
     }
 
-    if (enemyVec.size() <= 4 &&
+    if (enemyVec.size() <= 3 &&
         enemyClock.getElapsedTime() >= enemyDelay)                                                                        //generate enemy
     {
         enemyVec.push_back(factory.createEnemy(player));
@@ -59,7 +56,7 @@ void GameState::Update()
     }
     if (playerWeaponClock.getElapsedTime() >= playerWeaponDelay)                                                        //generate playerWeapon
     {
-        weaponToCollect.push_back(factory.createPlayerWeapon(player));
+        weaponToCollect.push_back(factory.createWeaponToCollect(player));
         playerWeaponClock.restart();
     }
 

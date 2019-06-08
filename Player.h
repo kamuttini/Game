@@ -13,7 +13,7 @@
 
 class Player: public GameCharacter {
 public:
-    explicit Player (Sidebar& sidebar, sf::Color=sf::Color::Red);
+    explicit Player (Sidebar& sidebar);
     ~Player(){};
     void move() override ;
     void getInput();

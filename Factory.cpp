@@ -5,61 +5,48 @@
 #include "Factory.h"
 #include "Enemy.h"
 
-std::unique_ptr<Weapon> Factory::createWeapon(std::list<CollisionObserver *> &targetList, sf::Vector2f targetDir, sf::Vector2f position, Enemy* refEnemy)
+std::unique_ptr<Weapon> Factory::createEnemyWeapon(std::list<CollisionObserver *> &targetList, sf::Vector2f targetDir,
+                                                   sf::Vector2f position, Enemy *refEnemy)
 {
     std::unique_ptr<Weapon> weapon;
 
-    if(refEnemy!= nullptr) {
-        Enemy::type enemyID=refEnemy->getId();
-        switch(enemyID)
-        {
-            case Enemy::type::student:
-                weapon= std::unique_ptr<Weapon>(new Weapon(targetList,sf::Color::Cyan,targetDir, position));
-                break;
+    Enemy::type enemyID=refEnemy->getId();
+    switch(enemyID)
+    {
+        case Enemy::type::student:
+            weapon= std::unique_ptr<Weapon>(new Weapon(targetList, targetDir, position, Weapon::type::book));
+            break;
 
             case Enemy::type::chef:
-                weapon= std::unique_ptr<Weapon>(new Weapon(targetList,sf::Color::Blue,targetDir, position));
+                weapon= std::unique_ptr<Weapon>(new Weapon(targetList, targetDir, position, Weapon::type::pizza));
                 break;
 
-            case Enemy::type::barMan:
-                weapon= std::unique_ptr<Weapon>(new Weapon(targetList,sf::Color::Green,targetDir, position));
+                case Enemy::type::barMan:
+                weapon= std::unique_ptr<Weapon>(new Weapon(targetList, targetDir, position, Weapon::type::coffee));
                 break;
-        }
     }
-
-    else
-        weapon= std::unique_ptr<Weapon>(new Weapon(targetList,sf::Color::White,targetDir, position));
 
     return weapon;
 }
 
 
-std::unique_ptr<PlayerWeapon> Factory::createPlayerWeapon(Player* player){
+std::unique_ptr<PlayerWeapon> Factory::createWeaponToCollect(Player *player){
     std::unique_ptr<PlayerWeapon> weapon;
-
-    weapon= std::unique_ptr<PlayerWeapon>(new PlayerWeapon(player));
+    Weapon::type ID= Weapon::type (rand() % 3);
+    weapon= std::unique_ptr<PlayerWeapon>(new PlayerWeapon(player, ID));
     return weapon;
 }
 
 
 std::unique_ptr<Enemy> Factory::createEnemy(Player *player) {
-    sf::Color color;
     Enemy::type ID= Enemy::type (rand() % 3);
-    switch(ID)
-    {
-        case Enemy::type::student:
-            color=sf::Color::Cyan;
-            break;
-
-        case Enemy::type::chef:
-            color=sf::Color::Blue;
-            break;
-
-        case Enemy::type::barMan:
-            color=sf::Color::Green;
-            break;
-    }
     std::unique_ptr<Enemy> enemy;
-    enemy= std::unique_ptr<Enemy>(new Enemy(player,ID, color));
+    enemy= std::unique_ptr<Enemy>(new Enemy(player,ID));
     return enemy;
+}
+
+std::unique_ptr<Weapon> Factory::createPlayerWeapon(Weapon::type ID, std::list<CollisionObserver *> &targetList, sf::Vector2f targetDir,sf::Vector2f position) {
+    std::unique_ptr<Weapon> weapon;
+    weapon= std::unique_ptr<Weapon>(new Weapon(targetList, targetDir, position, ID));
+    return weapon;
 }

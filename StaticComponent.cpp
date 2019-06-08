@@ -3,17 +3,16 @@
 //
 
 #include "StaticComponent.h"
+#include "Sprite.h"
 
+StaticComponent:: StaticComponent(orientation dir): direction(dir){
 
-StaticComponent:: StaticComponent(sf::Color color1){
-    color=color1;
     rect.setSize(sf::Vector2f(30.f,51.f));
-    rect.setFillColor(color);
 }
 
 void StaticComponent::draw(sf::RenderWindow &window)
 {
-    window.draw(rect);
+    sprite->draw(window);
 }
 
 void StaticComponent::randomPosition()
@@ -27,5 +26,15 @@ void StaticComponent::randomPosition()
 
 sf::RectangleShape &StaticComponent::getRect()  {
     return rect;
+}
+StaticComponent::orientation StaticComponent::getDirection() const {
+    return direction;
+}
+void StaticComponent::setDirection(StaticComponent::orientation direction) {
+    StaticComponent::direction = direction;
+}
+
+Sprite *StaticComponent::getSprite() const {
+    return sprite;
 }
 

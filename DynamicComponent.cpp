@@ -5,10 +5,9 @@
 #include "DynamicComponent.h"
 
 
-DynamicComponent:: DynamicComponent(float s, sf::Color color1, orientation dir): StaticComponent(color1),  speed(s),
-                                                                                 isDestroyed(false),
-                                                                                 direction(dir){}
-
+DynamicComponent:: DynamicComponent(float s):   speed(s),
+                                                isDestroyed(false)
+                                                {}
 
 bool DynamicComponent::isDestroyed1() const {
     return isDestroyed;
@@ -22,13 +21,8 @@ float DynamicComponent::getSpeed() const {
     return speed;
 }
 
-DynamicComponent::orientation DynamicComponent::getDirection() const {
-    return direction;
-}
 
-void DynamicComponent::setDirection(DynamicComponent::orientation direction) {
-    DynamicComponent::direction = direction;
-}
+
 
 
 

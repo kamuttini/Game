@@ -10,12 +10,11 @@
 
 
 class Weapon: public DynamicComponent, public Subject  {
-    enum id {cafe, pasta, book};
-
 public:
+    enum type{pizza,coffee,book};
 
-    Weapon (std::list<CollisionObserver*>& targetList, sf::Color color1, sf::Vector2f targetDir, sf::Vector2f position, float s=3);
-    Weapon(sf::Color color1,float s=7);
+    Weapon(std::list<CollisionObserver *> &targetList, sf::Vector2f targetDir, sf::Vector2f position, type ID, float s = 3);
+    Weapon(type ID, float s=7);
     ~Weapon(){};
     void attack();
     void addObserver(CollisionObserver* o) override ;
@@ -23,10 +22,13 @@ public:
     void notify() override;
     static void destroy(std::vector<std::unique_ptr<Weapon>>& enemy,std::vector<std::unique_ptr<Weapon>>::const_iterator iter1);
     std::unique_ptr<Weapon> clone() const;
+    type getId() const;
+    std::string setSprite();
 
 protected:
     std::list<CollisionObserver*> characters;
     sf::Vector2f targetDir;
+    type ID;
 };
 
 

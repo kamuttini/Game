@@ -15,7 +15,6 @@ public:
     Follow()= default;;
     ~Follow()= default;;
     void move(Enemy &enemy, Player &player) override ;
-
 };
 
 

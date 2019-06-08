@@ -5,8 +5,10 @@
 #include <list>
 #include "Weapon.h"
 
-Weapon:: Weapon(std::list<CollisionObserver*>& targetList,sf::Color color1, sf::Vector2f targetDir, sf::Vector2f position, float s): DynamicComponent (s, color1),
-                                                                                                                    targetDir(targetDir*speed)
+Weapon::Weapon(std::list<CollisionObserver *> &targetList, sf::Vector2f targetDir, sf::Vector2f position, type ID,
+               float s) : DynamicComponent (s),
+                          targetDir(targetDir*speed),
+                          ID(ID)
 {
     for (std::list<CollisionObserver*>::iterator iter = targetList.begin(); iter != targetList.end(); ++iter)
     {
@@ -14,10 +16,10 @@ Weapon:: Weapon(std::list<CollisionObserver*>& targetList,sf::Color color1, sf::
     }
     rect.setSize(sf::Vector2f(15.f,15.f));
     rect.setPosition(position);
+    sprite= new Sprite(setSprite(), *this);
 }
 
-Weapon::Weapon( sf::Color color1,float s ): DynamicComponent(s, color1){
-}
+Weapon::Weapon(type ID1,float s ): DynamicComponent(s), ID(ID1){}
 
 void Weapon::addObserver(CollisionObserver* o){
     characters.push_back(o);
@@ -37,6 +39,7 @@ void Weapon::notify() {
 void Weapon::attack() {
     rect.move(targetDir);
     notify();
+    sprite->update();
 }
 
 void Weapon::destroy(std::vector<std::unique_ptr<Weapon>>& weapon,std::vector<std::unique_ptr<Weapon>>::const_iterator iter) {
@@ -47,6 +50,27 @@ void Weapon::destroy(std::vector<std::unique_ptr<Weapon>>& weapon,std::vector<st
 std::unique_ptr<Weapon> Weapon::clone() const {
 
     return std::unique_ptr<Weapon>( new Weapon(*this));
+}
+
+Weapon::type Weapon::getId() const {
+    return ID;
+}
+
+std::string Weapon::setSprite() {
+ std::string filename;
+    switch(ID)
+    {
+        case book:
+            filename="book1.png";
+            break;
+        case pizza:
+            filename="pizza1.png";
+            break;
+        case coffee:
+            filename="caffe1.png";
+            break;
+    }
+    return filename;
 }
 
 

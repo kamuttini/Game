@@ -13,19 +13,16 @@
 class DynamicComponent: public StaticComponent {
 
 public:
-    enum orientation { down, up,left,right};
+    explicit DynamicComponent(float s);
 
-    explicit DynamicComponent(float s,sf::Color color1, orientation dir=down);
+    DynamicComponent();
+
     bool isDestroyed1() const;
     void setIsDestroyed(bool isDestroyed);
     float getSpeed() const;
-    orientation getDirection() const;
-    void setDirection(orientation direction);
-
 
 protected:
     float speed;
-    orientation direction;
     bool isDestroyed;
 };
 

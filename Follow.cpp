@@ -10,10 +10,26 @@
 
 void Follow::move(Enemy &enemy, Player &player) {
     float distance;
-    distance= sqrt(pow(enemy.getRect().getPosition().x- player.getRect().getPosition().x, 2) + pow(enemy.getRect().getPosition().y- player.getRect().getPosition().y, 2));
+    distance= sqrt(pow(enemy.getRect().getPosition().x- player.getRect().getOrigin().x, 2) + pow(enemy.getRect().getPosition().y- player.getRect().getPosition().y, 2));
+
     sf::Vector2f playerDir;
     playerDir.x=(player.getRect().getPosition().x-enemy.getRect().getPosition().x)/distance;
     playerDir.y=(player.getRect().getPosition().y-enemy.getRect().getPosition().y)/ distance;
+
+    if(playerDir.x>0) {
+     if(playerDir.x>playerDir.y)
+         enemy.setDirection(DynamicComponent::orientation::down);
+     else
+         enemy.setDirection(DynamicComponent::orientation::left);
+    }
+    else {
+        if(playerDir.x>playerDir.y)
+            enemy.setDirection(DynamicComponent::orientation::right);
+        else
+            enemy.setDirection(DynamicComponent::orientation::up);
+    }
+
     sf::RectangleShape& rect = enemy.getRect();
-    rect.move(playerDir);
+    rect.move(playerDir*(enemy.getSpeed()*2));
+    enemy.getSprite()->animate();
 }

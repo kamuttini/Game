@@ -18,7 +18,7 @@ public:
     Inventory();
     ~Inventory(){};
     void addToCollection(Weapon weapon);
-    void removeWeapon();
+    void removeFromCollection();
     void useWeapon(std::list<CollisionObserver*>& targetList, sf::Vector2f targetDir, sf::Vector2f position);
     int collectionSize();
     void updateState();

@@ -13,7 +13,7 @@
 class GameCharacter: public DynamicComponent,public CollisionObserver{
 
 public:
-     GameCharacter(int s=15,sf::Color color=sf::Color::White,int h=2);
+     GameCharacter(int s=15 ,int h=2);
     typedef std::unique_ptr<Weapon>  weaponPtr;
 
     void update(Weapon* weapon) override =0;
@@ -30,5 +30,7 @@ protected:
     sf::Clock attackClock;
     sf::Time attackDelay;
     sf::Clock woundedClock;
+    sf::Clock walkingClock;
+    sf::Time walkingDelay;
 };
 #endif //GAME_GAMECHARACTER_H

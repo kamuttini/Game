@@ -8,15 +8,17 @@
 #include "Static.h"
 #include <cmath>
 
-Enemy:: Enemy(Player* player1,type& ID1, sf::Color color1): player (player1),
-                                                            GameCharacter(3,color1),
-                                                            ID(ID1){
+Enemy:: Enemy(Player* player1,type& ID1):   player (player1),
+                                            GameCharacter(10),
+                                            ID(ID1){
+    randomPosition();
+    sprite= new Sprite(setSprite(), *this, 2, 1, 3, 0);
+    sprite->setScale(sf::Vector2f(1.9,1.9));
     strategy=new RandomMove;
     CollisionObserver* target=player1;
     targetList.push_back(target);
     player1->updateTarget(this);
-    attackDelay=sf::seconds(2.f);
-    randomPosition();
+    attackDelay=sf::seconds(4.f);
 }
 
 
@@ -35,7 +37,8 @@ void Enemy::fight()
     }
 
     if( isFighting) {
-        weaponVec.push_back(std::unique_ptr<Weapon>(weaponFactory.createWeapon(targetList, playerDir, rect.getPosition(), this)));
+        weaponVec.push_back(std::unique_ptr<Weapon>(
+                weaponFactory.createEnemyWeapon(targetList, playerDir, rect.getPosition(), this)));
         isFighting = false;
     }
 
@@ -47,9 +50,9 @@ void Enemy::fight()
 
 
 void Enemy::update(Weapon* weapon) {
-    if (weapon->getRect().getGlobalBounds().intersects( rect.getGlobalBounds()))       //controllo collisioni in base alla posizione di Weapon
+    if (weapon->getRect().getGlobalBounds().intersects( rect.getGlobalBounds()))         //controllo collisioni in base alla posizione di Weapon
     {
-        const std::type_info& type_info = typeid(*weapon);                          //verifica il tipo di arma
+        const std::type_info& type_info = typeid(*weapon);                               //verifica il tipo di arma (se è da prendere o si tratta di una collisione con armi nemiche)
         if( type_info== typeid(PlayerWeapon))
             weapon->setIsDestroyed(true);
 
@@ -105,7 +108,7 @@ void Enemy::move() {
     float distance;
     distance= sqrt(pow(posX- player->getRect().getPosition().x, 2) + pow(posY- player->getRect().getPosition().y, 2));
 
-    if(hp>1 && distance <400) {
+    if(hp>1 && distance <500) {
         strategy = new Follow;
     }
     else {
@@ -116,7 +119,31 @@ void Enemy::move() {
         else {
             strategy = new Static;
         }
-
     }
-    strategy->move(*this, *player);
+    if(walkingClock.getElapsedTime()>=walkingDelay)
+    {
+        strategy->move(*this, *player);
+        walkingClock.restart();
+    }
+}
+
+std::string Enemy::setSprite() {
+    std::string filename;
+
+    switch(ID)
+    {
+        case Enemy::type::student:
+            filename="sprite3-0.png";
+            break;
+
+        case Enemy::type::chef:
+            filename="sprite3-7.png";
+            break;
+
+        case Enemy::type::barMan:
+            filename="sprite4-0.png";
+            break;
+    }
+
+    return filename;
 }

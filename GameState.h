@@ -32,7 +32,7 @@ private:
     Factory factory;
     std::vector<playerWeaponPtr> weaponToCollect;
     sf::Clock enemyClock;
-    sf::Time enemyDelay=sf::seconds(3.f);
+    sf::Time enemyDelay=sf::seconds(4.f);
     sf::Clock playerWeaponClock;
     sf::Time playerWeaponDelay=sf::seconds(2.5f);
 };
