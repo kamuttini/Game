@@ -4,8 +4,8 @@
 
 #include "Sprite.h"
 #include "StaticComponent.h"
-Sprite::Sprite(std::string filename, StaticComponent &object, int down, int up, int right, int left, int maxi, int w, int h)
-        : object(object),
+Sprite::Sprite(std::string filename, StaticComponent &object, int down, int up, int right, int left, int maxi, float w, float h):
+          object(object),
           width(w),
           height(h),
           iter(0),
@@ -15,8 +15,8 @@ Sprite::Sprite(std::string filename, StaticComponent &object, int down, int up, 
     texture.loadFromFile("assets/sprites/"+filename);
     sprite.setTexture(texture);
     sprite.setTextureRect(sf::IntRect(0,0,width,height));
-    sprite.setScale(1.2,1.2);
     update();
+    explosionTexture.loadFromFile("assets/sprites/boom.png");
 }
 
 void Sprite::update() {
@@ -55,4 +55,26 @@ void Sprite::animate() {
 void Sprite::setScale(sf::Vector2f vector) {
     sprite.setScale(vector);
 }
+
+void Sprite::explode()  {
+if(explosionClock.getElapsedTime()>explosionDelay) {
+    sprite.setTextureRect(sf::IntRect(iter * width, left * height, width, height));
+    iter++;
+
+    if (iter == maxiter)
+        iter = 0;
+    explosionClock.restart();
+
+}
+}
+
+void Sprite::setExplodeTexture() {
+
+    sprite.setTexture(explosionTexture);
+    sprite.setScale(0.8,0.8);
+    width=155;
+    height=155;
+    maxiter=9;
+}
+
 

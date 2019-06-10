@@ -20,15 +20,20 @@ public:
     void addObserver(CollisionObserver* o) override ;
     void removeObserver(CollisionObserver* o) override;
     void notify() override;
-    static void destroy(std::vector<std::unique_ptr<Weapon>>& enemy,std::vector<std::unique_ptr<Weapon>>::const_iterator iter1);
+    void explode();
+    void destroy(std::vector<std::unique_ptr<Weapon>>& enemy,std::vector<std::unique_ptr<Weapon>>::const_iterator iter1);
     std::unique_ptr<Weapon> clone() const;
     type getId() const;
     std::string setSprite();
+
 
 protected:
     std::list<CollisionObserver*> characters;
     sf::Vector2f targetDir;
     type ID;
+    sf::Clock explosionClock;
+    sf::Time explosionTime=sf::seconds(1);
+    bool exploded;
 };
 
 

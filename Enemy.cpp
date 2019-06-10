@@ -81,7 +81,7 @@ void Enemy::updateState() {
         iter2=weaponVec.begin();
         if(weaponVec[j]->isDestroyed1())
         {
-            weaponVec[j]->destroy(weaponVec,iter2);
+            weaponVec[j]->destroy(weaponVec, iter2);
             break;
         }
         iter2++;

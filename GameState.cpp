@@ -103,6 +103,7 @@ void GameState::Draw()
 
     for (i = 0; i < player->inventory.weaponVec.size(); i++)
         player->inventory.weaponVec[i]->draw(this->data->window);
+
     if(player->inventory.alert.isDisplay())
     {
         player->inventory.alert.draw(this->data->window);

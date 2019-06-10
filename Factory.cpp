@@ -29,6 +29,11 @@ std::unique_ptr<Weapon> Factory::createEnemyWeapon(std::list<CollisionObserver *
     return weapon;
 }
 
+std::unique_ptr<Weapon> Factory::createPlayerWeapon(Weapon::type ID, std::list<CollisionObserver *> &targetList, sf::Vector2f targetDir,sf::Vector2f position) {
+    std::unique_ptr<Weapon> weapon;
+    weapon= std::unique_ptr<Weapon>(new Weapon(targetList, targetDir, position, ID));
+    return weapon;
+}
 
 std::unique_ptr<PlayerWeapon> Factory::createWeaponToCollect(Player *player){
     std::unique_ptr<PlayerWeapon> weapon;
@@ -45,8 +50,4 @@ std::unique_ptr<Enemy> Factory::createEnemy(Player *player) {
     return enemy;
 }
 
-std::unique_ptr<Weapon> Factory::createPlayerWeapon(Weapon::type ID, std::list<CollisionObserver *> &targetList, sf::Vector2f targetDir,sf::Vector2f position) {
-    std::unique_ptr<Weapon> weapon;
-    weapon= std::unique_ptr<Weapon>(new Weapon(targetList, targetDir, position, ID));
-    return weapon;
-}
+

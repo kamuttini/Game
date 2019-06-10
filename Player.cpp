@@ -12,7 +12,8 @@ Player::Player(Sidebar& sidebar):   GameCharacter(16,3),
                                     movement(1.f, 0.f)
 {
     rect.setPosition(600,600);
-    sprite= new Sprite("girl.png", *this, 2, 1, 3, 0,6, 65, 80);
+    sprite= new Sprite("sprite8.png", *this, 2, 0, 3, 1,9, 64, 65.25);
+    sprite->setScale(sf::Vector2f(1.6,1.6));
 }
 
 void Player::getInput() {

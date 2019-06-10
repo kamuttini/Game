@@ -8,6 +8,7 @@
 Weapon::Weapon(std::list<CollisionObserver *> &targetList, sf::Vector2f targetDir, sf::Vector2f position, type ID,
                float s) : DynamicComponent (s),
                           targetDir(targetDir*speed),
+                          exploded(false),
                           ID(ID)
 {
     for (std::list<CollisionObserver*>::iterator iter = targetList.begin(); iter != targetList.end(); ++iter)
@@ -37,14 +38,24 @@ void Weapon::notify() {
 }
 
 void Weapon::attack() {
-    rect.move(targetDir);
-    notify();
-    sprite->update();
+    if(!isDestroyed) {
+        rect.move(targetDir);
+        notify();
+        sprite->update();
+    }
 }
 
 void Weapon::destroy(std::vector<std::unique_ptr<Weapon>>& weapon,std::vector<std::unique_ptr<Weapon>>::const_iterator iter) {
+    if(!exploded)
+    {
+        sprite->setExplodeTexture();
+        exploded=true;
+        explosionClock.restart();
+    }
 
-    weapon.erase(iter);
+    sprite->explode();
+    if(explosionClock.getElapsedTime()>explosionTime)
+        weapon.erase(iter);
 }
 
 std::unique_ptr<Weapon> Weapon::clone() const {
@@ -71,6 +82,10 @@ std::string Weapon::setSprite() {
             break;
     }
     return filename;
+}
+
+void Weapon::explode() {
+    sprite->explode();
 }
 
 
