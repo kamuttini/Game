@@ -11,7 +11,7 @@
 
 class Subject {
 public:
-    Subject()= default;;
+    Subject()= default;
     virtual ~Subject(){};
     virtual void addObserver (CollisionObserver* o) = 0;
     virtual void removeObserver(CollisionObserver* o) = 0;

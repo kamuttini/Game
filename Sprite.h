@@ -14,7 +14,7 @@ class Sprite {
 public:
     Sprite(std::string filename, StaticComponent &object, int down=0, int up=0, int right=0, int left=0, int i=3, float w = 32, float h = 32);
 
-    ~Sprite()= default;;
+    ~Sprite()= default;
     void update();
     void animate();
     void draw(sf::RenderWindow& window);

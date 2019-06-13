@@ -20,6 +20,8 @@ public:
     virtual void fight()=0;
     virtual void move()=0;
     virtual void updateState();
+    void setHp(int hp);
+    int getHp();
     std::list<CollisionObserver*> targetList;
 
 

@@ -48,7 +48,7 @@ void GameState::Update()
         weaponToCollect[i]->updateState();
     }
 
-    if (enemyVec.size() <= 3 &&
+    if (enemyVec.size() <= 1 &&
         enemyClock.getElapsedTime() >= enemyDelay)                                                                        //generate enemy
     {
         enemyVec.push_back(factory.createEnemy(player));
