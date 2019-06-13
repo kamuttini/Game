@@ -12,7 +12,7 @@ class RandomMove: public Strategy {
 public:
 
     RandomMove();
-    ~RandomMove()= default;;
+    ~RandomMove()=default;
     void move(Enemy &enemy, Player &player) override;
 
 private:

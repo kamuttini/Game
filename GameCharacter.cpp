@@ -27,4 +27,12 @@ void GameCharacter::updateState() {
         rect.setFillColor(sf::Color::Transparent);
 }
 
+void GameCharacter::setHp(int h) {
+    hp=h;
+}
+
+int GameCharacter::getHp() {
+    return hp;
+}
+
 
