@@ -14,9 +14,7 @@ class DynamicComponent: public StaticComponent {
 
 public:
     explicit DynamicComponent(float s);
-
-    DynamicComponent();
-
+    ~DynamicComponent(){};
     bool isDestroyed1() const;
     void setIsDestroyed(bool isDestroyed);
     float getSpeed() const;

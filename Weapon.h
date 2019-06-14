@@ -20,7 +20,6 @@ public:
     void addObserver(CollisionObserver* o) override ;
     void removeObserver(CollisionObserver* o) override;
     void notify() override;
-    void explode();
     void destroy(std::vector<std::unique_ptr<Weapon>>& enemy,std::vector<std::unique_ptr<Weapon>>::const_iterator iter1);
     std::unique_ptr<Weapon> clone() const;
     type getId() const;

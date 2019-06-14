@@ -35,4 +35,7 @@ int GameCharacter::getHp() {
     return hp;
 }
 
+void GameCharacter::setWalkingDelay(int val) {
+    walkingDelay=sf::seconds(val);
+}
 

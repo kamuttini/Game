@@ -37,8 +37,7 @@ void Enemy::fight()
     }
 
     if( isFighting) {
-        weaponVec.push_back(std::unique_ptr<Weapon>(
-                weaponFactory.createEnemyWeapon(targetList, playerDir, rect.getPosition(), this)));
+        weaponVec.push_back(std::unique_ptr<Weapon>(weaponFactory.createEnemyWeapon(targetList, playerDir, rect.getPosition(), this)));
         isFighting = false;
     }
 
@@ -106,9 +105,9 @@ Enemy::type Enemy::getId() const {
 
 void Enemy::move() {
     float distance;
-    distance= sqrt(pow(posX- player->getRect().getPosition().x, 2) + pow(posY- player->getRect().getPosition().y, 2));
+    distance= sqrt(pow(rect.getPosition().x- player->getRect().getPosition().x, 2) + pow(rect.getPosition().y- player->getRect().getPosition().y, 2));
 
-    if(hp>1 && distance <500) {
+    if(hp>1 && distance <400) {
         strategy = new Follow;
     }
     else {
@@ -146,4 +145,8 @@ std::string Enemy::setSprite() {
     }
 
     return filename;
+}
+
+Strategy* Enemy::getStrategy() const {
+    return  strategy;
 }

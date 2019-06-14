@@ -23,6 +23,7 @@ public:
     void update(Weapon* weapon) override;
     type getId() const;
     std::string setSprite();
+    Strategy* getStrategy() const;
 
     std::vector<weaponPtr> weaponVec;
     sf::Clock changeDirectionClock;

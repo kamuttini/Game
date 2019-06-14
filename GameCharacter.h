@@ -22,6 +22,7 @@ public:
     virtual void updateState();
     void setHp(int hp);
     int getHp();
+    void setWalkingDelay(int val);
     std::list<CollisionObserver*> targetList;
 
 

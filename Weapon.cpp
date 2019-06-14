@@ -5,9 +5,9 @@
 #include <list>
 #include "Weapon.h"
 
-Weapon::Weapon(std::list<CollisionObserver *> &targetList, sf::Vector2f targetDir, sf::Vector2f position, type ID,
+Weapon::Weapon(std::list<CollisionObserver *> &targetList, sf::Vector2f playerDir, sf::Vector2f position, type ID,
                float s) : DynamicComponent (s),
-                          targetDir(targetDir*speed),
+                          targetDir(playerDir),
                           exploded(false),
                           ID(ID)
 {
@@ -39,7 +39,7 @@ void Weapon::notify() {
 
 void Weapon::attack() {
     if(!isDestroyed) {
-        rect.move(targetDir);
+        rect.move(targetDir*speed);
         notify();
         sprite->update();
     }
@@ -83,11 +83,3 @@ std::string Weapon::setSprite() {
     }
     return filename;
 }
-
-void Weapon::explode() {
-    sprite->explode();
-}
-
-
-
-
