@@ -6,15 +6,15 @@
 
 
 DynamicComponent:: DynamicComponent(float s):   speed(s),
-                                                isDestroyed(false)
+                                                destroyed(false)
                                                 {}
 
-bool DynamicComponent::isDestroyed1() const {
-    return isDestroyed;
+bool DynamicComponent::isDestroyed() const {
+    return destroyed;
 }
 
 void DynamicComponent::setIsDestroyed(bool isDestroyed) {
-    DynamicComponent::isDestroyed = isDestroyed;
+    DynamicComponent::destroyed = isDestroyed;
 }
 
 float DynamicComponent::getSpeed() const {

@@ -38,7 +38,7 @@ void Weapon::notify() {
 }
 
 void Weapon::attack() {
-    if(!isDestroyed) {
+    if(!destroyed) {
         rect.move(targetDir);
         notify();
         sprite->update();

@@ -9,29 +9,39 @@
 #include "GameCharacter.h"
 #include "Player.h"
 #include "Strategy.h"
+#include "BaseClock.h"
 
-class Enemy: public GameCharacter {
+class Enemy : public GameCharacter {
 public:
-    enum type {student, barMan, chef};
+    enum type {
+        student, barMan, chef
+    };
 
-    explicit Enemy(Player* player,type& ID);
-    ~Enemy(){};
+    explicit Enemy(Player *player, Strategy *strategy, type &ID);
+
+    ~Enemy() {};
+
     void fight() override;
+
     void move() override;
-    void destroy(std::vector<std::unique_ptr<Enemy>>& enemy,std::vector<std::unique_ptr<Enemy>>::const_iterator iter1);
-    void updateState()override;
-    void update(Weapon* weapon) override;
+
+    void destroy(std::vector<std::unique_ptr<Enemy>> &enemy, std::vector<std::unique_ptr<Enemy>>::const_iterator iter1);
+
+    void updateState() override;
+
+    void update(Weapon *weapon) override;
+
     type getId() const;
+
     std::string setSprite();
 
     std::vector<weaponPtr> weaponVec;
-    sf::Clock changeDirectionClock;
 
 private:
     Strategy* strategy;
     type ID;
     Factory weaponFactory;
-    Player* player;
+    Player *player;
 };
 
 
