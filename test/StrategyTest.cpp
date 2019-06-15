@@ -13,7 +13,7 @@
 class StrategyTest : public ::testing::Test {
 protected:
     StrategyTest(): player(sidebar), enemy(&player, ID){};
-    ~StrategyTest() override{};
+    ~StrategyTest() {};
     int calculateDistance();
     Sidebar sidebar;
     Player player;

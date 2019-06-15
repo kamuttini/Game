@@ -21,7 +21,7 @@ PlayerWeapon::PlayerWeapon(Player *player,type id):     Weapon(id),
 void PlayerWeapon::updateState() {
 
     if(displayClock.getElapsedTime()>= displayTime && !caught)
-        isDestroyed=true;
+        destroyed=true;
 }
 
 void PlayerWeapon::destroy(std::vector<std::unique_ptr<PlayerWeapon>>& weapon,std::vector<std::unique_ptr<PlayerWeapon>>::const_iterator iter) {

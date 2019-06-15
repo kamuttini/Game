@@ -15,13 +15,13 @@ class DynamicComponent: public StaticComponent {
 public:
     explicit DynamicComponent(float s);
     ~DynamicComponent(){};
-    bool isDestroyed1() const;
+    bool isDestroyed() const;
     void setIsDestroyed(bool isDestroyed);
     float getSpeed() const;
 
 protected:
     float speed;
-    bool isDestroyed;
+    bool destroyed;
 };
 
 

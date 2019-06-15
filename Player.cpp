@@ -7,18 +7,16 @@
 #include "Game.h"
 
 
-Player::Player(Sidebar& sidebar):   GameCharacter(16,3),
-                                    stats(sidebar),
-                                    movement(1.f, 0.f)
-{
-    rect.setPosition(600,600);
-    sprite= new Sprite("sprite8.png", *this, 2, 0, 3, 1,9, 64, 65.25);
-    sprite->setScale(sf::Vector2f(1.6,1.6));
+Player::Player(Sidebar &sidebar) : GameCharacter(16, 3),
+                                   stats(sidebar),
+                                   movement(1.f, 0.f) {
+    rect.setPosition(600, 600);
+    sprite = new Sprite("sprite8.png", *this, 2, 0, 3, 1, 9, 64, 65.25);
+    sprite->setScale(sf::Vector2f(1.6, 1.6));
 }
 
 void Player::getInput() {
-    if(walkingClock.getElapsedTime()>=walkingDelay)
-    {
+    if (walkingClock.getElapsedTime() >= walkingDelay) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
             direction = up;
             move();
@@ -41,17 +39,16 @@ void Player::getInput() {
         walkingClock.restart();
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && attackClock.getElapsedTime()>attackDelay){
-        isFighting= true;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && attackClock.getElapsedTime() > attackDelay) {
+        isFighting = true;
         attackClock.restart();
     }
 }
 
 void Player::move() {
-    movement.x=0.f;
-    movement.y=0.f;
-    switch(direction)
-    {
+    movement.x = 0.f;
+    movement.y = 0.f;
+    switch (direction) {
         case left:
             movement.x -= speed;
             break;
@@ -68,20 +65,19 @@ void Player::move() {
             break;
     }
 
-        rect.move(movement);
+    rect.move(movement);
     sprite->animate();
-    movement/=speed;
+    movement /= speed;
 }
 
 void Player::fight() {
 
-    if( isFighting) {
+    if (isFighting) {
         inventory.useWeapon(targetList, movement, rect.getPosition());
         isFighting = false;
     }
 
-    for (int i = 0; i < inventory.weaponVec.size(); i++)
-    {
+    for (int i = 0; i < inventory.weaponVec.size(); i++) {
         inventory.weaponVec[i]->attack();
         stats.updateWeapons(inventory.collectionSize());
     }
@@ -93,30 +89,25 @@ void Player::updateTarget(CollisionObserver *enemy) {
 }
 
 void Player::update(Weapon *weapon) {
-    if (weapon->getRect().getGlobalBounds().intersects( rect.getGlobalBounds()))
-    {
-        const std::type_info& type_info = typeid(*weapon);
-        if( type_info== typeid(PlayerWeapon))
-        {
+    if (weapon->getRect().getGlobalBounds().intersects(rect.getGlobalBounds())) {
+        const std::type_info &type_info = typeid(*weapon); //!!!!
+        if (type_info == typeid(PlayerWeapon)) {
             inventory.addToCollection(*weapon);
             weapon->setIsDestroyed(true);
             stats.updateWeapons(inventory.collectionSize());
             stats.updateScore(5);
-        }
-        else
-        {
-            wounded=true;
+        } else {
+            wounded = true;
             woundedClock.restart();
 
-            if(hp>1){
+            if (hp > 1) {
                 hp--;
                 weapon->setIsDestroyed(true);
                 stats.updateHp(hp);
 
-            }
-            else{
+            } else {
                 hp--;
-                isDestroyed=true;
+                destroyed = true;
                 weapon->setIsDestroyed(true);
                 stats.updateHp(hp);
                 sf::sleep(sf::seconds(1));

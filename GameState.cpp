@@ -66,7 +66,7 @@ void GameState::Update()
     std::vector<std::unique_ptr<Enemy>>::const_iterator iter1;                                                          //delete enemy if collision detected
     i = 0;
     for (iter1 = enemyVec.begin(); iter1 != enemyVec.end(); iter1++) {
-        if (enemyVec[i]->isDestroyed1()) {
+        if (enemyVec[i]->isDestroyed()) {
             enemyVec[i]->destroy(enemyVec, iter1);
             break;
         }
@@ -76,12 +76,12 @@ void GameState::Update()
 
     std::vector<std::unique_ptr<PlayerWeapon>>::const_iterator iter3 = weaponToCollect.begin();                         //delete weapon if collision detected
     for (i = 0; i < weaponToCollect.size(); i++) {
-        if (weaponToCollect[i]->isDestroyed1())
+        if (weaponToCollect[i]->isDestroyed())
             weaponToCollect[i]->destroy(weaponToCollect, iter3);
         iter3++;
     }
 
-    if(player->isDestroyed1()){                                                                                         //end game
+    if(player->isDestroyed()){                                                                                         //end game
         this->data->machine.AddState(StateRef(new GameOverState(sidebar->getScore(), this->data)), true);
     }
 }

@@ -27,21 +27,21 @@ TEST_F(PlayerTest, Collision) {
     player.setHp(2);
     weapon.notify();
     EXPECT_EQ(1,player.getHp());
-    EXPECT_TRUE(weapon.isDestroyed1());
-    ASSERT_FALSE(player.isDestroyed1())<< "player is alive";
+    EXPECT_TRUE(weapon.isDestroyed());
+    ASSERT_FALSE(player.isDestroyed())<< "player is alive";
 }
 
 TEST_F(PlayerTest, CollisionToDeath) {
     player.setHp(1);
     weapon.notify();
-    EXPECT_TRUE(weapon.isDestroyed1());
-    ASSERT_TRUE(player.isDestroyed1())<< "player is dead";
+    EXPECT_TRUE(weapon.isDestroyed());
+    ASSERT_TRUE(player.isDestroyed())<< "player is dead";
 }
 
 TEST_F(PlayerTest, CatchWeapon) {
     weaponToCollect.notify();
     EXPECT_EQ(player.inventory.collectionSize(),1)<< "weapon was caught";
-    ASSERT_FALSE(player.isDestroyed1())<< "player still alive2";
+    ASSERT_FALSE(player.isDestroyed())<< "player still alive2";
 }
 
 TEST_F(PlayerTest, MultipleCollisions) {
@@ -58,6 +58,6 @@ TEST_F(PlayerTest, MultipleCollisions) {
     EXPECT_EQ(2,player.getHp());
     weapon2.notify();
     EXPECT_EQ(1,player.getHp());
-    ASSERT_FALSE(player.isDestroyed1())<< "player is dead";
+    ASSERT_FALSE(player.isDestroyed())<< "player is dead";
 }
 

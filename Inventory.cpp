@@ -40,7 +40,7 @@ void Inventory::updateState() {
     int i=0;
     for (iter2=weaponVec.begin(); iter2!=weaponVec.end(); iter2++)      //delete weapon if collision detected
     {
-        if (weaponVec[i]->isDestroyed1())
+        if (weaponVec[i]->isDestroyed())
         {
             weaponVec[i]->destroy(weaponVec,iter2);
             break;
