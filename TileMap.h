@@ -7,7 +7,6 @@
 
 
 #include <SFML/Graphics.hpp>
-#include "Tile.h"
 #include "GameCharacter.h"
 #include "Player.h"
 #include <list>
@@ -18,47 +17,25 @@
 class TileMap : public sf::Drawable, public sf::Transformable
 {
 public:
-    TileMap(){}
-    ~TileMap(){}
-
-    void InitMap(unsigned int w, unsigned int h, sf::Vector2u tS){
-        width = w;
-        height = h;
-        tileSize = tS;
-    }
-
-    bool load(const std::string& tilesetFile, sf::RenderWindow &window, bool newLevel = false);
-
-
-
-    void drawColTile(sf::RenderWindow &window){
-        for(auto tiles:colTiles) {
-            tiles->drawSingleTile(window);
-        }
-    }
-
-    void LoadColMap(int preMap);
-
-    std::vector<std::vector<int>> map;
-
-    unsigned  int width;
-    unsigned  int height;
-    std::vector<Tile*> colTiles;
+    TileMap();
+    bool load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height);
 
 private:
 
-    void draw(sf::RenderTarget& target, sf::RenderStates states)  const ;
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
+    {
+        // apply the transform
+        states.transform *= getTransform();
 
-    sf::VertexArray vertices;
-    sf::Texture tileset;
-    int init;
+        // apply the tileset texture
+        states.texture = &m_tileset;
 
-    sf::Vector2u tileSize = sf::Vector2u(175, 175);
+        // draw the vertex array
+        target.draw(m_vertices, states);
+    }
 
-
-
-
-
+    sf::VertexArray m_vertices;
+    sf::Texture m_tileset;
 };
 
 

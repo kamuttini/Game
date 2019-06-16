@@ -5,7 +5,7 @@
 #ifndef GAME_DEF_H
 #define GAME_DEF_H
 
-#define TILE_SET_TEXTURE "assets/mapkmn.png"
+#define TILE_SET_TEXTURE "home/assets/mapkmn.png"
 #define MAP_WIDTH 71
 #define MAP_HEIGHT 36
 #define TILE_SIZE sf::Vector2u(75, 75)
