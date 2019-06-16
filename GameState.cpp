@@ -5,6 +5,8 @@
 #include "GameState.h"
 #include "GameOverState.h"
 #include "PauseState.h"
+#include <iostream>
+#include "Def.h"
 
 GameState::GameState(GameDataRef data1) :   data(data1) {}
 
@@ -13,6 +15,12 @@ void GameState::Init()
     sidebar= new Sidebar;
     player=new Player(*sidebar);
     data->soundTrack.play();
+
+//MAP
+    map.InitMap(MAP_WIDTH, MAP_HEIGHT, TILE_SIZE);
+    if (!(map.load(TILE_SET_TEXTURE, this->data->window), true))
+        std::cout<<"ERROR TILE_SET_TEXTURE"<<std::endl;
+
 }
 
 void GameState::HandleInput()
@@ -112,4 +120,10 @@ void GameState::Draw()
 
     player->draw(this->data->window);
     this->data->window.display();
+
+    //MAP
+
+    this->data->window.draw(this->map);
+    map.drawColTile(this->data->window);
+
 }

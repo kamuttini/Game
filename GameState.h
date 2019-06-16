@@ -8,6 +8,9 @@
 #include "Game.h"
 #include "Enemy.h"
 #include "Player.h"
+#include "TileMap.h"
+#include "Def.h"
+#include <SFML/Graphics.hpp>
 
 typedef std::unique_ptr<Enemy>  enemyPtr;
 typedef std::unique_ptr<PlayerWeapon> playerWeaponPtr;
@@ -26,6 +29,8 @@ public:
     std::vector<enemyPtr> enemyVec;
 
 private:
+
+    TileMap map;
     GameDataRef data;
     Sidebar* sidebar;
     Player* player;
