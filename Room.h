@@ -15,7 +15,7 @@ typedef std::unique_ptr<PlayerWeapon> playerWeaponPtr;
 
 class Room{
 public:
-    enum type{canteen, hall, classroom, bar};
+    enum type{canteen, hall, classroom1, classroom2, bar};
     Room( type ID);
     void update(Player* player);
     std::vector<enemyPtr> enemyVec;

@@ -29,7 +29,7 @@ public:
 private:
     sf::View view;
     TileMap layer[4];
-    Room room[4];
+    Room room[5];
     Room* activeRoom;
     GameDataRef data;
     Sidebar* sidebar;

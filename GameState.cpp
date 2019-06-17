@@ -10,7 +10,7 @@
 class Enemy;
 GameState::GameState(GameDataRef data1) :   data(data1),
                                             layer{TileMap("map1.txt"),TileMap("map2.txt"),TileMap("map3.txt"), TileMap("map4.txt")},
-                                            room{Room(Room::type::canteen),Room(Room::type::hall),Room(Room::type::classroom),Room(Room::type::bar)}
+                                            room{Room(Room::type::canteen),Room(Room::type::hall),Room(Room::type::classroom1),Room(Room::type::bar),Room(Room::type::classroom2)}
                                            {}
 
 void GameState::Init()
