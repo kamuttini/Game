@@ -16,7 +16,7 @@ public:
         student, barMan, chef
     };
 
-    explicit Enemy(Player *player, type &ID);
+    explicit Enemy(Player *player, type &ID,sf::Vector2f origin, sf::Vector2f bound);
 
     ~Enemy() {};
 
@@ -29,7 +29,6 @@ public:
     void updateState() override;
 
     void update(Weapon *weapon) override;
-
     type getId() const;
     std::string setSprite();
     Strategy* getStrategy() const;

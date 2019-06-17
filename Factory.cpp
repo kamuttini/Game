@@ -5,6 +5,7 @@
 #include "Factory.h"
 #include "Enemy.h"
 #include "RandomMove.h"
+#include "Room.h"
 
 std::unique_ptr<Weapon> Factory::createEnemyWeapon(std::list<CollisionObserver *> &targetList, sf::Vector2f targetDir,
                                                    sf::Vector2f position, Enemy *refEnemy) {
@@ -36,19 +37,50 @@ Factory::createPlayerWeapon(Weapon::type ID, std::list<CollisionObserver *> &tar
     return weapon;
 }
 
-std::unique_ptr<PlayerWeapon> Factory::createWeaponToCollect(Player *player) {
+std::unique_ptr<PlayerWeapon> Factory::createWeaponToCollect(Player *player,Room& room) {
+    Weapon::type ID;
+    switch (room.ID)
+    {
+        case Room::type ::canteen:
+            ID = Weapon::type::pizza;
+            break;
+
+        case Room::type ::hall:
+            ID = Weapon::type::book;
+            break;
+        case Room::type ::bar:
+            ID = Weapon::type::coffee;
+            break;
+        case Room::type::classroom:
+            ID = Weapon::type::book;
+            break;
+    }
     std::unique_ptr<PlayerWeapon> weapon;
-    Weapon::type ID = Weapon::type(rand() % 3);
-    weapon = std::unique_ptr<PlayerWeapon>(new PlayerWeapon(player, ID));
+    weapon = std::unique_ptr<PlayerWeapon>(new PlayerWeapon(player, ID,room.origin,room.dimension));
     return weapon;
 }
 
 
-std::unique_ptr<Enemy> Factory::createEnemy(Player *player) {
+std::unique_ptr<Enemy> Factory::createEnemy(Player *player, Room& room) {
     Enemy::type ID;
-    ID = Enemy::type::chef;
+    switch (room.ID)
+    {
+        case Room::type ::canteen:
+            ID = Enemy::type::chef;
+            break;
+
+        case Room::type ::hall:
+            ID = Enemy::type::student;
+            break;
+        case Room::type ::bar:
+            ID = Enemy::type::barMan;
+            break;
+        case Room::type::classroom:
+            ID = Enemy::type::student;
+            break;
+    }
     std::unique_ptr<Enemy> enemy;
-    enemy = std::make_unique<Enemy>(player, ID);
+    enemy = std::make_unique<Enemy>(player, ID, room.origin,room.dimension);
     return enemy;
 }
 

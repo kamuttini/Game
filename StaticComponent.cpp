@@ -15,11 +15,16 @@ void StaticComponent::draw(sf::RenderWindow &window)
     sprite->draw(window);
 }
 
-void StaticComponent::randomPosition()
+void StaticComponent::randomPosition(sf::Vector2f range, sf::Vector2f origin)
 {
+    int minx=origin.x;
+    int miny=origin.y;
+    int x=origin.x+range.x;
+    int y=origin.y+range.y;
+
     srand(clock());
-    posX=rand()%1350;
-    posY=rand()%950;
+    posX=rand()%(x- minx+ 1) + minx;
+    posY=rand()%(y- miny+ 1) + miny;
     rect.setPosition(posX,posY);
 }
 

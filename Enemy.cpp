@@ -8,13 +8,13 @@
 #include "Follow.h"
 #include "RandomMove.h"
 #include "Static.h"
+#include "Def.h"
 #include <cmath>
 
-Enemy::Enemy(Player *player1, type &ID1) : player(player1),
-
-                                                                            GameCharacter(10),
-                                                                            ID(ID1) {
-    randomPosition();
+Enemy::Enemy(Player *player1, type &ID1,sf::Vector2f origin, sf::Vector2f bound) : player(player1),
+                                            GameCharacter(10),
+                                            ID(ID1) {
+    randomPosition(bound,origin);
     sprite = new Sprite(setSprite(), *this, 2, 1, 3, 0);
     sprite->setScale(sf::Vector2f(1.9, 1.9));
     CollisionObserver *target = player1;
@@ -22,7 +22,6 @@ Enemy::Enemy(Player *player1, type &ID1) : player(player1),
     player1->updateTarget(this);
     attackDelay = sf::seconds(4.f);
 }
-
 
 void Enemy::fight() {
     float distance;

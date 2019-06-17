@@ -33,16 +33,9 @@ void RandomMove::move(Enemy &enemy, Player &player) {
             break;
     }
 
-    if (enemy.getRect().getPosition().x < 1350 && enemy.getRect().getPosition().x > 0 &&
-        enemy.getRect().getPosition().y < 950 && enemy.getRect().getPosition().y > 0) {
-        enemy.getRect().move(movement);
-    } else {
 
-        enemy.getRect().move(-movement);
-        srand(clock());
-        enemy.setDirection(DynamicComponent::orientation(rand() % 4));
-        enemy.changeDirectionClock.restart();
-    }
+        enemy.getRect().move(movement);
+
 
     if (enemy.changeDirectionClock.getElapsedTime() > changeDirectionTime) {
         srand(clock());

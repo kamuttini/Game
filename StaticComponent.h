@@ -15,7 +15,7 @@ public:
     explicit StaticComponent(orientation dir=down);
     ~StaticComponent()= default;
     void draw (sf::RenderWindow& window);
-    void randomPosition();
+    void randomPosition(sf::Vector2f range, sf::Vector2f origin);
     orientation getDirection() const;
     void setDirection(orientation direction);
     sf::RectangleShape &getRect();

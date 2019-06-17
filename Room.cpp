@@ -17,20 +17,11 @@ Room::Room( type ID1):  ID(ID1){
             origin=HALL_ORIGIN;
             dimension=HALL_DIMENSION;
             break;
-
-        case bar:
-            origin=sf::Vector2f(390,1250);
-            dimension=sf::Vector2f(600,900);
-            break;
-        case classroom:
-            origin=sf::Vector2f(390,1250);
-            dimension=sf::Vector2f(600,685);
-            break;
     }
 
     rect.setPosition(origin);
     rect.setSize(dimension);
-    rect.setFillColor(sf::Color::Blue);
+    rect.setFillColor(sf::Color::Transparent);
 
 }
 
@@ -39,7 +30,7 @@ void Room::update(Player* player) {
     if (enemyVec.size() <= 1 &&
         enemyClock.getElapsedTime() >=enemyDelay)                                                                        //generate enemy
     {
-        enemyVec.push_back(factory.createEnemy(player));
+        enemyVec.push_back(factory.createEnemy(player,*this));
         enemyClock.restart();
     }
     int i = 0;
@@ -50,7 +41,7 @@ void Room::update(Player* player) {
 
     if (playerWeaponClock.getElapsedTime() >= playerWeaponDelay)                                                        //generate playerWeapon
     {
-        weaponToCollect.push_back(factory.createWeaponToCollect(player));
+        weaponToCollect.push_back(factory.createWeaponToCollect(player,*this));
         playerWeaponClock.restart();
     }
 

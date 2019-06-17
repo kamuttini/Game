@@ -49,7 +49,6 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int*
                     //MURO
                     break;
                 case 216 :
-                              //MURO
                     break;
                 case 200 :
                     //MURO
@@ -79,13 +78,13 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int*
                     //MURO
                     break;
                 case 244:
-                                       //PAVIMENTO INTERNO
+
                     break;
                 case 252 :
-                         //PAVIMENTO ESTERNO
+
                     break;
                 case 268:
-                                 //PORTA CHIUSA
+
                     break;
 
                 default:

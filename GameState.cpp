@@ -52,9 +52,7 @@ void GameState::Update()
     checkRoom();
     player->updateState();
 
-
     activeRoom->update(player);
-
 
     if(player->isDestroyed()){                                                                                         //end game
         this->data->machine.AddState(StateRef(new GameOverState(sidebar->getScore(), this->data)), true);
@@ -101,7 +99,6 @@ void GameState::checkRoom() {
     for(int i=0;  i<4;i++)
        if(room[i].rect.getGlobalBounds().intersects(player->getRect().getGlobalBounds()))
            activeRoom=&room[i];
-
 
 }
 

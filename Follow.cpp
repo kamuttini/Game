@@ -30,6 +30,6 @@ void Follow::move(Enemy &enemy, Player &player) {
     }
 
     sf::RectangleShape& rect = enemy.getRect();
-    rect.move(playerDir*(enemy.getSpeed()*2));
+    rect.move(playerDir*(enemy.getSpeed()*5));
     enemy.getSprite()->animate();
 }
