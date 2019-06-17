@@ -96,7 +96,7 @@ void GameState::Draw()
 }
 
 void GameState::checkRoom() {
-    for(int i=0;  i<4;i++)
+    for(int i=0;  i<5;i++)
        if(room[i].rect.getGlobalBounds().intersects(player->getRect().getGlobalBounds()))
            activeRoom=&room[i];
 
