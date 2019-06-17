@@ -21,6 +21,7 @@ public:
     void fight() override;
     void updateTarget(CollisionObserver *enemy);
     void updateState()override;
+    void getPosition();
 
     Inventory inventory;
     Sidebar& stats;

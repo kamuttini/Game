@@ -7,14 +7,12 @@
 
 #include "Def.h"
 #include "Game.h"
-#include "Enemy.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "TileMap.h"
 #include "Def.h"
+#include "Room.h"
 #include <SFML/Graphics.hpp>
-
-typedef std::unique_ptr<Enemy>  enemyPtr;
-typedef std::unique_ptr<PlayerWeapon> playerWeaponPtr;
 
 
 class GameState: public State {
@@ -26,21 +24,17 @@ public:
     void HandleInput() override ;
     void Update()  override;
     void Draw() override ;
-    
-    std::vector<enemyPtr> enemyVec;
+    void checkRoom();
 
 private:
     sf::View view;
     TileMap layer[4];
+    Room room[4];
+    Room* activeRoom;
     GameDataRef data;
     Sidebar* sidebar;
     Player* player;
-    Factory factory;
-    std::vector<playerWeaponPtr> weaponToCollect;
-    sf::Clock enemyClock;
-    sf::Time enemyDelay=sf::seconds(4.f);
-    sf::Clock playerWeaponClock;
-    sf::Time playerWeaponDelay=sf::seconds(2.5f);
+
 };
 
 

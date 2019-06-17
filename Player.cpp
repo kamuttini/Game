@@ -3,6 +3,7 @@
 //
 
 #include <unistd.h>
+#include <iostream>
 #include "Player.h"
 #include "Game.h"
 
@@ -35,6 +36,9 @@ void Player::getInput() {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
             direction = left;
             move();
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
+            getPosition();
         }
         walkingClock.restart();
     }
@@ -120,6 +124,14 @@ void Player::update(Weapon *weapon) {
 void Player::updateState() {
     GameCharacter::updateState();
     inventory.updateState();
+}
+
+void Player::getPosition() {
+
+    sf::Vector2f position = rect.getPosition();
+    std::cout << "position x:" << position.x;
+    std::cout << "position y:" << position.y;
+
 }
 
 

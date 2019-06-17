@@ -31,7 +31,6 @@ public:
     void update(Weapon *weapon) override;
 
     type getId() const;
-
     std::string setSprite();
     Strategy* getStrategy() const;
 

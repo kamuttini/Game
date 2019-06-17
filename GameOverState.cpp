@@ -9,7 +9,7 @@
 
 GameOverState::GameOverState(int score1, GameDataRef data1): title("GAME OVER",150,sf::Color::Red),
                                                             enterText("press ENTER to replay",80, sf::Color::White),
-                                                            scoreText("score: "+ std::to_string(score1),70),
+                                                            scoreText("CFU: "+ std::to_string(score1),70),
                                                             bestScoreText("best: "+ std::to_string(highScore),70),
                                                             data(data1),
                                                             score(score1)

@@ -45,7 +45,8 @@ std::unique_ptr<PlayerWeapon> Factory::createWeaponToCollect(Player *player) {
 
 
 std::unique_ptr<Enemy> Factory::createEnemy(Player *player) {
-    Enemy::type ID = Enemy::type(rand() % 3);
+    Enemy::type ID;
+    ID = Enemy::type::chef;
     std::unique_ptr<Enemy> enemy;
     enemy = std::make_unique<Enemy>(player, ID);
     return enemy;

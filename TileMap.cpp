@@ -40,7 +40,58 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int*
         {
             // get the current tile number
             int tileNumber = tiles[i + j * width];
+            switch(tileNumber) {
 
+                case 120 :
+                    //MURO
+                    break;
+                case 121 :
+                    //MURO
+                    break;
+                case 216 :
+                              //MURO
+                    break;
+                case 200 :
+                    //MURO
+                    break;
+                case 201 :
+                    //MURO
+                    break;
+                case 202 :
+                    //MURO
+                    break;
+                case 217 :
+                    //MURO
+                    break;
+                case 218 :
+                    //MURO
+                    break;
+                case 219 :
+                    //MURO
+                    break;
+                case 236 :
+                    //MURO
+                    break;
+                case 235 :
+                    //MURO
+                    break;
+                case 234 :
+                    //MURO
+                    break;
+                case 244:
+                                       //PAVIMENTO INTERNO
+                    break;
+                case 252 :
+                         //PAVIMENTO ESTERNO
+                    break;
+                case 268:
+                                 //PORTA CHIUSA
+                    break;
+
+                default:
+                    colTiles.push_back(i+j*width);
+                    break;
+            }
             // find its position in the tileset texture
             int tu = (tileNumber -1)% (m_tileset.getSize().x / tileSize.x);
             int tv = (tileNumber -1)/ (m_tileset.getSize().x / tileSize.x);
