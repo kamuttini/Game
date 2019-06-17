@@ -22,6 +22,7 @@ void PauseState::Init() {
                           (this->data->window.getSize().y / 2) - (title.text.getGlobalBounds().height / 2));
     replayText.setPosition((this->data->window.getSize().x / 2) - (replayText.text.getGlobalBounds().width / 2),
                           (this->data->window.getSize().y / 2) - ((title.text.getGlobalBounds().height / 2) - 100));
+    view.setSize(sf::Vector2f(WINDOW_WIDTH,WINDOW_HEIGHT));
 }
 
 void PauseState::HandleInput() {
@@ -71,6 +72,8 @@ void PauseState::Update() {
 void PauseState::Draw() {
 
     this->data->window.clear();
+    view.setCenter(sf::Vector2f(WINDOW_WIDTH /2.0f, WINDOW_HEIGHT/2.0f));
+    this->data->window.setView(view);
     title.draw(this->data->window);
     resumeText.draw(this->data->window);
     replayText.draw(this->data->window);

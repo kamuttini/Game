@@ -5,6 +5,7 @@
 #ifndef GAME_GAMESTATE_H
 #define GAME_GAMESTATE_H
 
+#include "Def.h"
 #include "Game.h"
 #include "Enemy.h"
 #include "Player.h"
@@ -29,8 +30,8 @@ public:
     std::vector<enemyPtr> enemyVec;
 
 private:
-
-    TileMap map;
+    sf::View view;
+    TileMap layer[4];
     GameDataRef data;
     Sidebar* sidebar;
     Player* player;

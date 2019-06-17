@@ -47,6 +47,7 @@ void GameOverState::Init() {
     }
 
     writeFile.close();
+    view.setSize(WINDOW_WIDTH,WINDOW_HEIGHT);
 }
 
 void GameOverState::HandleInput() {
@@ -75,6 +76,10 @@ void GameOverState::Update() {}
 
 void GameOverState::Draw() {
     this->data->window.clear();
+    view.setCenter(sf::Vector2f(WINDOW_WIDTH /2.0f, WINDOW_HEIGHT/2.0f));
+
+    this->data->window.setView(view);
+
     title.draw(this->data->window);
     enterText.draw(this->data->window);
     scoreText.draw(this->data->window);

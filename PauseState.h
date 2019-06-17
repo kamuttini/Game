@@ -31,6 +31,7 @@ public:
     void SwapSize();
 
 protected:
+    sf::View view;
     GameDataRef data;
     Text title;
     Text resumeText;

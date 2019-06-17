@@ -7,6 +7,8 @@
 
 #define TILE_SET_TEXTURE "home/assets/mapkmn.png"
 #define MAP_WIDTH 71
+#define WINDOW_HEIGHT 1000
+#define WINDOW_WIDTH 1400
 #define MAP_HEIGHT 36
 #define TILE_SIZE sf::Vector2u(75, 75)
 #define MAP_1 "../assets/Map1.txt"

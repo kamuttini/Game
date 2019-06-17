@@ -20,6 +20,7 @@ public:
     void Draw() override ;
     
 protected:
+    sf::View view;
     GameDataRef data;
     Text title;
     Text enterText;

@@ -10,7 +10,7 @@
 Player::Player(Sidebar &sidebar) : GameCharacter(16, 3),
                                    stats(sidebar),
                                    movement(1.f, 0.f) {
-    rect.setPosition(600, 600);
+    rect.setPosition(2050, 2200);
     sprite = new Sprite("sprite8.png", *this, 2, 0, 3, 1, 9, 64, 65.25);
     sprite->setScale(sf::Vector2f(1.6, 1.6));
 }

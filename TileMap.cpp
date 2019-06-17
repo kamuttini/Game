@@ -8,17 +8,21 @@
 #include "TileMap.h"
 
 
-TileMap::TileMap() {
-    std::ifstream openFile;
-     int  level[128]={0};
+TileMap::TileMap(std::string filename) {
+    std::ifstream openFile1;
 
-    openFile.open("assets/maptest.txt");
 
-    for( int i=0; i<128; i++)
-        openFile >> level[i];
 
-    openFile.close();
-    load("assets/tileset.png", sf::Vector2u(32, 32), level, 16, 8);
+    int  level[7700]={0};
+
+    openFile1.open("assets/"+filename);
+
+
+    for( int i=0; i<7700; i++)
+        openFile1 >> level[i];
+
+    openFile1.close();
+    load("assets/sprites/mappa.png", sf::Vector2u(16, 16), level, 110, 70);
 }
 bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height)
 {
@@ -38,8 +42,8 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int*
             int tileNumber = tiles[i + j * width];
 
             // find its position in the tileset texture
-            int tu = tileNumber % (m_tileset.getSize().x / tileSize.x);
-            int tv = tileNumber / (m_tileset.getSize().x / tileSize.x);
+            int tu = (tileNumber -1)% (m_tileset.getSize().x / tileSize.x);
+            int tv = (tileNumber -1)/ (m_tileset.getSize().x / tileSize.x);
 
             // get a pointer to the current tile's quad
             sf::Vertex* quad = &m_vertices[(i + j * width) * 4];
@@ -59,3 +63,19 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int*
 
     return true;
 }
+
+void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    {
+        // apply the transform
+        states.transform *= getTransform();
+        states.transform.scale(2.5,2.5);
+        // apply the tileset texture
+        states.texture = &m_tileset;
+
+        // draw the vertex array
+        target.draw(m_vertices, states);
+    }
+
+}
+
+
