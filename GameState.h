@@ -33,7 +33,7 @@ private:
     Room room[5];
     Room* activeRoom;
     GameDataRef data;
-    HUD* sidebar;
+    HUD* hud;
     Player* player;
 
 };

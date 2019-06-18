@@ -18,11 +18,13 @@ public:
     enum type{canteen, hall, classroom1, classroom2, bar};
     Room( type ID);
     void update(Player* player);
-    std::vector<enemyPtr> enemyVec;
-    std::vector<playerWeaponPtr> weaponToCollect;
+    void create(Player* player);
     const sf::Vector2f &getOrigin() const;
     const sf::Vector2f &getDimension() const;
     type getId() const;
+
+    std::vector<enemyPtr> enemyVec;
+    std::vector<playerWeaponPtr> weaponToCollect;
     sf::RectangleShape rect;
 
 private:

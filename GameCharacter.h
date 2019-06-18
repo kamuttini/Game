@@ -28,11 +28,9 @@ public:
 
 protected:
     int hp;
-    bool wounded;
     bool isFighting;
     sf::Clock attackClock;
     sf::Time attackDelay;
-    sf::Clock woundedClock;
     sf::Clock walkingClock;
     sf::Time walkingDelay;
 };

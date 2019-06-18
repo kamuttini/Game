@@ -101,8 +101,6 @@ void Player::update(Weapon *weapon) {
             stats.updateWeapons(inventory.collectionSize());
             stats.updateScore(5);
         } else {
-            wounded = true;
-            woundedClock.restart();
 
             if (hp > 1) {
                 hp--;

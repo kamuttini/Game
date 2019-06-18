@@ -57,8 +57,7 @@ void Enemy::update(Weapon *weapon) {
             weapon->setIsDestroyed(true);
 
         else {
-            wounded = true;
-            woundedClock.restart();
+
             if (hp > 1) {
                 hp--;
                 weapon->setIsDestroyed(true);

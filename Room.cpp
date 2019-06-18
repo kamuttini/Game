@@ -36,33 +36,18 @@ Room::Room(type ID1) : ID(ID1) {
     rect.setPosition(origin);
     rect.setSize(dimension);
     rect.setFillColor(sf::Color::Transparent);
-
 }
 
-void Room::update(Player *player) {
+void Room::update(Player* player) {
+    create(player);
 
-    if (enemyVec.size() <= 1 &&
-        enemyClock.getElapsedTime() >=
-        enemyDelay)                                                                        //generate enemy
-    {
-        enemyVec.push_back(factory.createEnemy(player, *this));
-        enemyClock.restart();
-    }
     int i = 0;
-    for (i = 0; i < weaponToCollect.size(); i++) {
+    for (i = 0; i < weaponToCollect.size(); i++){
         weaponToCollect[i]->notify();
         weaponToCollect[i]->updateState();
     }
 
-    if (playerWeaponClock.getElapsedTime() >=
-        playerWeaponDelay)                                                        //generate playerWeapon
-    {
-        weaponToCollect.push_back(factory.createWeaponToCollect(player, *this));
-        playerWeaponClock.restart();
-    }
-
-    for (i = 0; i <
-                enemyVec.size(); i++)                                                                               //generate enemyWeapon
+    for (i = 0; i <enemyVec.size(); i++)                                                                               //generate enemyWeapon
         enemyVec[i]->updateState();
 
     std::vector<std::unique_ptr<Enemy>>::const_iterator iter1;                                                          //delete enemy if collision detected
@@ -74,7 +59,6 @@ void Room::update(Player *player) {
         }
         i++;
     }
-
 
     std::vector<std::unique_ptr<PlayerWeapon>>::const_iterator iter3 = weaponToCollect.begin();                         //delete weapon if collision detected
     for (i = 0; i < weaponToCollect.size(); i++) {
@@ -95,5 +79,31 @@ const sf::Vector2f &Room::getDimension() const {
 Room::type Room::getId() const {
     return ID;
 }
+
+void Room::create(Player *player) {
+    if(ID==hall)
+    {
+        if (enemyVec.size() <= 3 &&
+            enemyClock.getElapsedTime() >=
+            enemyDelay)                                                                        //generate enemy
+        {
+            enemyVec.push_back(factory.createEnemy(player, *this));
+            enemyClock.restart();
+        }
+    }
+    else
+        if(enemyVec.size() <= 1 &&enemyClock.getElapsedTime() >=enemyDelay)                                                                        //generate enemy
+    {
+        enemyVec.push_back(factory.createEnemy(player, *this));
+        enemyClock.restart();
+    }
+
+    if (playerWeaponClock.getElapsedTime() >=playerWeaponDelay)                                                        //generate playerWeapon
+    {
+        weaponToCollect.push_back(factory.createWeaponToCollect(player, *this));
+        playerWeaponClock.restart();
+    }
+}
+
 
 
