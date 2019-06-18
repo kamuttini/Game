@@ -9,8 +9,8 @@
 #define WINDOW_WIDTH 1400
 #define CANTEEN_DIMENSION sf::Vector2f(950,845)
 #define CANTEEN_ORIGIN sf::Vector2f(390,1250)
-#define HALL_DIMENSION sf::Vector2f(800,965)
-#define HALL_ORIGIN sf::Vector2f(1700,1368)
+#define HALL_DIMENSION sf::Vector2f(700,980)
+#define HALL_ORIGIN sf::Vector2f(1720,1368)
 #define BAR_DIMENSION sf::Vector2f(1200,675)
 #define BAR_ORIGIN sf::Vector2f(3080,1750)
 #define CLASSROOM1_DIMENSION sf::Vector2f(734,482)

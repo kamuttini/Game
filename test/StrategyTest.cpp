@@ -15,7 +15,7 @@ protected:
     StrategyTest(): player(sidebar), enemy(&player, ID){};
     ~StrategyTest() {};
     int calculateDistance();
-    Sidebar sidebar;
+    HUD sidebar;
     Player player;
     Enemy enemy;
     Enemy::type ID=Enemy::type::student;

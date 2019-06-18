@@ -28,11 +28,12 @@ public:
 
 private:
     sf::View view;
+    sf::View HUDview;
     TileMap layer[4];
     Room room[5];
     Room* activeRoom;
     GameDataRef data;
-    Sidebar* sidebar;
+    HUD* sidebar;
     Player* player;
 
 };

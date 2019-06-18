@@ -35,7 +35,7 @@ Room::Room(type ID1) : ID(ID1) {
 
     rect.setPosition(origin);
     rect.setSize(dimension);
-    rect.setFillColor(sf::Color::Blue);
+    rect.setFillColor(sf::Color::Transparent);
 
 }
 
@@ -82,6 +82,18 @@ void Room::update(Player *player) {
             weaponToCollect[i]->destroy(weaponToCollect, iter3);
         iter3++;
     }
+}
+
+const sf::Vector2f &Room::getOrigin() const {
+    return origin;
+}
+
+const sf::Vector2f &Room::getDimension() const {
+    return dimension;
+}
+
+Room::type Room::getId() const {
+    return ID;
 }
 
 

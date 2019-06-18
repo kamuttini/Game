@@ -8,12 +8,12 @@
 
 #include "GameCharacter.h"
 #include "Inventory.h"
-#include "Sidebar.h"
+#include "HUD.h"
 
 
 class Player: public GameCharacter {
 public:
-    explicit Player (Sidebar& sidebar);
+    explicit Player (HUD& sidebar);
     ~Player(){};
     void move() override ;
     void getInput();
@@ -24,7 +24,7 @@ public:
     void getPosition();
 
     Inventory inventory;
-    Sidebar& stats;
+    HUD& stats;
 
 private:
     sf::Vector2f movement;

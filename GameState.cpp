@@ -16,7 +16,8 @@ GameState::GameState(GameDataRef data1) :   data(data1),
 void GameState::Init()
 {
     view.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
-    sidebar= new Sidebar;
+    HUDview.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
+    sidebar= new HUD();
     player=new Player(*sidebar);
     data->soundTrack.play();
     view.setCenter(player->getRect().getPosition());
@@ -69,7 +70,6 @@ void GameState::Draw()
     for(int i=0;  i<4;i++)
         this->data->window.draw(layer[i]);
 
-    sidebar->draw(this->data->window);
     this->data->window.draw(activeRoom->rect);
     int i,j;
     for (i = 0; i < activeRoom->enemyVec.size(); i++){
@@ -91,6 +91,10 @@ void GameState::Draw()
     }
 
     player->draw(this->data->window);
+    this->data->window.setView(HUDview);
+
+    sidebar->draw(this->data->window);
+
     this->data->window.display();
 
 }

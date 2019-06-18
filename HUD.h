@@ -2,30 +2,30 @@
 // Created by camut on 02/06/19.
 //
 
-#ifndef GAME_SIDEBAR_H
-#define GAME_SIDEBAR_H
+#ifndef GAME_HUD_H
+#define GAME_HUD_H
 
 
 #include <SFML/Graphics.hpp>
 #include "Text.h"
 class Player;
-class Sidebar {
+class HUD {
 
 public:
-    Sidebar();
-    ~Sidebar(){};
+    HUD();
+    ~HUD(){};
     void draw(sf::RenderWindow& window);
     void updateHp(int hp) ;
     void updateWeapons(int weapons);
     void updateScore(int bonus);
     int getScore();
+
 private:
     int score;
-    Text hpText;
-    Text weaponsText;
-    Text scoreText;
-    Text pauseText;
+    Text text[4];
+    sf::RectangleShape sxRect;
+    sf::RectangleShape dxRect;
 };
 
 
-#endif //GAME_SIDEBAR_H
+#endif //GAME_HUD_H

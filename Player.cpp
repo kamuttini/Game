@@ -8,7 +8,7 @@
 #include "Game.h"
 
 
-Player::Player(Sidebar &sidebar) : GameCharacter(16, 3),
+Player::Player(HUD &sidebar) : GameCharacter(16, 3),
                                    stats(sidebar),
                                    movement(1.f, 0.f) {
     rect.setPosition(2050, 2200);

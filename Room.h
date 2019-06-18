@@ -20,15 +20,17 @@ public:
     void update(Player* player);
     std::vector<enemyPtr> enemyVec;
     std::vector<playerWeaponPtr> weaponToCollect;
-
+    const sf::Vector2f &getOrigin() const;
+    const sf::Vector2f &getDimension() const;
+    type getId() const;
     sf::RectangleShape rect;
-    Factory factory;
 
+private:
+    Factory factory;
     sf::Clock enemyClock;
     sf::Time enemyDelay=sf::seconds(4.f);
     sf::Clock playerWeaponClock;
     sf::Time playerWeaponDelay=sf::seconds(2.5f);
-
     sf::Vector2f origin;
     sf::Vector2f dimension;
     type ID;

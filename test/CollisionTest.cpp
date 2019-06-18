@@ -10,7 +10,7 @@ class PlayerTest : public ::testing::Test {
 protected:
     PlayerTest(): player(sidebar), weapon(Weapon::type::coffee), weaponToCollect(&player, Weapon::type::coffee) {};
     ~PlayerTest() override{};
-    Sidebar sidebar;
+    HUD sidebar;
     Player player;
     Weapon weapon;
     PlayerWeapon weaponToCollect;

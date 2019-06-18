@@ -17,6 +17,10 @@ void Text::setPosition(float x, float y) {
     text.setPosition(x,y);
 }
 
+sf::Vector2f Text::getPosition() {
+    return text.getPosition();
+}
+
 void Text::draw(sf::RenderWindow &window) {
     window.draw(text);
 }

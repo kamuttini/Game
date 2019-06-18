@@ -39,7 +39,7 @@ Factory::createPlayerWeapon(Weapon::type ID, std::list<CollisionObserver *> &tar
 
 std::unique_ptr<PlayerWeapon> Factory::createWeaponToCollect(Player *player,Room& room) {
     Weapon::type ID;
-    switch (room.ID)
+    switch (room.getId())
     {
         case Room::type ::canteen:
             ID = Weapon::type::pizza;
@@ -62,14 +62,14 @@ std::unique_ptr<PlayerWeapon> Factory::createWeaponToCollect(Player *player,Room
             break;
     }
     std::unique_ptr<PlayerWeapon> weapon;
-    weapon = std::unique_ptr<PlayerWeapon>(new PlayerWeapon(player, ID,room.origin,room.dimension));
+    weapon = std::unique_ptr<PlayerWeapon>(new PlayerWeapon(player, ID,room.getOrigin(),room.getDimension()));
     return weapon;
 }
 
 
 std::unique_ptr<Enemy> Factory::createEnemy(Player *player, Room& room) {
     Enemy::type ID;
-    switch (room.ID)
+    switch (room.getId())
     {
         case Room::type ::canteen:
             ID = Enemy::type::chef;
@@ -90,7 +90,7 @@ std::unique_ptr<Enemy> Factory::createEnemy(Player *player, Room& room) {
 
     }
     std::unique_ptr<Enemy> enemy;
-    enemy = std::make_unique<Enemy>(player, ID, room.origin,room.dimension);
+    enemy = std::make_unique<Enemy>(player, ID, room.getOrigin(),room.getDimension());
     return enemy;
 }
 
