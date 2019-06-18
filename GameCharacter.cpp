@@ -5,7 +5,6 @@
 #include "GameCharacter.h"
 #include "Factory.h"
 
-sf::Time woundedTime = sf::seconds(0.3f);
 
 GameCharacter::GameCharacter(int s, int h) : DynamicComponent(s),
                                              hp(h),
@@ -14,9 +13,10 @@ GameCharacter::GameCharacter(int s, int h) : DynamicComponent(s),
     walkingDelay = sf::seconds(.1f);
 }
 
-
 void GameCharacter::updateState() {
+
     fight();
+
 }
 
 void GameCharacter::setHp(int h) {
@@ -30,3 +30,5 @@ int GameCharacter::getHp() {
 void GameCharacter::setWalkingDelay(int val) {
     walkingDelay=sf::seconds(val);
 }
+
+

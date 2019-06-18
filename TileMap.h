@@ -7,8 +7,6 @@
 
 
 #include <SFML/Graphics.hpp>
-#include "GameCharacter.h"
-#include "Player.h"
 #include <list>
 #include <random>
 #include "Def.h"
@@ -17,8 +15,9 @@
 class TileMap : public sf::Drawable, public sf::Transformable
 {
 public:
-    TileMap(std::string filename);
+    TileMap(std::string filename, bool collisionCheck=false);
     bool load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height);
+    void loadColTiles(const int* tiles, unsigned int width, unsigned int height);
     std::vector<int> colTiles;
 
 private:

@@ -4,7 +4,7 @@
 
 
 int main() {
-    Game(2800,2000, "game");
+    Game(1400,1000, "game");
 
     return 0;
 }

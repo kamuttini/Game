@@ -35,7 +35,6 @@ private:
     GameDataRef data;
     HUD* hud;
     Player* player;
-
 };
 
 

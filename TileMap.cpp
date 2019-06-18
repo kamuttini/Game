@@ -8,7 +8,7 @@
 #include "TileMap.h"
 
 
-TileMap::TileMap(std::string filename) {
+TileMap::TileMap(std::string filename, bool collCheck) {
     std::ifstream openFile1;
 
 
@@ -23,6 +23,9 @@ TileMap::TileMap(std::string filename) {
 
     openFile1.close();
     load("assets/sprites/mappa.png", sf::Vector2u(16, 16), level, 110, 70);
+
+    if(collCheck)
+        loadColTiles(level, 110, 70);
 }
 bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height)
 {
@@ -40,57 +43,7 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int*
         {
             // get the current tile number
             int tileNumber = tiles[i + j * width];
-            switch(tileNumber) {
 
-                case 120 :
-                    //MURO
-                    break;
-                case 121 :
-                    //MURO
-                    break;
-                case 216 :
-                    break;
-                case 200 :
-                    //MURO
-                    break;
-                case 201 :
-                    //MURO
-                    break;
-                case 202 :
-                    //MURO
-                    break;
-                case 217 :
-                    //MURO
-                    break;
-                case 218 :
-                    //MURO
-                    break;
-                case 219 :
-                    //MURO
-                    break;
-                case 236 :
-                    //MURO
-                    break;
-                case 235 :
-                    //MURO
-                    break;
-                case 234 :
-                    //MURO
-                    break;
-                case 244:
-
-                    break;
-                case 252 :
-
-                    break;
-                case 268:
-
-                    break;
-
-                default:
-                    colTiles.push_back(i+j*width);
-                    break;
-            }
             // find its position in the tileset texture
             int tu = (tileNumber -1)% (m_tileset.getSize().x / tileSize.x);
             int tv = (tileNumber -1)/ (m_tileset.getSize().x / tileSize.x);
@@ -128,4 +81,10 @@ void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 
 }
 
-
+void TileMap::loadColTiles(const int* tiles,unsigned int width, unsigned int height) {
+    for ( int i = 0; i < 7700; ++i)
+    {
+        if(tiles[i]==1)
+            colTiles.push_back(i);
+    }
+}

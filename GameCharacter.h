@@ -7,15 +7,12 @@
 
 #include "DynamicComponent.h"
 #include "Weapon.h"
-#include "Factory.h"
-
 
 class GameCharacter: public DynamicComponent,public CollisionObserver{
 
 public:
      GameCharacter(int s=15 ,int h=2);
     typedef std::unique_ptr<Weapon>  weaponPtr;
-
     void update(Weapon* weapon) override =0;
     virtual void fight()=0;
     virtual void move()=0;

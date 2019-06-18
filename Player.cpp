@@ -10,7 +10,7 @@
 
 Player::Player(HUD &sidebar) : GameCharacter(16, 3),
                                    stats(sidebar),
-                                   movement(1.f, 0.f) {
+                                   movement(1.f, 0.f){
     rect.setPosition(2050, 2200);
     sprite = new Sprite("sprite8.png", *this, 2, 0, 3, 1, 9, 64, 65.25);
     sprite->setScale(sf::Vector2f(1.6, 1.6));
@@ -50,28 +50,30 @@ void Player::getInput() {
 }
 
 void Player::move() {
-    movement.x = 0.f;
-    movement.y = 0.f;
-    switch (direction) {
-        case left:
-            movement.x -= speed;
-            break;
+    if(checkBorders(direction)) {
+        movement.x = 0.f;
+        movement.y = 0.f;
+        switch (direction) {
+            case left:
+                movement.x -= speed;
+                break;
 
-        case right:
-            movement.x += speed;
-            break;
+            case right:
+                movement.x += speed;
+                break;
 
-        case down:
-            movement.y += speed;
-            break;
-        case up:
-            movement.y -= speed;
-            break;
+            case down:
+                movement.y += speed;
+                break;
+            case up:
+                movement.y -= speed;
+                break;
+        }
+
+        rect.move(movement);
+        sprite->animate();
+        movement /= speed;
     }
-
-    rect.move(movement);
-    sprite->animate();
-    movement /= speed;
 }
 
 void Player::fight() {
@@ -129,7 +131,6 @@ void Player::getPosition() {
     sf::Vector2f position = rect.getPosition();
     std::cout << "position x:" << position.x;
     std::cout << "position y:" << position.y;
-
 }
 
 
