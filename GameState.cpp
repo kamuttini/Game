@@ -22,6 +22,9 @@ void GameState::Init()
     data->soundTrack.play();
     view.setCenter(player->getRect().getPosition());
     this->data->window.setView(view);
+    profs.push_back(Professor("prof1.png", PROF1_POSITION));
+    profs.push_back(Professor("prof2.png", PROF2_POSITION));
+    profs.push_back(Professor("prof3.png", PROF3_POSITION));
 }
 
 void GameState::HandleInput()
@@ -91,7 +94,12 @@ void GameState::Draw()
     for (int i = 0; i < player->inventory.weaponVec.size(); i++)
         player->inventory.weaponVec[i]->draw(this->data->window);
 
+    for(int i=0; i<profs.size(); i++)
+    profs[i].draw(this->data->window);
+
     player->draw(this->data->window);
+
+
     this->data->window.setView(HUDview);
 
     hud->draw(this->data->window);

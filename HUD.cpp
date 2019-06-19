@@ -8,7 +8,7 @@
 
 HUD::HUD ():text{Text("HP: 3/3"),
                                             Text("Weapons: 0"),
-                                            Text("Score: 0"),
+                                            Text("CFU: 0"),
                                             Text("PRESS P TO PAUSE",30)}
 
 {

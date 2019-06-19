@@ -17,6 +17,9 @@
 #define CLASSROOM1_ORIGIN sf::Vector2f(1666,792)
 #define CLASSROOM2_DIMENSION sf::Vector2f(734,482)
 #define CLASSROOM2_ORIGIN sf::Vector2f(2786,792)
+#define PROF3_POSITION sf::Vector2f(1950,800)
+#define PROF2_POSITION sf::Vector2f(3150,900)
+#define PROF1_POSITION sf::Vector2f(2370,65)
 
 
 #endif //GAME_DEF_H

@@ -12,6 +12,7 @@
 #include "TileMap.h"
 #include "Def.h"
 #include "Room.h"
+#include "Professor.h"
 #include <SFML/Graphics.hpp>
 
 
@@ -32,6 +33,7 @@ private:
     TileMap layer[4];
     Room room[5];
     Room* activeRoom;
+    std::vector<Professor> profs;
     GameDataRef data;
     HUD* hud;
     Player* player;
