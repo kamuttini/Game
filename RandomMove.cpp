@@ -11,38 +11,12 @@ RandomMove::RandomMove() {
 }
 
 
-void RandomMove::move(Enemy &enemy, Player &player) {
-
-    sf::Vector2f movement;
-    movement.x = 0.f;
-    movement.y = 0.f;
-    switch (enemy.getDirection()) {
-        case DynamicComponent::up:
-            movement.x -= enemy.getSpeed();
-            break;
-
-        case DynamicComponent::down:
-            movement.x += enemy.getSpeed();
-            break;
-
-        case DynamicComponent::left:
-            movement.y += enemy.getSpeed();
-            break;
-        case DynamicComponent::right:
-            movement.y -= enemy.getSpeed();
-            break;
-    }
-
-
-        enemy.getRect().move(movement);
-
-
+void RandomMove::setDirection(Enemy &enemy, Player &player) {
     if (enemy.changeDirectionClock.getElapsedTime() > changeDirectionTime) {
         srand(clock());
         enemy.setDirection(DynamicComponent::orientation(rand() % 4));
         enemy.changeDirectionClock.restart();
     }
-    enemy.getSprite()->animate();
-
+    enemy.setSpeed(5);
 }
 

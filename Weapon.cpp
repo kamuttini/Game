@@ -38,6 +38,20 @@ void Weapon::notify() {
 }
 
 void Weapon::attack() {
+    if(targetDir.x>0) {
+        if(targetDir.x>targetDir.y)
+            direction=down;
+        else
+            direction=left;
+    }
+    else {
+        if(targetDir.x>targetDir.y)
+            direction=right;
+        else
+        direction=up;
+    }
+    if(!checkBorders(direction))
+        destroyed=true;
     if(!destroyed) {
         rect.move(targetDir*speed);
         notify();

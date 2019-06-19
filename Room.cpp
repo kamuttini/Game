@@ -83,7 +83,7 @@ Room::type Room::getId() const {
 void Room::create(Player *player) {
     if(ID==hall)
     {
-        if (enemyVec.size() <= 3 &&
+        if (enemyVec.size() <= 2 &&
             enemyClock.getElapsedTime() >=
             enemyDelay)                                                                        //generate enemy
         {

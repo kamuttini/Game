@@ -12,7 +12,7 @@ class Static: public Strategy {
 public:
     Static()= default;
     ~Static()= default;
-    void move(Enemy& enemy, Player &player) override{} ;
+    void setDirection(Enemy &enemy, Player &player) override{} ;
 };
 
 

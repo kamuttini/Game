@@ -12,9 +12,7 @@
 
 class Enemy : public GameCharacter {
 public:
-    enum type {
-        student, barMan, chef
-    };
+    enum type {student, barMan, chef};
 
     explicit Enemy(Player *player, type &ID,sf::Vector2f origin, sf::Vector2f bound);
     ~Enemy() {};
@@ -23,8 +21,8 @@ public:
     void destroy(std::vector<std::unique_ptr<Enemy>> &enemy, std::vector<std::unique_ptr<Enemy>>::const_iterator iter1);
     void updateState() override;
     void update(Weapon *weapon) override;
-    void findTile() override;
     type getId() const;
+    orientation swapDirection();
     std::string setSprite();
     Strategy* getStrategy() const;
 

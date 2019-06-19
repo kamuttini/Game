@@ -8,10 +8,11 @@
 #include "Game.h"
 
 
-Player::Player(HUD &sidebar) : GameCharacter(16, 3),
-                                   stats(sidebar),
-                                   movement(1.f, 0.f){
+Player::Player(HUD &hud1) : GameCharacter(16, 3),
+                                   stats(hud1)
+                                   {
     rect.setPosition(2050, 2200);
+    rect.setSize(sf::Vector2f(30,60));
     sprite = new Sprite("sprite8.png", *this, 2, 0, 3, 1, 9, 64, 65.25);
     sprite->setScale(sf::Vector2f(1.6, 1.6));
 }
@@ -51,27 +52,7 @@ void Player::getInput() {
 
 void Player::move() {
     if(checkBorders(direction)) {
-        movement.x = 0.f;
-        movement.y = 0.f;
-        switch (direction) {
-            case left:
-                movement.x -= speed;
-                break;
-
-            case right:
-                movement.x += speed;
-                break;
-
-            case down:
-                movement.y += speed;
-                break;
-            case up:
-                movement.y -= speed;
-                break;
-        }
-
-        rect.move(movement);
-        sprite->animate();
+        GameCharacter::move();
         movement /= speed;
     }
 }
@@ -96,7 +77,7 @@ void Player::updateTarget(CollisionObserver *enemy) {
 
 void Player::update(Weapon *weapon) {
     if (weapon->getRect().getGlobalBounds().intersects(rect.getGlobalBounds())) {
-        const std::type_info &type_info = typeid(*weapon); //!!!!
+        const std::type_info &type_info = typeid(*weapon);
         if (type_info == typeid(PlayerWeapon)) {
             inventory.addToCollection(*weapon);
             weapon->setIsDestroyed(true);

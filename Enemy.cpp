@@ -11,17 +11,16 @@
 #include "Def.h"
 #include <cmath>
 
-Enemy::Enemy(Player *player1, type &ID1,sf::Vector2f origin, sf::Vector2f bound) : player(player1),
-                                            GameCharacter(10),
-                                            ID(ID1) {
-    randomPosition(bound,origin);
+Enemy::Enemy(Player *player1, type &ID1, sf::Vector2f origin, sf::Vector2f bound) : player(player1),
+                                                                                    ID(ID1) {
+    randomPosition(bound, origin);
     sprite = new Sprite(setSprite(), *this, 2, 1, 3, 0);
     sprite->setScale(sf::Vector2f(1.9, 1.9));
     CollisionObserver *target = player1;
     targetList.push_back(target);
     player1->updateTarget(this);
     attackDelay = sf::seconds(4.f);
-    rect.setSize(sf::Vector2f(40.f,40.f));
+    rect.setSize(sf::Vector2f(40,45));
 }
 
 void Enemy::fight() {
@@ -33,13 +32,14 @@ void Enemy::fight() {
     playerDir.x = (player->getRect().getPosition().x - rect.getPosition().x) / distance;
     playerDir.y = (player->getRect().getPosition().y - rect.getPosition().y) / distance;
 
-    if (attackClock.getElapsedTime() > attackDelay && distance < 600) {
+    if (attackClock.getElapsedTime() > attackDelay && distance < 500) {
         isFighting = true;
         attackClock.restart();
     }
 
-    if( isFighting) {
-        weaponVec.push_back(std::unique_ptr<Weapon>(weaponFactory.createEnemyWeapon(targetList, playerDir, rect.getPosition(), this)));
+    if (isFighting) {
+        weaponVec.push_back(std::unique_ptr<Weapon>(
+                weaponFactory.createEnemyWeapon(targetList, playerDir, rect.getPosition(), this)));
         isFighting = false;
     }
 
@@ -102,28 +102,48 @@ Enemy::type Enemy::getId() const {
 
 void Enemy::move() {
     float distance;
-    distance= sqrt(pow(rect.getPosition().x- player->getRect().getPosition().x, 2) + pow(rect.getPosition().y- player->getRect().getPosition().y, 2));
+    distance = sqrt(pow(rect.getPosition().x - player->getRect().getPosition().x, 2) +
+                    pow(rect.getPosition().y - player->getRect().getPosition().y, 2));
 
-    if(hp>1 && distance <300) {
+    if (hp > 1 && distance < 300) {
         strategy = new Follow;
-    }
-    else {
+    } else {
         if (hp > 1) {
             strategy = new RandomMove();
         } else {
             strategy = new Static;
         }
     }
-    if (walkingClock.getElapsedTime() >= walkingDelay && checkBorders(direction)) {
-        strategy->move(*this, *player);
-        walkingClock.restart();
-    }
+    strategy->setDirection(*this, *player);
+    orientation fakeDirection = swapDirection();
+    if (checkBorders(fakeDirection)) {
+        if (walkingClock.getElapsedTime() >= walkingDelay) {
+            walkingClock.restart();
+            movement.x = 0.f;
+            movement.y = 0.f;
+            switch (direction) {
+                case up:
+                    movement.x -= speed;
+                    break;
 
-    if(!checkBorders(direction))
-    {
+                case down:
+                    movement.x += speed;
+                    break;
+
+                case left:
+                    movement.y += speed;
+                    break;
+                case right:
+                    movement.y -= speed;
+                    break;
+            }
+            rect.move(movement);
+            sprite->animate();
+        }
+    }
+    else {
         srand(clock());
-        setDirection(orientation(rand() % 4));
-        strategy=new Follow;
+        direction=orientation(rand() % 4);
     }
 }
 
@@ -147,20 +167,30 @@ std::string Enemy::setSprite() {
     return filename;
 }
 
-Strategy* Enemy::getStrategy() const {
-    return  strategy;
+Strategy *Enemy::getStrategy() const {
+    return strategy;
 }
 
-void Enemy::findTile() {
+DynamicComponent::orientation Enemy::swapDirection() {
+    orientation fakeDirection;
 
+    switch (direction) {
+        case up:
+            fakeDirection=left;
+            break;
 
-    bottom =rect.getPosition().y+rect.getSize().y+25;
-    sx =rect.getPosition().x+20;
-    dx=rect.getPosition().x+rect.getSize().x;
-    top =rect.getPosition().y;
+        case down:
+            fakeDirection=right;
+            break;
 
-    int tileX=int(sx)/(16*2.5);
-    int tileY=int(bottom)/(16*2.5);
-    tile=(tileX+tileY*110);
-    DynamicComponent::findTile();
+        case left:
+            fakeDirection=down;
+            break;
+        case right:
+            fakeDirection=up;
+            break;
+    }
+    return fakeDirection;
 }
+
+

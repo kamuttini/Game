@@ -11,11 +11,11 @@
 class GameCharacter: public DynamicComponent,public CollisionObserver{
 
 public:
-     GameCharacter(int s=15 ,int h=2);
+     GameCharacter(int s=10 ,int h=2);
     typedef std::unique_ptr<Weapon>  weaponPtr;
     void update(Weapon* weapon) override =0;
     virtual void fight()=0;
-    virtual void move()=0;
+    virtual void move();
     virtual void updateState();
     void setHp(int hp);
     int getHp();
@@ -26,6 +26,7 @@ public:
 protected:
     int hp;
     bool isFighting;
+    sf::Vector2f movement;
     sf::Clock attackClock;
     sf::Time attackDelay;
     sf::Clock walkingClock;

@@ -14,7 +14,7 @@ class Follow: public Strategy {
 public:
     Follow()= default;
     ~Follow()= default;
-    void move(Enemy &enemy, Player &player) override ;
+    void setDirection(Enemy &enemy, Player &player) override ;
 };
 
 

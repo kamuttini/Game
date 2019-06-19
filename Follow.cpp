@@ -8,7 +8,7 @@
 #include <cmath>
 
 
-void Follow::move(Enemy &enemy, Player &player) {
+void Follow::setDirection(Enemy &enemy, Player &player) {
     float distance;
     distance= sqrt(pow(enemy.getRect().getPosition().x- player.getRect().getOrigin().x, 2) + pow(enemy.getRect().getPosition().y- player.getRect().getPosition().y, 2));
 
@@ -29,7 +29,5 @@ void Follow::move(Enemy &enemy, Player &player) {
             enemy.setDirection(DynamicComponent::orientation::up);
     }
 
-    sf::RectangleShape& rect = enemy.getRect();
-    rect.move(playerDir*(enemy.getSpeed()*5));
-    enemy.getSprite()->animate();
+    enemy.setSpeed(8);
 }

@@ -20,6 +20,7 @@ public:
     bool isDestroyed() const;
     void setIsDestroyed(bool isDestroyed);
     float getSpeed() const;
+    void setSpeed(float s);
 
 protected:
     float sx,dx,top,bottom;

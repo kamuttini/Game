@@ -13,7 +13,7 @@ public:
 
     RandomMove();
     ~RandomMove()=default;
-    void move(Enemy &enemy, Player &player) override;
+    void setDirection(Enemy &enemy, Player &player) override;
 
 private:
     sf::Time changeDirectionTime;

@@ -12,8 +12,7 @@ class Strategy {
 public:
     Strategy(){};
     ~Strategy(){};
-    virtual void
-    move(Enemy &enemy, Player &player) =0;
+    virtual void setDirection(Enemy &enemy, Player &player) =0;
 };
 
 

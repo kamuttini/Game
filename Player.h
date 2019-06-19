@@ -13,7 +13,7 @@
 
 class Player: public GameCharacter {
 public:
-    explicit Player (HUD& sidebar);
+    explicit Player (HUD& hud);
     ~Player(){};
     void move() override ;
     void getInput();
@@ -27,7 +27,6 @@ public:
     HUD& stats;
 
 private:
-    sf::Vector2f movement;
 };
 
 

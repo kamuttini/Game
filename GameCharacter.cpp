@@ -8,7 +8,8 @@
 
 GameCharacter::GameCharacter(int s, int h) : DynamicComponent(s),
                                              hp(h),
-                                             isFighting(false)
+                                             isFighting(false),
+                                             movement(1.f, 0.f)
                                              {
     walkingDelay = sf::seconds(.1f);
 }
@@ -29,6 +30,30 @@ int GameCharacter::getHp() {
 
 void GameCharacter::setWalkingDelay(int val) {
     walkingDelay=sf::seconds(val);
+}
+
+void GameCharacter::move() {
+    movement.x = 0.f;
+    movement.y = 0.f;
+    switch (direction) {
+        case left:
+            movement.x -= speed;
+            break;
+
+        case right:
+            movement.x += speed;
+            break;
+
+        case down:
+            movement.y += speed;
+            break;
+        case up:
+            movement.y -= speed;
+            break;
+    }
+
+    rect.move(movement);
+    sprite->animate();
 }
 
 
