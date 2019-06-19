@@ -25,6 +25,10 @@ void GameState::Init()
     profs.push_back(Professor("prof1.png", PROF1_POSITION));
     profs.push_back(Professor("prof2.png", PROF2_POSITION));
     profs.push_back(Professor("prof3.png", PROF3_POSITION));
+    tok.push_back(Token("token1.png", TOKEN1_POSITION));
+    tok.push_back(Token("token2.png", TOKEN2_POSITION));
+    tok.push_back(Token("token3.png", TOKEN3_POSITION));
+
 }
 
 void GameState::HandleInput()
@@ -94,8 +98,12 @@ void GameState::Draw()
     for (int i = 0; i < player->inventory.weaponVec.size(); i++)
         player->inventory.weaponVec[i]->draw(this->data->window);
 
-    for(int i=0; i<profs.size(); i++)
+    for(int i=0; i<profs.size(); i++)  //ProfessorsDraw
     profs[i].draw(this->data->window);
+
+    for(int i=0; i<tok.size(); i++)         //TokenDraw
+        tok[i].draw(this->data->window);
+
 
     player->draw(this->data->window);
 

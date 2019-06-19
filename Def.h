@@ -20,6 +20,10 @@
 #define PROF3_POSITION sf::Vector2f(1950,800)
 #define PROF2_POSITION sf::Vector2f(3150,900)
 #define PROF1_POSITION sf::Vector2f(2370,65)
+#define TOKEN1_POSITION sf::Vector2f(3442,2184)
+#define TOKEN2_POSITION sf::Vector2f(2226,1144)
+#define TOKEN3_POSITION sf::Vector2f(2900,1144)
+
 
 
 #endif //GAME_DEF_H

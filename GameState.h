@@ -13,6 +13,7 @@
 #include "Def.h"
 #include "Room.h"
 #include "Professor.h"
+#include "Token.h"
 #include <SFML/Graphics.hpp>
 
 
@@ -34,6 +35,7 @@ private:
     Room room[5];
     Room* activeRoom;
     std::vector<Professor> profs;
+    std::vector<Token> tok;
     GameDataRef data;
     HUD* hud;
     Player* player;

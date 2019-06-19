@@ -4,7 +4,7 @@
 
 #include "Sprite.h"
 #include "StaticComponent.h"
-Sprite::Sprite(std::string filename, StaticComponent &object, int down, int up, int right, int left, int maxi, float w, float h):
+Sprite:: Sprite(std::string filename, StaticComponent &object, int down, int up, int right, int left, int maxi, float w, float h):
           object(object),
           width(w),
           height(h),
