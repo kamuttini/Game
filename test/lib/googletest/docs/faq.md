@@ -164,7 +164,7 @@ in a parallel universe, more or less.
 
 In particular, if you use [gMock](../../googlemock) and the death test statement
 invokes some mock methods, the parent process will think the calls have never
-occurred. Therefore, you may want to move your `EXPECT_CALL` statements inside
+occurred. Therefore, you may want to setDirection your `EXPECT_CALL` statements inside
 the `EXPECT_DEATH` macro.
 
 ## EXPECT_EQ(htonl(blah), blah_blah) generates weird compiler errors in opt mode. Is this a googletest bug?
@@ -295,7 +295,7 @@ or fake objects instead of real ones in your tests.
 Sometimes this is impossible as some library you must use may be creating
 threads before `main()` is even reached. In this case, you can try to minimize
 the chance of conflicts by either moving as many activities as possible inside
-`EXPECT_DEATH()` (in the extreme case, you want to move everything inside), or
+`EXPECT_DEATH()` (in the extreme case, you want to setDirection everything inside), or
 leaving as few things as possible in it. Also, you can try to set the death test
 style to `"threadsafe"`, which is safer but slower, and see if it helps.
 
@@ -463,7 +463,7 @@ messages to an `ASSERT_*`, e.g.
 ```
 
 we had to give up using `ASSERT*` and `FAIL*` (but not `EXPECT*` and
-`ADD_FAILURE*`) in constructors and destructors. The workaround is to move the
+`ADD_FAILURE*`) in constructors and destructors. The workaround is to setDirection the
 content of your constructor/destructor to a private void member function, or
 switch to `EXPECT_*()` if that works. This
 [section](advanced.md#assertion-placement) in the user's guide explains it.

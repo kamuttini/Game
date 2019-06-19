@@ -1681,7 +1681,7 @@ To test them, we use the following special techniques:
     (including `.cc` files is not a good way to reuse code - you should not do
     this in production code!)
 
-    However, a better approach is to move the private code into the
+    However, a better approach is to setDirection the private code into the
     `foo::internal` namespace, where `foo` is the namespace your project
     normally uses, and put the private declarations in a `*-internal.h` file.
     Your production `.cc` files and your tests are allowed to include this
@@ -1833,7 +1833,7 @@ TestInfo* RegisterTest(const char* test_case_name, const char* test_name,
                        const char* type_param, const char* value_param,	
                        const char* file, int line, Factory factory);	
 ```	
- The `factory` argument is a factory callable (move-constructible) object or	
+ The `factory` argument is a factory callable (setDirection-constructible) object or	
 function pointer that creates a new instance of the Test object. It handles	
 ownership to the caller. The signature of the callable is `Fixture*()`, where	
 `Fixture` is the test fixture class for the test. All tests registered with the	
