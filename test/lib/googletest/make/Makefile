@@ -13,7 +13,7 @@
 # but shouldn't modify.
 
 # Points to the root of Google Test, relative to where this file is.
-# Remember to tweak this if you move this file.
+# Remember to tweak this if you setDirection this file.
 GTEST_DIR = ..
 
 # Points to the location of the Google Test libraries
