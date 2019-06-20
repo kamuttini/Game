@@ -39,35 +39,16 @@ Room::Room(type ID1) : ID(ID1) {
 }
 
 void Room::update() {
-    std::vector<std::unique_ptr<Enemy>>::const_iterator iter1;                                                          //delete enemy if collision detected
-    int i = 0;
-    for (iter1 = enemyVec.begin(); iter1 != enemyVec.end(); iter1++) {
-        if (enemyVec[i]->isDestroyed()) {
-            enemyVec[i]->destroy(enemyVec, iter1);
+    destroy();
+    for (int i = 0; i != enemyVec.size(); i++) {
+        for (int k = 0; k < enemyVec[i]->weaponVec.size(); k++)
+            enemyVec[i]->weaponVec[k]->attack();
         }
-
-        else {
-
-            for (int k = 0; k < enemyVec[i]->weaponVec.size(); k++)
-                enemyVec[i]->weaponVec[k]->attack();
-
-            std::vector<std::unique_ptr<Weapon>>::const_iterator iter2;
-            for (int j = 0; j != enemyVec[i]->weaponVec.size(); j++) {
-                iter2 = enemyVec[i]->weaponVec.begin();
-                if (enemyVec[i]->weaponVec[j]->isDestroyed()) {
-                    enemyVec[i]->weaponVec[j]->destroy(enemyVec[i]->weaponVec, iter2);
-                    break;
-                }
-                iter2++;
-            }
-        }
-        i++;
-    }
 }
 
 bool Room::activeUpdate(Player &player) {
     create(player);
-
+    destroy();
     int i = 0;
     for (i = 0; i < weaponToCollect.size(); i++) {
         weaponToCollect[i]->notify();
@@ -134,5 +115,25 @@ Room::type Room::getId() const {
 
 const sf::RectangleShape &Room::getRect() const {
     return rect;
+}
+
+void Room::destroy() {
+    std::vector<std::unique_ptr<Enemy>>::const_iterator iter1;                                                          //delete enemy if collision detected
+    int i = 0;
+    for (iter1 = enemyVec.begin(); iter1 != enemyVec.end(); iter1++) {
+        if (enemyVec[i]->isDestroyed()) {
+            enemyVec[i]->destroy(enemyVec, iter1);
+        }
+        std::vector<std::unique_ptr<Weapon>>::const_iterator iter2;
+        for (int j = 0; j != enemyVec[i]->weaponVec.size(); j++) {
+            iter2 = enemyVec[i]->weaponVec.begin();
+            if (enemyVec[i]->weaponVec[j]->isDestroyed()) {
+                enemyVec[i]->weaponVec[j]->destroy(enemyVec[i]->weaponVec, iter2);
+                break;
+            }
+            iter2++;
+        }
+        i++;
+    }
 }
 

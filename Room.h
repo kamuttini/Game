@@ -21,6 +21,7 @@ public:
     void update();
     virtual bool activeUpdate(Player &player);
     void create(Player& player);
+    void destroy();
     virtual void draw(sf::RenderWindow& window);
 
     const sf::Vector2f &getOrigin() const;
