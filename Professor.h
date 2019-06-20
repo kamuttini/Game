@@ -8,6 +8,7 @@
 
 #include "StaticComponent.h"
 #include "Token.h"
+#include "Text.h"
 
 class Professor: public StaticComponent {
 public:
@@ -20,6 +21,8 @@ public:
 
 private:
     type ID;
+    Text advise;
+    sf::Sprite message;
    // Token& token;
 };
 

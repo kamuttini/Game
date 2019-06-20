@@ -5,7 +5,7 @@
 #include <deque>
 #include "Inventory.h"
 
-Inventory::Inventory():alert("Weapon inventory is empty!", 50)
+Inventory::Inventory():alert("Weapon inventory is empty!")
 {
     alert.setPosition(260,200);
 }

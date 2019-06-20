@@ -43,7 +43,7 @@ void HUD::updateWeapons(int weapons) {
 }
 
 void HUD::updateScore(int bonus) {
-    text[2].text.setString("Score: "+ std::to_string(score=score+bonus));
+    text[2].text.setString("CFU: "+ std::to_string(score=score+bonus));
 
 }
 

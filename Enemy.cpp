@@ -12,7 +12,7 @@
 #include <cmath>
 
 Enemy::Enemy(Player *player1, type &ID1, sf::Vector2f origin, sf::Vector2f bound) : player(player1),
-                                                                                    ID(ID1) {
+                                                                                    ID(ID1){
     randomPosition(bound, origin);
     sprite = new Sprite(setSprite(), *this, 2, 1, 3, 0);
     sprite->setScale(sf::Vector2f(1.9, 1.9));
@@ -136,6 +136,8 @@ void Enemy::move() {
                 case right:
                     movement.y -= speed;
                     break;
+                case null:
+                    movement=sf::Vector2f(0,0);
             }
             rect.move(movement);
             sprite->animate();
@@ -146,6 +148,7 @@ void Enemy::move() {
         direction=orientation(rand() % 4);
     }
 }
+
 
 std::string Enemy::setSprite() {
     std::string filename;
@@ -167,9 +170,11 @@ std::string Enemy::setSprite() {
     return filename;
 }
 
+
 Strategy *Enemy::getStrategy() const {
     return strategy;
 }
+
 
 DynamicComponent::orientation Enemy::swapDirection() {
     orientation fakeDirection;

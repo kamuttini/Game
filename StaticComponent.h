@@ -10,7 +10,7 @@
 
 class StaticComponent {
 public:
-    enum orientation { down, up,left,right};
+    enum orientation { down, up,left,right, null};
 
     explicit StaticComponent(orientation dir=down);
     ~StaticComponent()= default;

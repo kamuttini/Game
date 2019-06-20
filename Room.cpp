@@ -45,6 +45,7 @@ void Room::update() {
         if (enemyVec[i]->isDestroyed()) {
             enemyVec[i]->destroy(enemyVec, iter1);
         }
+
         else {
 
             for (int k = 0; k < enemyVec[i]->weaponVec.size(); k++)
