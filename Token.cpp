@@ -3,10 +3,10 @@
 //
 
 #include "Token.h"
-
-Token::Token(std::string filename, sf::Vector2f position) {
+#include "Def.h"
+Token::Token(std::string filename) {
     rect.setSize(sf::Vector2f(32,32));
-    rect.setPosition(position);
-    sprite = new Sprite(filename,*this,0,0,0,0,0,32,32);
-    sprite->setScale(sf::Vector2f(2,2));
+    randomPosition(HALL_DIMENSION,HALL_ORIGIN);
+
+    sprite = new Sprite(filename,*this);
 }

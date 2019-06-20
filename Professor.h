@@ -7,11 +7,20 @@
 
 
 #include "StaticComponent.h"
+#include "Token.h"
 
 class Professor: public StaticComponent {
 public:
-    Professor(std::string filename, sf::Vector2f position);
+    enum type {prof1,prof2,prof3};
+
+    explicit Professor(type id);
     ~Professor(){};
+    bool checkToken();
+    void talk();
+
+private:
+    type ID;
+   // Token& token;
 };
 
 

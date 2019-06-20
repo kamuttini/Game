@@ -15,17 +15,21 @@ typedef std::unique_ptr<PlayerWeapon> playerWeaponPtr;
 
 class Room{
 public:
-    enum type{canteen, hall, classroom1, classroom2, bar};
-    Room( type ID);
-    void update(Player* player);
-    void create(Player* player);
+    enum type{canteen, hall, classroom1, classroom2, bar, bossRoom};
+
+    explicit Room( type ID);
+    void update();
+    virtual bool activeUpdate(Player &player);
+    void create(Player& player);
+    virtual void draw(sf::RenderWindow& window);
+
     const sf::Vector2f &getOrigin() const;
     const sf::Vector2f &getDimension() const;
     type getId() const;
+    const sf::RectangleShape &getRect() const;
 
     std::vector<enemyPtr> enemyVec;
     std::vector<playerWeaponPtr> weaponToCollect;
-    sf::RectangleShape rect;
 
 private:
     Factory factory;
@@ -36,6 +40,7 @@ private:
     sf::Vector2f origin;
     sf::Vector2f dimension;
     type ID;
+    sf::RectangleShape rect;
 };
 
 

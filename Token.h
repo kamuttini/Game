@@ -10,8 +10,10 @@
 
 class Token: public StaticComponent {
 public:
-    Token(std::string filename, sf::Vector2f position);
+    Token(std::string filename);
     ~Token(){};
+
+
 };
 
 

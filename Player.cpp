@@ -107,11 +107,5 @@ void Player::updateState() {
     inventory.updateState();
 }
 
-void Player::getPosition() {
-
-    sf::Vector2f position = rect.getPosition();
-    std::cout << "position x:" << position.x;
-    std::cout << "position y:" << position.y;
-}
 
 

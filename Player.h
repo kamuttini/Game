@@ -21,12 +21,8 @@ public:
     void fight() override;
     void updateTarget(CollisionObserver *enemy);
     void updateState()override;
-    void getPosition();
-
-    Inventory inventory;
     HUD& stats;
-
-private:
+    Inventory inventory;
 };
 
 

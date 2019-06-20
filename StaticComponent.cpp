@@ -43,3 +43,7 @@ Sprite *StaticComponent::getSprite() const {
     return sprite;
 }
 
+sf::Vector2f StaticComponent::getPosition() {
+    return rect.getPosition();
+}
+

@@ -11,12 +11,9 @@
 TileMap::TileMap(std::string filename, bool collCheck) {
     std::ifstream openFile1;
 
-
-
     int  level[7700]={0};
 
     openFile1.open("assets/"+filename);
-
 
     for( int i=0; i<7700; i++)
         openFile1 >> level[i];
@@ -82,9 +79,10 @@ void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 }
 
 void TileMap::loadColTiles(const int* tiles,unsigned int width, unsigned int height) {
-    for ( int i = 0; i < 7700; ++i)
+    for ( int i = 0; i < width*height; ++i)
     {
         if(tiles[i]==1)
             colTiles.push_back(i);
     }
 }
+

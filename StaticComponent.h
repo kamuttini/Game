@@ -20,6 +20,7 @@ public:
     void setDirection(orientation direction);
     sf::RectangleShape &getRect();
     Sprite *getSprite() const;
+    sf::Vector2f getPosition();
 
 
 protected:

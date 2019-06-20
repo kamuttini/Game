@@ -7,10 +7,12 @@
 #include "PauseState.h"
 #include <iostream>
 #include "Def.h"
+#include "ClassRoom.h"
+
 class Enemy;
 GameState::GameState(GameDataRef data1) :   data(data1),
                                             layer{TileMap("map1.txt"),TileMap("map2.txt"),TileMap("map3.txt"), TileMap("map4.txt")},
-                                            room{Room(Room::type::hall),Room(Room::type::canteen),Room(Room::type::classroom1),Room(Room::type::bar),Room(Room::type::classroom2)}
+                                            mapLevel(0)
                                            {}
 
 void GameState::Init()
@@ -22,13 +24,15 @@ void GameState::Init()
     data->soundTrack.play();
     view.setCenter(player->getRect().getPosition());
     this->data->window.setView(view);
-    profs.push_back(Professor("prof1.png", PROF1_POSITION));
-    profs.push_back(Professor("prof2.png", PROF2_POSITION));
-    profs.push_back(Professor("prof3.png", PROF3_POSITION));
-    tok.push_back(Token("token1.png", TOKEN1_POSITION));
-    tok.push_back(Token("token2.png", TOKEN2_POSITION));
-    tok.push_back(Token("token3.png", TOKEN3_POSITION));
-
+    room.push_back(new Room(Room::type::hall));
+    room.push_back(new Room(Room::type::canteen));
+    room.push_back(new Room(Room::type::bar));
+    room.push_back(new ClassRoom(Room::type::classroom1));
+    room.push_back(new ClassRoom(Room::type::classroom2));
+    room.push_back(new ClassRoom(Room::type::bossRoom));
+    tok.push_back(Token("token1.png"));
+    tok.push_back(Token("token2.png"));
+    tok.push_back(Token("token3.png"));
 }
 
 void GameState::HandleInput()
@@ -60,77 +64,71 @@ void GameState::Update()
     checkRoom();
     player->updateState();
 
-    activeRoom->update(player);
-    for(int i=0; i<5; i++)
-        for(int j=0; j<room[i].enemyVec.size(); j++)
-            for(int k=0; k< room[i].enemyVec[j]->weaponVec.size(); k++)
-                if(activeRoom!=&room[i])
-                    room[i].enemyVec[j]->weaponVec[k]->attack();
+    if(activeRoom->activeUpdate(*player)) {
+        switch (mapLevel) {
+            case 0:
+                layer[1] = TileMap("map2_v2.txt");
+                break;
+            case 1:
+                layer[1] = TileMap("map2_v3.txt");
+                break;
+        }
+        mapLevel=1;
+    }
+    for(int i=0; i<room.size(); i++)
+        if(activeRoom!=room[i])
+            room[i]->update();
 
     if(player->isDestroyed()){                                                                                         //end game
         this->data->machine.AddState(StateRef(new GameOverState(hud->getScore(), this->data)), true);
     }
 }
 
-void GameState::Draw()
-{
-    this->data->window.clear(sf::Color (123, 173, 44));
+void GameState::Draw() {
+    this->data->window.clear(sf::Color(123, 173, 44));
     sf::Vector2f movement = player->getRect().getPosition() - view.getCenter();
-    view.move(movement.x*0.2,movement.y*0.2);
+    view.move(movement.x * 0.2, movement.y * 0.2);
     this->data->window.setView(view);
 
-    for(int i=0;  i<4;i++)
+    for (int i = 0; i < 4; i++)
         this->data->window.draw(layer[i]);
 
-    this->data->window.draw(activeRoom->rect);
-    for(int k=0; k<5; k++)
+    for(int i=0; i<room.size();i++)
     {
-        int i, j;
-        for (i = 0; i < room[k].enemyVec.size(); i++) {
-            room[k].enemyVec[i]->draw(this->data->window);
-            for (j = 0; j < room[k].enemyVec[i]->weaponVec.size(); j++)
-                room[k].enemyVec[i]->weaponVec[j]->draw(this->data->window);
-        }
-
-        for (i = 0; i < room[k].weaponToCollect.size(); i++)
-            room[k].weaponToCollect[i]->draw(this->data->window);
+        room[i]->draw(this->data->window);
     }
     for (int i = 0; i < player->inventory.weaponVec.size(); i++)
         player->inventory.weaponVec[i]->draw(this->data->window);
 
-    for(int i=0; i<profs.size(); i++)  //ProfessorsDraw
-    profs[i].draw(this->data->window);
+    //ProfessorsDraw
 
-    for(int i=0; i<tok.size(); i++)         //TokenDraw
+
+    for (int i = 0; i < tok.size(); i++)         //TokenDraw
         tok[i].draw(this->data->window);
 
-
     player->draw(this->data->window);
-
 
     this->data->window.setView(HUDview);
 
     hud->draw(this->data->window);
-    if(player->inventory.alert.isDisplay())
-    {
+    if (player->inventory.alert.isDisplay()) {
         player->inventory.alert.draw(this->data->window);
         player->inventory.alert.stopDisplaying();
     }
 
     this->data->window.display();
-
 }
+
 
 void GameState::checkRoom() {
     bool find=false;
-    for(int i=1;  i<5;i++)
-        if (room[i].rect.getGlobalBounds().intersects(player->getRect().getGlobalBounds())) {
-            activeRoom = &room[i];
+    for(int i=1;  i<room.size();i++)
+        if (room[i]->getRect().getGlobalBounds().intersects(player->getRect().getGlobalBounds())) {
+            activeRoom = room[i];
             find=true;
         }
         if(!find)
-        activeRoom = &room[0];
-
+        activeRoom = room[0];
 }
 
 

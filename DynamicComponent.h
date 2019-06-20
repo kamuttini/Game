@@ -16,18 +16,19 @@ public:
     explicit DynamicComponent(float s);
     ~DynamicComponent(){};
     bool checkBorders(orientation direction);
-    virtual void findTile();
+    int findTile();
     bool isDestroyed() const;
     void setIsDestroyed(bool isDestroyed);
     float getSpeed() const;
     void setSpeed(float s);
+    void changeColMap();
 
 protected:
     float sx,dx,top,bottom;
-    int tile;
     float speed;
     bool destroyed;
-    TileMap colMap;
+    TileMap* colMap;
+    int colIter;
 };
 
 

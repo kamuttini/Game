@@ -32,13 +32,13 @@ private:
     sf::View view;
     sf::View HUDview;
     TileMap layer[4];
-    Room room[5];
+    std::vector<Room*> room;
     Room* activeRoom;
-    std::vector<Professor> profs;
     std::vector<Token> tok;
     GameDataRef data;
     HUD* hud;
     Player* player;
+    int mapLevel;
 };
 
 
