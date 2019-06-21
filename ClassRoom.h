@@ -8,6 +8,7 @@
 
 #include "Room.h"
 #include "Professor.h"
+#include "Token.h"
 
 class ClassRoom: public Room {
 public:
@@ -18,6 +19,7 @@ public:
 
 private:
     Professor *professor;
+    Token *token;
     bool completed;
 };
 

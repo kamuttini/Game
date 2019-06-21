@@ -7,7 +7,7 @@
 
 Professor::Professor(type id): ID(id), talking(false) {
 
-    rect.setSize(sf::Vector2f(32,64));
+    rect.setSize(sf::Vector2f(32, 64));
     sf::Vector2f position;
     std::string filename, mfilename;
     switch (ID)
@@ -29,6 +29,7 @@ Professor::Professor(type id): ID(id), talking(false) {
             break;
 
     }
+
     rect.setPosition(position);
     sprite = new Sprite(filename,*this,0,0,0,0,0,32,64);
     sprite->setScale(sf::Vector2f(2,2));

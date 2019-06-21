@@ -57,7 +57,8 @@ bool Room::activeUpdate(Player &player) {
         weaponToCollect[i]->updateState();
     }
 
-    for (i = 0; i <enemyVec.size(); i++)                                                                               //generate enemyWeapon
+    for (i = 0; i <
+                enemyVec.size(); i++)                                                                               //generate enemyWeapon
         enemyVec[i]->updateState();
 
     std::vector<std::unique_ptr<PlayerWeapon>>::const_iterator iter3 = weaponToCollect.begin();                         //delete weapon if collision detected
@@ -69,22 +70,23 @@ bool Room::activeUpdate(Player &player) {
     return false;
 }
 
-void Room::create(Player& player) {
+void Room::create(Player &player) {
     if (ID == hall) {
-        if (enemyVec.size() <= 2 && enemyClock.getElapsedTime() >= enemyDelay)                                                                        //generate enemy
+        if (enemyVec.size() <= 2 && enemyClock.getElapsedTime() >=
+                                    enemyDelay)                                                                        //generate enemy
         {
             enemyVec.push_back(factory.createEnemy(&player, *this));
             enemyClock.restart();
         }
-    }
-    else
-        if (enemyVec.size() <= 1 && enemyClock.getElapsedTime() >= enemyDelay)                                                                        //generate enemy
+    } else if (enemyVec.size() <= 1 && enemyClock.getElapsedTime() >=
+                                       enemyDelay)                                                                        //generate enemy
     {
         enemyVec.push_back(factory.createEnemy(&player, *this));
         enemyClock.restart();
     }
 
-    if (playerWeaponClock.getElapsedTime() >= playerWeaponDelay)                                                        //generate playerWeapon
+    if (playerWeaponClock.getElapsedTime() >=
+        playerWeaponDelay)                                                        //generate playerWeapon
     {
         weaponToCollect.push_back(factory.createWeaponToCollect(&player, *this));
         playerWeaponClock.restart();
@@ -94,7 +96,7 @@ void Room::create(Player& player) {
 void Room::draw(sf::RenderWindow &window) {
     window.draw(rect);
     int i, j;
-    for (i = 0; i <enemyVec.size(); i++) {
+    for (i = 0; i < enemyVec.size(); i++) {
         enemyVec[i]->draw(window);
         for (j = 0; j < enemyVec[i]->weaponVec.size(); j++)
             enemyVec[i]->weaponVec[j]->draw(window);
@@ -102,6 +104,8 @@ void Room::draw(sf::RenderWindow &window) {
 
     for (i = 0; i < weaponToCollect.size(); i++)
         weaponToCollect[i]->draw(window);
+
+
 }
 
 const sf::Vector2f &Room::getOrigin() const {

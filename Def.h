@@ -23,4 +23,10 @@
 #define PROF2_POSITION sf::Vector2f(3150,900)
 #define PROF3_POSITION sf::Vector2f(2370,90)
 #define WEAPONALER_POSITION 260,200
+
+//#define TOKEN1_POSITION sf::Vector2f(1850,1468)
+//#define TOKEN2_POSITION sf::Vector2f(1790,940)
+//#define TOKEN3_POSITION sf::Vector2f(2886,940)
+
+
 #endif //GAME_DEF_H

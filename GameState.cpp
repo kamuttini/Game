@@ -30,9 +30,6 @@ void GameState::Init()
     room.push_back(new ClassRoom(Room::type::classroom1));
     room.push_back(new ClassRoom(Room::type::classroom2));
     room.push_back(new ClassRoom(Room::type::classRoom3));
-    tok.push_back(Token("token1.png"));
-    tok.push_back(Token("token2.png"));
-    tok.push_back(Token("token3.png"));
 }
 
 void GameState::HandleInput()
@@ -103,8 +100,6 @@ void GameState::Draw() {
     //ProfessorsDraw
 
 
-    for (int i = 0; i < tok.size(); i++)         //TokenDraw
-        tok[i].draw(this->data->window);
 
     player->draw(this->data->window);
 

@@ -9,14 +9,18 @@ ClassRoom::ClassRoom(Room::type ID): Room(ID), completed(false){
     {
         case classroom1:
             professor=new Professor(Professor::type::prof1);
+            token=new Token(Token::type::token1);
             break;
 
         case classroom2:
             professor=new Professor(Professor::type::prof2);
+            token=new Token(Token::type::token2);
             break;
 
         case classRoom3:
             professor=new Professor(Professor::type::prof3);
+            token=new Token(Token::type::token3);
+
             break;
     }
 }
@@ -42,6 +46,7 @@ void ClassRoom::draw(sf::RenderWindow &window) {
         window.draw(professor->message);
         professor->stopTalking();
     }
+    token->draw(window);
 }
 
 

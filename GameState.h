@@ -34,7 +34,6 @@ private:
     TileMap layer[4];
     std::vector<Room*> room;
     Room* activeRoom;
-    std::vector<Token> tok;
     GameDataRef data;
     HUD* hud;
     Player* player;
