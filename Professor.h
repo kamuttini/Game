@@ -30,7 +30,6 @@ private:
     sf::Texture mTexture;
     sf::Clock disaplyClock;
     sf::Time displayTime;
-    // Token& token;
 };
 
 

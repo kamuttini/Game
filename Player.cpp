@@ -38,9 +38,7 @@ void Player::getInput() {
             direction = left;
             move();
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
-            getPosition();
-        }
+
         walkingClock.restart();
     }
 

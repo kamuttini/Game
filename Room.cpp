@@ -13,8 +13,8 @@ Room::Room(type ID1) : ID(ID1) {
             break;
 
         case hall:
-            origin = HALL_ORIGIN;
-            dimension = HALL_DIMENSION;
+            origin = CANTEEN_ORIGIN;
+            dimension = CANTEEN_DIMENSION;
             break;
 
         case bar:
@@ -36,17 +36,22 @@ Room::Room(type ID1) : ID(ID1) {
             dimension = CLASSROOM3_DIMENSION;
             break;
     }
-
-    rect.setPosition(origin);
-    rect.setSize(dimension);
-    rect.setFillColor(sf::Color::Transparent);
+    if(ID!= hall) {
+        rect = new sf::RectangleShape;
+        rect->setPosition(origin);
+        rect->setSize(dimension);
+    }
+    else
+        hallShape=new HallShape;
 }
+
 
 void Room::update() {
     destroy();
     for (int i = 0; i <enemyVec.size(); i++)                                                                               //generate enemyWeapon
         enemyVec[i]->updateState();
 }
+
 
 bool Room::activeUpdate(Player &player) {
     create(player);
@@ -70,9 +75,10 @@ bool Room::activeUpdate(Player &player) {
     return false;
 }
 
+
 void Room::create(Player &player) {
     if (ID == hall) {
-        if (enemyVec.size() <= 2 && enemyClock.getElapsedTime() >=
+        if (enemyVec.size() <= 3 && enemyClock.getElapsedTime() >=
                                     enemyDelay)                                                                        //generate enemy
         {
             enemyVec.push_back(factory.createEnemy(&player, *this));
@@ -93,36 +99,19 @@ void Room::create(Player &player) {
     }
 }
 
+
 void Room::draw(sf::RenderWindow &window) {
-    window.draw(rect);
-    int i, j;
-    for (i = 0; i < enemyVec.size(); i++) {
-        enemyVec[i]->draw(window);
-        for (j = 0; j < enemyVec[i]->weaponVec.size(); j++)
-            enemyVec[i]->weaponVec[j]->draw(window);
-    }
+        int i, j;
+        for (i = 0; i < enemyVec.size(); i++) {
+            enemyVec[i]->draw(window);
+            for (j = 0; j < enemyVec[i]->weaponVec.size(); j++)
+                enemyVec[i]->weaponVec[j]->draw(window);
+        }
 
-    for (i = 0; i < weaponToCollect.size(); i++)
-        weaponToCollect[i]->draw(window);
-
-
+        for (i = 0; i < weaponToCollect.size(); i++)
+            weaponToCollect[i]->draw(window);
 }
 
-const sf::Vector2f &Room::getOrigin() const {
-    return origin;
-}
-
-const sf::Vector2f &Room::getDimension() const {
-    return dimension;
-}
-
-Room::type Room::getId() const {
-    return ID;
-}
-
-const sf::RectangleShape &Room::getRect() const {
-    return rect;
-}
 
 void Room::destroy() {
     std::vector<std::unique_ptr<Enemy>>::const_iterator iter1;                                                          //delete enemy if collision detected
@@ -130,6 +119,7 @@ void Room::destroy() {
     for (iter1 = enemyVec.begin(); iter1 != enemyVec.end(); iter1++) {
         if (enemyVec[i]->isDestroyed()) {
             enemyVec[i]->destroy(enemyVec, iter1);
+            break;
         }
         std::vector<std::unique_ptr<Weapon>>::const_iterator iter2;
         for (int j = 0; j != enemyVec[i]->weaponVec.size(); j++) {
@@ -142,5 +132,36 @@ void Room::destroy() {
         }
         i++;
     }
+}
+const sf::Vector2f &Room::getOrigin() const {
+    if(ID==hall)
+    {
+        srand((clock()));
+        int i= rand()%5;
+        return hallShape->rect[i].getPosition();
+    }
+    else
+        return origin;
+}
+
+const sf::Vector2f &Room::getDimension() const {
+    if(ID==hall)
+    {
+        srand((clock()));
+        int i= rand()%5;
+        return hallShape->rect[i].getSize();
+    }
+
+    else
+
+        return dimension;
+}
+
+Room::type Room::getId() const {
+    return ID;
+}
+
+const sf::RectangleShape &Room::getRect() const {
+    return *rect;
 }
 

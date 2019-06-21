@@ -12,7 +12,7 @@ StaticComponent:: StaticComponent(orientation dir): direction(dir){
 
 void StaticComponent::draw(sf::RenderWindow &window)
 {
-    sprite->draw(window);
+   sprite->draw(window);
 }
 
 void StaticComponent::randomPosition(sf::Vector2f range, sf::Vector2f origin)

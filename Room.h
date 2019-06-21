@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Token.h"
+#include "HallShape.h"
 
 
 typedef std::unique_ptr<Enemy>  enemyPtr;
@@ -43,7 +44,8 @@ protected:
     sf::Vector2f origin;
     sf::Vector2f dimension;
     type ID;
-    sf::RectangleShape rect;
+    sf::RectangleShape* rect;
+    HallShape* hallShape;
     Token *token;
 };
 
