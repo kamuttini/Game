@@ -7,6 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "StaticComponent.h"
+#include "Player.h"
 
 class Token: public StaticComponent {
 public:
@@ -14,11 +15,17 @@ public:
     explicit Token(type id);
     ~Token(){};
     bool isActive() const;
-    void setActive(bool active);
+    void setActive(bool active, Player* player= nullptr);
+    void update();
+    void attachToPlayer();
+    bool isCaught() const;
 
 private:
+    Player* player;
     type ID;
     bool active;
+    bool caught;
+
 };
 
 

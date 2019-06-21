@@ -58,9 +58,13 @@ bool Professor::isTalking() {
     return talking;
 }
 
-bool Professor::checkToken(Player &player) {
-
-       return false;
+bool Professor::checkToken() {
+    if(token->isCaught()) {
+        token->setActive(false);
+        return true;
+    }
+    else
+        return false;
 }
 
 Token *Professor::getToken() const {

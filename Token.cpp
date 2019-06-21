@@ -5,7 +5,7 @@
 #include "Token.h"
 #include "Def.h"
 
-Token::Token(type id) : ID(id), active(false) {
+Token::Token(type id) : ID(id), active(false), caught(false) {
     rect.setSize(sf::Vector2f(32, 32));
     std::string filename;
 
@@ -31,6 +31,31 @@ bool Token::isActive() const {
     return active;
 }
 
-void Token::setActive(bool active) {
-    Token::active = active;
+void Token::setActive(bool active1, Player* player1) {
+    active = active1;
+    player=player1;
 }
+
+void Token::update() {
+    if(!caught)
+        if(player->getRect().getGlobalBounds().intersects(rect.getGlobalBounds())) {
+            attachToPlayer();
+            caught=true;
+        }
+    if(caught)
+        attachToPlayer();
+}
+
+void Token::attachToPlayer() {
+
+    rect.setPosition(player->getPosition().x+10,player->getPosition().y+40);
+    sprite->update();
+    sprite->setScale(sf::Vector2f(0.7,0.7));
+}
+
+bool Token::isCaught() const {
+    return caught;
+}
+
+
+

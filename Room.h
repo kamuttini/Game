@@ -19,7 +19,8 @@ public:
     enum type{canteen, hall, classroom1, classroom2, bar, classRoom3};
 
     explicit Room( type ID);
-    void update();
+
+    virtual void update();
     virtual bool activeUpdate(Player &player);
     void create(Player& player);
     void destroy();
@@ -44,6 +45,7 @@ protected:
     type ID;
     sf::RectangleShape* rect;
     HallShape* hallShape;
+    int maxEnemyN;
 };
 
 

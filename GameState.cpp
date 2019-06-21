@@ -97,12 +97,12 @@ void GameState::Draw() {
     for (int i = 0; i < player->inventory.weaponVec.size(); i++)
         player->inventory.weaponVec[i]->draw(this->data->window);
 
-    //ProfessorsDraw
-
-
 
     player->draw(this->data->window);
-
+    for(int i=0; i<room.size();i++)
+    {
+        room[i]->draw(this->data->window);
+    }
     this->data->window.setView(HUDview);
 
     hud->draw(this->data->window);

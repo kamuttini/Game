@@ -19,7 +19,7 @@ public:
     ~Professor(){};
 
 
-    bool checkToken(Player& player);
+    bool checkToken();
     void talk();
     bool isTalking();
     void stopTalking();

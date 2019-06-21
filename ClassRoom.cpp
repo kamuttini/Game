@@ -24,14 +24,19 @@ ClassRoom::ClassRoom(Room::type ID): Room(ID), completed(false){
 bool ClassRoom::activeUpdate(Player &player) {
 
     Room::activeUpdate(player);
+    if(professor->getToken()->isActive())
+        professor->getToken()->update();
 
     if(player.getRect().getGlobalBounds().intersects(professor->getRect().getGlobalBounds())){
-        professor->talk();
-        professor->getToken()->setActive(true);
-        if(!completed) {
-            player.changeColMap();
-            completed=true;
-            return true;
+        if(!professor->checkToken()) {
+            professor->talk();
+            professor->getToken()->setActive(true,&player);
+        }
+        else
+            if(!completed) {
+                player.changeColMap();
+                completed=true;
+                return true;
         }
     }
     return false;
@@ -46,6 +51,12 @@ void ClassRoom::draw(sf::RenderWindow &window) {
     }
     if(professor->getToken()->isActive())
         professor->getToken()->draw(window);
+}
+
+void ClassRoom::update() {
+    Room::update();
+    if(professor->getToken()->isActive())
+        professor->getToken()->update();
 }
 
 

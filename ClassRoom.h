@@ -15,6 +15,7 @@ public:
     ~ClassRoom() {};
     bool activeUpdate(Player &player) override;
     void draw(sf::RenderWindow &window) override;
+    void update()override;
 
 private:
     Professor *professor;

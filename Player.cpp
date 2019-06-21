@@ -8,7 +8,7 @@
 #include "Game.h"
 
 
-Player::Player(HUD &hud1) : GameCharacter(16, 3),
+Player::Player(HUD &hud1) : GameCharacter(30, 3),
                                    stats(hud1)
                                    {
     rect.setPosition(2050, 2200);
@@ -36,6 +36,10 @@ void Player::getInput() {
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
             direction = left;
+            move();
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
+            hp +=1 ;
             move();
         }
 
