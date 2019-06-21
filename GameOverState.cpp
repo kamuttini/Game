@@ -10,13 +10,12 @@
 GameOverState::GameOverState(int score1, GameDataRef data1): title("GAME OVER",150,sf::Color::Red),
                                                             enterText("press ENTER to replay",80, sf::Color::White),
                                                             scoreText("CFU: "+ std::to_string(score1),70),
-                                                            bestScoreText("best: "+ std::to_string(highScore),70),
+                                                            bestScoreText("best: ",70),
                                                             data(data1),
                                                             score(score1)
                                                             {}
 
 void GameOverState::Init() {
-    sf::Vector2u WindowSize = this->data->window.getSize();
     title.setPosition((this->data->window.getSize().x/2)-(title.text.getGlobalBounds().width/2),(this->data->window.getSize().y/2)-(title.text.getGlobalBounds().height/2));
     enterText.setPosition((this->data->window.getSize().x/2)-(enterText.text.getGlobalBounds().width/2),(this->data->window.getSize().y/2)-((title.text.getGlobalBounds().height/2)-200));
     scoreText.setPosition((this->data->window.getSize().x/2)-(scoreText.text.getGlobalBounds().width/2),(this->data->window.getSize().y/2)-((title.text.getGlobalBounds().height/2)+200));

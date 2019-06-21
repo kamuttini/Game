@@ -8,6 +8,7 @@
 #include <iostream>
 #include "Def.h"
 #include "ClassRoom.h"
+#include "WinGameOverState.h"
 
 class Enemy;
 GameState::GameState(GameDataRef data1) :   data(data1),
@@ -70,7 +71,9 @@ void GameState::Update()
                 layer[1] = TileMap("map2_v3.txt");
                 break;
             case 2:
-                this->data->machine.AddState(StateRef(new GameOverState(hud->getScore(), this->data)), true);
+                Draw();
+                sf::sleep(sf::seconds(2));
+                this->data->machine.AddState(StateRef(new WinGameOverState(hud->getScore(), this->data)), true);
                 break;
         }
         mapLevel+=1;

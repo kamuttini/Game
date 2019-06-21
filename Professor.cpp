@@ -62,8 +62,6 @@ bool Professor::checkToken() {
         token->setActive(false);
         changeText();
         talk();
-        if(ID==prof3)
-            sf::sleep(sf::seconds(1));
         return true;
     }
     else
