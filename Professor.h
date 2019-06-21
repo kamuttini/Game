@@ -15,6 +15,8 @@ public:
 
     explicit Professor(type id);
     ~Professor(){};
+
+
     bool checkToken();
     void talk();
 

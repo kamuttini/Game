@@ -9,6 +9,8 @@
 #include "Factory.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Token.h"
+
 
 typedef std::unique_ptr<Enemy>  enemyPtr;
 typedef std::unique_ptr<PlayerWeapon> playerWeaponPtr;
@@ -41,6 +43,7 @@ private:
     sf::Vector2f dimension;
     type ID;
     sf::RectangleShape rect;
+    Token *token;
 };
 
 

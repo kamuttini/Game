@@ -9,14 +9,18 @@ ClassRoom::ClassRoom(Room::type ID): Room(ID){
     {
         case classroom1:
             professor=new Professor(Professor::type::prof1);
+            token=new Token(Token::type::token1);
             break;
 
         case classroom2:
             professor=new Professor(Professor::type::prof2);
+            token=new Token(Token::type::token2);
             break;
 
         case bossRoom:
             professor=new Professor(Professor::type::prof3);
+            token=new Token(Token::type::token3);
+
             break;
     }
 }
@@ -38,6 +42,7 @@ bool ClassRoom::activeUpdate(Player &player) {
 void ClassRoom::draw(sf::RenderWindow &window) {
     Room::draw(window);
     professor->draw(window);
+    token->draw(window);
 }
 
 

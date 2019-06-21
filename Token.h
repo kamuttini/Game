@@ -10,9 +10,13 @@
 
 class Token: public StaticComponent {
 public:
-    Token(std::string filename);
+    enum type{token1,token2,token3};
+    explicit Token(type id);
     ~Token(){};
 
+
+private:
+    type ID;
 
 };
 
