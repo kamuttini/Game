@@ -16,16 +16,19 @@ Professor::Professor(type id): ID(id), talking(false) {
             position=PROF1_POSITION;
             filename="prof1.png";
             mfilename="assets/sprites/message1.png";
+            token= new Token(Token::type::calculator);
             break;
         case prof2:
             position=PROF2_POSITION;
             filename="prof2.png";
             mfilename="assets/sprites/message2.png";
+            token= new Token(Token::type::license);
             break;
         case prof3:
             position=PROF3_POSITION;
             filename="prof3.png";
             mfilename="assets/sprites/message3.png";
+            token= new Token(Token::type::computer);
             break;
 
     }
@@ -42,17 +45,26 @@ Professor::Professor(type id): ID(id), talking(false) {
 void Professor::talk() {
     if(!talking) {
         talking = true;
-        disaplyClock.restart();
+        displayClock.restart();
     }
 }
 
 void Professor::stopTalking() {
-    if(talking && disaplyClock.getElapsedTime()>displayTime)
+    if(talking && displayClock.getElapsedTime()>displayTime)
         talking=false;
 }
 
 bool Professor::isTalking() {
     return talking;
+}
+
+bool Professor::checkToken(Player &player) {
+
+       return false;
+}
+
+Token *Professor::getToken() const {
+    return token;
 }
 
 

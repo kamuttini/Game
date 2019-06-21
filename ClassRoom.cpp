@@ -9,18 +9,14 @@ ClassRoom::ClassRoom(Room::type ID): Room(ID), completed(false){
     {
         case classroom1:
             professor=new Professor(Professor::type::prof1);
-            token=new Token(Token::type::token1);
             break;
 
         case classroom2:
             professor=new Professor(Professor::type::prof2);
-            token=new Token(Token::type::token2);
             break;
 
         case classRoom3:
             professor=new Professor(Professor::type::prof3);
-            token=new Token(Token::type::token3);
-
             break;
     }
 }
@@ -28,8 +24,10 @@ ClassRoom::ClassRoom(Room::type ID): Room(ID), completed(false){
 bool ClassRoom::activeUpdate(Player &player) {
 
     Room::activeUpdate(player);
+
     if(player.getRect().getGlobalBounds().intersects(professor->getRect().getGlobalBounds())){
         professor->talk();
+        professor->getToken()->setActive(true);
         if(!completed) {
             player.changeColMap();
             completed=true;
@@ -46,7 +44,8 @@ void ClassRoom::draw(sf::RenderWindow &window) {
         window.draw(professor->message);
         professor->stopTalking();
     }
-    token->draw(window);
+    if(professor->getToken()->isActive())
+        professor->getToken()->draw(window);
 }
 
 

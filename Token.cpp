@@ -5,24 +5,32 @@
 #include "Token.h"
 #include "Def.h"
 
-Token::Token(type id) : ID(id) {
+Token::Token(type id) : ID(id), active(false) {
     rect.setSize(sf::Vector2f(32, 32));
     std::string filename;
 
     switch (ID) {
-        case token1:
+        case calculator:
             randomPosition(HALL_DIMENSION,HALL_ORIGIN);
             filename = "token1.png";
             break;
-        case token2:
-            randomPosition(CLASSROOM1_DIMENSION,CLASSROOM1_ORIGIN);
+        case license:
+            randomPosition(CANTEEN_DIMENSION, CANTEEN_ORIGIN);
             filename = "token2.png";
             break;
-        case token3:
-            randomPosition(CLASSROOM2_DIMENSION,CLASSROOM2_ORIGIN);
+        case computer:
+            randomPosition(BAR_DIMENSION,BAR_ORIGIN);
             filename = "token3.png";
             break;
     }
 
     sprite = new Sprite(filename, *this);
+}
+
+bool Token::isActive() const {
+    return active;
+}
+
+void Token::setActive(bool active) {
+    Token::active = active;
 }

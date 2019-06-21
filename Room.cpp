@@ -13,8 +13,8 @@ Room::Room(type ID1) : ID(ID1) {
             break;
 
         case hall:
-            origin = CANTEEN_ORIGIN;
-            dimension = CANTEEN_DIMENSION;
+            origin = HALL_ORIGIN;
+            dimension = HALL_ORIGIN;
             break;
 
         case bar:

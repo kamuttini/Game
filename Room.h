@@ -9,9 +9,7 @@
 #include "Factory.h"
 #include "Player.h"
 #include "Enemy.h"
-#include "Token.h"
 #include "HallShape.h"
-
 
 typedef std::unique_ptr<Enemy>  enemyPtr;
 typedef std::unique_ptr<PlayerWeapon> playerWeaponPtr;
@@ -46,7 +44,6 @@ protected:
     type ID;
     sf::RectangleShape* rect;
     HallShape* hallShape;
-    Token *token;
 };
 
 

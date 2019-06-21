@@ -9,6 +9,7 @@
 #include "StaticComponent.h"
 #include "Token.h"
 #include "Text.h"
+#include "Player.h"
 
 class Professor: public StaticComponent {
 public:
@@ -18,18 +19,20 @@ public:
     ~Professor(){};
 
 
-    bool checkToken();
+    bool checkToken(Player& player);
     void talk();
     bool isTalking();
     void stopTalking();
     sf::Sprite message;
+    Token *getToken() const;
 
 private:
     type ID;
     bool talking;
     sf::Texture mTexture;
-    sf::Clock disaplyClock;
+    sf::Clock displayClock;
     sf::Time displayTime;
+    Token* token;
 };
 
 

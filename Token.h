@@ -10,14 +10,15 @@
 
 class Token: public StaticComponent {
 public:
-    enum type{token1,token2,token3};
+    enum type{calculator,license,computer};
     explicit Token(type id);
     ~Token(){};
-
+    bool isActive() const;
+    void setActive(bool active);
 
 private:
     type ID;
-
+    bool active;
 };
 
 
