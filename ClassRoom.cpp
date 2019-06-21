@@ -35,6 +35,7 @@ bool ClassRoom::activeUpdate(Player &player) {
         else
             if(!completed) {
                 player.changeColMap();
+                player.stats.updateScore(80);
                 completed=true;
                 return true;
         }
@@ -58,9 +59,3 @@ void ClassRoom::update() {
     if(professor->getToken()->isActive())
         professor->getToken()->update();
 }
-
-
-
-
-
-

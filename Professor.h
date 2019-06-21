@@ -17,10 +17,9 @@ public:
 
     explicit Professor(type id);
     ~Professor(){};
-
-
     bool checkToken();
     void talk();
+    void changeText();
     bool isTalking();
     void stopTalking();
     sf::Sprite message;

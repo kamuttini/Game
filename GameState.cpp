@@ -69,8 +69,11 @@ void GameState::Update()
             case 1:
                 layer[1] = TileMap("map2_v3.txt");
                 break;
+            case 2:
+                this->data->machine.AddState(StateRef(new GameOverState(hud->getScore(), this->data)), true);
+                break;
         }
-        mapLevel=1;
+        mapLevel+=1;
     }
     for(int i=0; i<room.size(); i++)
         if(activeRoom!=room[i])

@@ -30,7 +30,6 @@ Professor::Professor(type id): ID(id), talking(false) {
             mfilename="assets/sprites/message3.png";
             token= new Token(Token::type::computer);
             break;
-
     }
 
     rect.setPosition(position);
@@ -38,7 +37,7 @@ Professor::Professor(type id): ID(id), talking(false) {
     sprite->setScale(sf::Vector2f(2,2));
     mTexture.loadFromFile(mfilename);
     message.setTexture(mTexture);
-    message.setPosition(rect.getPosition().x,rect.getPosition().y-90);
+    message.setPosition(rect.getPosition().x+10,rect.getPosition().y-130);
     displayTime=sf::seconds(2);
 }
 
@@ -61,6 +60,10 @@ bool Professor::isTalking() {
 bool Professor::checkToken() {
     if(token->isCaught()) {
         token->setActive(false);
+        changeText();
+        talk();
+        if(ID==prof3)
+            sf::sleep(sf::seconds(1));
         return true;
     }
     else
@@ -69,6 +72,24 @@ bool Professor::checkToken() {
 
 Token *Professor::getToken() const {
     return token;
+}
+
+void Professor::changeText() {
+    std::string filename;
+    switch (ID)
+    {
+        case prof1:
+            filename="assets/sprites/message4.png";
+            break;
+        case prof2:
+            filename="assets/sprites/message5.png";
+            break;
+        case prof3:
+            filename="assets/sprites/message6.png";
+            break;
+    }
+    mTexture.loadFromFile(filename);
+    message.setTexture(mTexture);
 }
 
 
