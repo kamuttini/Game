@@ -15,7 +15,7 @@ typedef std::unique_ptr<PlayerWeapon> playerWeaponPtr;
 
 class Room{
 public:
-    enum type{canteen, hall, classroom1, classroom2, bar, bossRoom};
+    enum type{canteen, hall, classroom1, classroom2, bar, classRoom3};
 
     explicit Room( type ID);
     void update();
@@ -32,7 +32,7 @@ public:
     std::vector<enemyPtr> enemyVec;
     std::vector<playerWeaponPtr> weaponToCollect;
 
-private:
+protected:
     Factory factory;
     sf::Clock enemyClock;
     sf::Time enemyDelay=sf::seconds(4.f);

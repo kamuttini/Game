@@ -31,6 +31,10 @@ Room::Room(type ID1) : ID(ID1) {
             origin = CLASSROOM2_ORIGIN;
             dimension = CLASSROOM2_DIMENSION;
             break;
+        case classRoom3:
+            origin = CLASSROOM3_ORIGIN;
+            dimension = CLASSROOM3_DIMENSION;
+            break;
     }
 
     rect.setPosition(origin);
@@ -40,10 +44,8 @@ Room::Room(type ID1) : ID(ID1) {
 
 void Room::update() {
     destroy();
-    for (int i = 0; i != enemyVec.size(); i++) {
-        for (int k = 0; k < enemyVec[i]->weaponVec.size(); k++)
-            enemyVec[i]->weaponVec[k]->attack();
-        }
+    for (int i = 0; i <enemyVec.size(); i++)                                                                               //generate enemyWeapon
+        enemyVec[i]->updateState();
 }
 
 bool Room::activeUpdate(Player &player) {
@@ -90,6 +92,7 @@ void Room::create(Player& player) {
 }
 
 void Room::draw(sf::RenderWindow &window) {
+    window.draw(rect);
     int i, j;
     for (i = 0; i <enemyVec.size(); i++) {
         enemyVec[i]->draw(window);

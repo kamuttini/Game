@@ -60,6 +60,9 @@ std::unique_ptr<PlayerWeapon> Factory::createWeaponToCollect(Player *player,Room
         case Room::type::classroom2:
             ID = Weapon::type::book;
             break;
+        case Room::type::classRoom3:
+            ID = Weapon::type::book;
+            break;
     }
     std::unique_ptr<PlayerWeapon> weapon;
     weapon = std::unique_ptr<PlayerWeapon>(new PlayerWeapon(player, ID,room.getOrigin(),room.getDimension()));
@@ -85,6 +88,9 @@ std::unique_ptr<Enemy> Factory::createEnemy(Player *player, Room& room) {
             ID = Enemy::type::student;
             break;
         case Room::type::classroom2:
+            ID = Enemy::type::student;
+            break;
+        case Room::type::classRoom3:
             ID = Enemy::type::student;
             break;
 

@@ -17,8 +17,10 @@
 #define CLASSROOM1_ORIGIN sf::Vector2f(1690,840)
 #define CLASSROOM2_DIMENSION sf::Vector2f(700,400)
 #define CLASSROOM2_ORIGIN sf::Vector2f(2786,840)
+#define CLASSROOM3_DIMENSION sf::Vector2f(800,300)
+#define CLASSROOM3_ORIGIN sf::Vector2f(2150,90)
 #define PROF1_POSITION sf::Vector2f(1950,800)
 #define PROF2_POSITION sf::Vector2f(3150,900)
-#define PROF3_POSITION sf::Vector2f(2370,65)
-
+#define PROF3_POSITION sf::Vector2f(2370,90)
+#define WEAPONALER_POSITION 260,200
 #endif //GAME_DEF_H

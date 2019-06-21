@@ -29,7 +29,7 @@ void GameState::Init()
     room.push_back(new Room(Room::type::bar));
     room.push_back(new ClassRoom(Room::type::classroom1));
     room.push_back(new ClassRoom(Room::type::classroom2));
-    room.push_back(new ClassRoom(Room::type::bossRoom));
+    room.push_back(new ClassRoom(Room::type::classRoom3));
     tok.push_back(Token("token1.png"));
     tok.push_back(Token("token2.png"));
     tok.push_back(Token("token3.png"));

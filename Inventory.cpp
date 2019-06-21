@@ -7,7 +7,7 @@
 
 Inventory::Inventory():alert("Weapon inventory is empty!")
 {
-    alert.setPosition(260,200);
+    alert.setPosition(WEAPONALER_POSITION);
 }
 
 

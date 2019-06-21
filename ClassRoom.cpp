@@ -4,7 +4,7 @@
 
 #include "ClassRoom.h"
 
-ClassRoom::ClassRoom(Room::type ID): Room(ID){
+ClassRoom::ClassRoom(Room::type ID): Room(ID), completed(false){
     switch (ID)
     {
         case classroom1:
@@ -15,7 +15,7 @@ ClassRoom::ClassRoom(Room::type ID): Room(ID){
             professor=new Professor(Professor::type::prof2);
             break;
 
-        case bossRoom:
+        case classRoom3:
             professor=new Professor(Professor::type::prof3);
             break;
     }
@@ -24,13 +24,13 @@ ClassRoom::ClassRoom(Room::type ID): Room(ID){
 bool ClassRoom::activeUpdate(Player &player) {
 
     Room::activeUpdate(player);
-    if(player.getRect().getGlobalBounds().intersects(professor->getRect().getGlobalBounds())&& !completed){
-        //if(professor->checkToken())
-        player.changeColMap();
-        //else
-        //   professor->talk();
-        completed=true;
-        return true;
+    if(player.getRect().getGlobalBounds().intersects(professor->getRect().getGlobalBounds())){
+        professor->talk();
+        if(!completed) {
+            player.changeColMap();
+            completed=true;
+            return true;
+        }
     }
     return false;
 }
@@ -38,6 +38,10 @@ bool ClassRoom::activeUpdate(Player &player) {
 void ClassRoom::draw(sf::RenderWindow &window) {
     Room::draw(window);
     professor->draw(window);
+    if(professor->isTalking()) {
+        window.draw(professor->message);
+        professor->stopTalking();
+    }
 }
 
 

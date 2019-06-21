@@ -39,6 +39,3 @@ bool Text::isDisplay() const {
     return display;
 }
 
-void Text::setDisplayTime(const sf::Time &displayTime) {
-    Text::displayTime = displayTime;
-}

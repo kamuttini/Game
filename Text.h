@@ -17,7 +17,6 @@ public:
     void startDisplaying();
     void stopDisplaying();
     bool isDisplay() const;
-    void setDisplayTime(const sf::Time &displayTime);
 
     sf::Text text;
 

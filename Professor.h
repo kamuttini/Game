@@ -18,12 +18,17 @@ public:
     ~Professor(){};
     bool checkToken();
     void talk();
+    bool isTalking();
+    void stopTalking();
+    sf::Sprite message;
 
 private:
     type ID;
-    Text advise;
-    sf::Sprite message;
-   // Token& token;
+    bool talking;
+    sf::Texture mTexture;
+    sf::Clock disaplyClock;
+    sf::Time displayTime;
+    // Token& token;
 };
 
 
