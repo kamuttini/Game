@@ -7,7 +7,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "StaticComponent.h"
-#include "TileMap.h"
 
 
 class DynamicComponent: public StaticComponent {
@@ -16,7 +15,6 @@ public:
     explicit DynamicComponent(float s);
     ~DynamicComponent(){};
     bool checkBorders(orientation direction);
-    int findTile();
     bool isDestroyed() const;
     void setIsDestroyed(bool isDestroyed);
     float getSpeed() const;
@@ -24,10 +22,8 @@ public:
     void changeColMap();
 
 protected:
-    float sx,dx,top,bottom;
     float speed;
     bool destroyed;
-    TileMap* colMap;
     int colIter;
 };
 

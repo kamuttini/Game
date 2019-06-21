@@ -85,8 +85,7 @@ bool Room::activeUpdate(Player &player) {
 
 void Room::create(Player &player) {
 
-    if (enemyVec.size() <= maxEnemyN && enemyClock.getElapsedTime() >=
-                                       enemyDelay)                                                                        //generate enemy
+    if (enemyVec.size() <= maxEnemyN && enemyClock.getElapsedTime() >=enemyDelay)                                                                        //generate enemy
     {
         enemyVec.push_back(factory.createEnemy(&player, *this));
         enemyClock.restart();
@@ -154,7 +153,6 @@ const sf::Vector2f &Room::getDimension() const {
     }
 
     else
-
         return dimension;
 }
 

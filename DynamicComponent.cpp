@@ -5,8 +5,7 @@
 #include "DynamicComponent.h"
 
 
-DynamicComponent:: DynamicComponent(float s):   colMap(new TileMap("colMap.txt", true)),
-                                                speed(s),
+DynamicComponent:: DynamicComponent(float s):   speed(s),
                                                 destroyed(false),
                                                 colIter(0)
                                                 {}
@@ -54,20 +53,7 @@ bool DynamicComponent::checkBorders( orientation direction) {
         return true;
 }
 
-int DynamicComponent::findTile() {
 
-    //Riconosce il tile per la collisione
-
-    bottom =rect.getPosition().y+rect.getSize().y-20;
-    sx =rect.getPosition().x;
-    dx=rect.getPosition().x+rect.getSize().x;
-    top =rect.getPosition().y;
-
-    int tileX=int(dx)/(16*2.5);
-    int tileY=int(bottom)/(16*2.5);
-    return tileX+(tileY*110);
-
-}
 
 void DynamicComponent::setSpeed(float s) {
     speed=s;

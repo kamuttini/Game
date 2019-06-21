@@ -165,7 +165,6 @@ std::string Enemy::setSprite() {
         case Enemy::type::barMan:
             filename = "sprite4-0.png";
             break;
-
     }
 
     return filename;
