@@ -14,8 +14,9 @@ Game::Game(int width, int height, std::string title)
     data->window.setFramerateLimit(60);
     data->machine.AddState(StateRef(new MenuState(this->data)));
 
-    data->soundTrack.openFromFile("assets/music/mario.wav");
+    data->soundTrack.openFromFile("assets/music/Gerudo_Valley-The_Legend_of_Zelda-Ocarina_of_Time.wav");
     data->soundTrack.setVolume(10);
+    data->soundTrack.setLoop(true);
 
     this->Run();
 }

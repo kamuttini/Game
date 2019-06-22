@@ -90,7 +90,7 @@ void GameState::Update()
 void GameState::Draw() {
     this->data->window.clear(sf::Color(123, 173, 44));
     sf::Vector2f movement = player->getRect().getPosition() - view.getCenter();
-    view.move(movement.x * 0.2, movement.y * 0.2);
+    view.move(movement.x * 0.15, movement.y * 0.15);
     this->data->window.setView(view);
 
     for (int i = 0; i < 4; i++)

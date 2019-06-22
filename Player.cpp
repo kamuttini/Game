@@ -8,10 +8,10 @@
 #include "Game.h"
 
 
-Player::Player(HUD &hud1) : GameCharacter(30, 3),
+Player::Player(HUD &hud1) : GameCharacter(20, 3),
                                    stats(hud1)
                                    {
-    rect.setPosition(2050, 2200);
+    rect.setPosition(2050, 2300);
     rect.setSize(sf::Vector2f(30,60));
     sprite = new Sprite("sprite8.png", *this, 2, 0, 3, 1, 9, 64, 65.25);
     sprite->setScale(sf::Vector2f(1.6, 1.6));
@@ -21,26 +21,29 @@ void Player::getInput() {
     if (walkingClock.getElapsedTime() >= walkingDelay) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
             direction = up;
+            moveClock.restart();
             move();
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
             direction = down;
+            moveClock.restart();
             move();
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             direction = right;
+            moveClock.restart();
             move();
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
             direction = left;
+            moveClock.restart();
             move();
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
             hp +=1 ;
-            move();
         }
 
         walkingClock.restart();
@@ -90,13 +93,13 @@ void Player::update(Weapon *weapon) {
             if (hp > 1) {
                 hp--;
                 weapon->setIsDestroyed(true);
-                stats.updateHp(hp);
+                stats.updateHp();
 
             } else {
                 hp--;
                 destroyed = true;
                 weapon->setIsDestroyed(true);
-                stats.updateHp(hp);
+                stats.updateHp();
                 sf::sleep(sf::seconds(1));
             }
         }
@@ -107,6 +110,15 @@ void Player::update(Weapon *weapon) {
 void Player::updateState() {
     GameCharacter::updateState();
     inventory.updateState();
+    if(moveClock.getElapsedTime()<sf::seconds(0.4))
+    {
+        if (walkingClock.getElapsedTime() >= walkingDelay)
+        {
+            move();
+            walkingClock.restart();
+        }
+
+    }
 }
 
 

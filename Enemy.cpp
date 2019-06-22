@@ -32,7 +32,7 @@ void Enemy::fight() {
     playerDir.x = (player->getRect().getPosition().x - rect.getPosition().x) / distance;
     playerDir.y = (player->getRect().getPosition().y - rect.getPosition().y) / distance;
 
-    if (attackClock.getElapsedTime() > attackDelay && distance < 500) {
+    if (attackClock.getElapsedTime() > attackDelay && distance < 400) {
         isFighting = true;
         attackClock.restart();
     }

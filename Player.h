@@ -23,6 +23,9 @@ public:
     void updateState()override;
     HUD& stats;
     Inventory inventory;
+
+private:
+    sf::Clock moveClock;
 };
 
 

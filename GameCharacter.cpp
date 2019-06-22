@@ -8,9 +8,7 @@
 
 GameCharacter::GameCharacter(int s, int h) : DynamicComponent(s),
                                              hp(h),
-                                             isFighting(false),
-                                             movement(1.f, 0.f)
-                                             {
+                                             isFighting(false){
     walkingDelay = sf::seconds(.1f);
 }
 

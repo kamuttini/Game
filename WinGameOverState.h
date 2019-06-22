@@ -21,6 +21,7 @@ private:
     bool active;
     Text playerText;
     Text reward;
+    std::string newInput;
     sf::String playerInput;
     sf::Clock displayNot;
     sf::Clock display;

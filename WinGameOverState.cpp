@@ -60,14 +60,22 @@ void WinGameOverState::HandleInput() {
                 case sf::Event::Closed:
                     this->data->window.close();
                     break;
+
                 case sf::Event::TextEntered:
-                        playerInput +=event.text.unicode;
-                        playerText.text.setString(playerInput+"_");
+                        newInput =event.text.unicode;
+                    if (event.text.unicode == '\b')
+                        playerInput.erase(playerInput.getSize() - 1, 1);
+                    else
+                        playerInput+=newInput;
+                    playerText.text.setString(playerInput+"_");
                         break;
+
+
                 case sf::Event::KeyPressed:
-                    switch(event.key.code) {
+                    switch(event.key.code)
+                    {
                         case sf::Keyboard::Return:
-                            change=true;
+                            change = true;
                             break;
                     }
             }
