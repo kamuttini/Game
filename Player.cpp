@@ -8,7 +8,7 @@
 #include "Game.h"
 
 
-Player::Player(HUD &hud1) : GameCharacter(20, 4),
+Player::Player(HUD &hud1) : GameCharacter(18, 4),
                                    stats(hud1)
                                    {
     rect.setPosition(PLAYER_START_POSITION);
