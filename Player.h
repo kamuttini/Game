@@ -26,6 +26,9 @@ public:
 
 private:
     sf::Clock moveClock;
+    sf::SoundBuffer token;
+    sf::SoundBuffer damage;
+    sf::Sound sound;
 };
 
 

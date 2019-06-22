@@ -9,16 +9,20 @@ ClassRoom::ClassRoom(Room::type ID): Room(ID), completed(false){
     {
         case classroom1:
             professor=new Professor(Professor::type::prof1);
+            sound.openFromFile("assets/music/completed.wav");
             break;
 
         case classroom2:
             professor=new Professor(Professor::type::prof2);
+            sound.openFromFile("assets/music/completed.wav");
             break;
 
         case classRoom3:
             professor=new Professor(Professor::type::prof3);
+            sound.openFromFile("assets/music/win.flac");
             break;
     }
+    sound.setVolume(30);
 }
 
 bool ClassRoom::activeUpdate(Player &player) {
@@ -37,8 +41,9 @@ bool ClassRoom::activeUpdate(Player &player) {
                 player.changeColMap();
                 player.stats.updateScore(80);
                 completed=true;
+                sound.play();
                 return true;
-        }
+            }
     }
     return false;
 }

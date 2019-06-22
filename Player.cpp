@@ -8,14 +8,17 @@
 #include "Game.h"
 
 
-Player::Player(HUD &hud1) : GameCharacter(20, 3),
+Player::Player(HUD &hud1) : GameCharacter(20, 4),
                                    stats(hud1)
                                    {
-    rect.setPosition(2050, 2300);
+    rect.setPosition(PLAYER_START_POSITION);
     rect.setSize(sf::Vector2f(30,60));
     sprite = new Sprite("sprite8.png", *this, 2, 0, 3, 1, 9, 64, 65.25);
     sprite->setScale(sf::Vector2f(1.6, 1.6));
-}
+    walkingDelay = sf::seconds(.13f);
+    token.loadFromFile("assets/music/token.flac");
+    damage.loadFromFile("assets/music/damage.ogg");
+                                   }
 
 void Player::getInput() {
     if (walkingClock.getElapsedTime() >= walkingDelay) {
@@ -84,12 +87,15 @@ void Player::update(Weapon *weapon) {
     if (weapon->getRect().getGlobalBounds().intersects(rect.getGlobalBounds())) {
         const std::type_info &type_info = typeid(*weapon);
         if (type_info == typeid(PlayerWeapon)) {
+            sound.setBuffer(token);
+            sound.play();
             inventory.addToCollection(*weapon);
             weapon->setIsDestroyed(true);
             stats.updateWeapons(inventory.collectionSize());
             stats.updateScore(5);
         } else {
-
+            sound.setBuffer(damage);
+            sound.play();
             if (hp > 1) {
                 hp--;
                 weapon->setIsDestroyed(true);

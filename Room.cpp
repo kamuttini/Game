@@ -101,6 +101,10 @@ void Room::create(Player &player) {
 
 
 void Room::draw(sf::RenderWindow &window) {
+    //if(ID==hall)
+    //{
+    //  hallShape->draw(window);
+    //}
         int i, j;
         for (i = 0; i < enemyVec.size(); i++) {
             enemyVec[i]->draw(window);

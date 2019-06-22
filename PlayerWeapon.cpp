@@ -26,7 +26,6 @@ void PlayerWeapon::updateState() {
 }
 
 void PlayerWeapon::destroy(std::vector<std::unique_ptr<PlayerWeapon>>& weapon,std::vector<std::unique_ptr<PlayerWeapon>>::const_iterator iter) {
-
     weapon.erase(iter);
 }
 

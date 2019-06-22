@@ -19,6 +19,7 @@ public:
 
 private:
     Professor *professor;
+    sf::Music sound;
     bool completed;
 };
 
