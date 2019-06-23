@@ -9,7 +9,7 @@
 GameCharacter::GameCharacter(int s, int h) : DynamicComponent(s),
                                              hp(h),
                                              isFighting(false){
-    walkingDelay = sf::seconds(.1f);
+    walkingDelay = WALKING_DELAY;
 }
 
 void GameCharacter::updateState() {

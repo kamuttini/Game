@@ -30,7 +30,7 @@ bool DynamicComponent::checkBorders( orientation direction) {
     switch (direction){
 
         case down:
-            tileToCheck+=110;
+            tileToCheck+=MAP_WIDTH;
             break;
 
         case up:

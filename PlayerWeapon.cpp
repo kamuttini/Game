@@ -14,7 +14,7 @@ PlayerWeapon::PlayerWeapon(Player &player,type id,sf::Vector2f origin, sf::Vecto
     rect.setSize(sf::Vector2f(25.f,25.f));
     CollisionObserver* target= &player;
     addObserver(target);
-    displayTime=sf::seconds(12);
+    displayTime=WEAPONTOCOLLECT_DISPLAY_TIME;
     sprite= new Sprite(setSprite(), *this);
     sprite->setScale(sf::Vector2f(0.8,0.8));
 }

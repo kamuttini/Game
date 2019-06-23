@@ -11,18 +11,18 @@
 TileMap::TileMap(std::string filename, bool collCheck) {
     std::ifstream openFile1;
 
-    int  level[7700]={0};
+    int  level[nTILES]={0};
 
     openFile1.open("assets/"+filename);
 
-    for( int i=0; i<7700; i++)
+    for( int i=0; i<nTILES; i++)
         openFile1 >> level[i];
 
     openFile1.close();
-    load("assets/sprites/mappa.png", sf::Vector2u(16, 16), level, 110, 70);
+    load("assets/sprites/mappa.png", sf::Vector2u(TIE_SIZE), level, MAP_WIDTH, MAP_HEIGHT);
 
     if(collCheck)
-        loadColTiles(level, 110, 70);
+        loadColTiles(level, MAP_WIDTH, MAP_HEIGHT);
 }
 bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height)
 {

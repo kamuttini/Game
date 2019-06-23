@@ -88,12 +88,12 @@ void GameState::Update()
 }
 
 void GameState::Draw() {
-    this->data->window.clear(sf::Color(123, 173, 44));
+    this->data->window.clear(BACKGROUNDCOLOR);
     sf::Vector2f movement = player->getRect().getPosition() - view.getCenter();
     view.move(movement.x * 0.1, movement.y * 0.1);
     this->data->window.setView(view);
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < nLAYERS; i++)
         this->data->window.draw(layer[i]);
 
     for(int i=0; i<room.size();i++)

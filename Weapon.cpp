@@ -9,6 +9,7 @@ Weapon::Weapon(std::list<CollisionObserver *> &targetList, sf::Vector2f playerDi
                float s) : DynamicComponent (s),
                           targetDir(playerDir),
                           exploded(false),
+                          explosionTime(EXPLOSION_TIME),
                           ID(ID)
 {
     for (std::list<CollisionObserver*>::iterator iter = targetList.begin(); iter != targetList.end(); ++iter)

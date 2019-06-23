@@ -50,12 +50,12 @@ void PauseState::HandleInput() {
                         if(resumeText.text.getFillColor()==sf::Color::Red)
                         {
                             this->data->machine.RemoveState(true);
-                            this->data->soundTrack.setVolume(10);
+                            this->data->soundTrack.setVolume(SOUNDTRACK_VOLUME);
                         }
                         else
                         {
                             this->data->machine.AddState(StateRef(new GameState(data)), true);
-                            this->data->soundTrack.setVolume(10);
+                            this->data->soundTrack.setVolume(SOUNDTRACK_VOLUME);
                         }
                         break;
 

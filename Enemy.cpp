@@ -19,7 +19,7 @@ Enemy::Enemy(Player *player1, type &ID1, sf::Vector2f origin, sf::Vector2f bound
     CollisionObserver *target = player1;
     targetList.push_back(target);
     player1->updateTarget(this);
-    attackDelay = sf::seconds(4.f);
+    attackDelay = ATTACK_DELAY;
     rect.setSize(sf::Vector2f(40,45));
 }
 
@@ -32,7 +32,7 @@ void Enemy::fight() {
     playerDir.x = (player->getRect().getPosition().x - rect.getPosition().x) / distance;
     playerDir.y = (player->getRect().getPosition().y - rect.getPosition().y) / distance;
 
-    if (attackClock.getElapsedTime() > attackDelay && distance < 400) {
+    if (attackClock.getElapsedTime() > attackDelay && distance < ATTACK_RANGE) {
         isFighting = true;
         attackClock.restart();
     }
@@ -62,7 +62,7 @@ void Enemy::update(Weapon *weapon) {
             if (hp > 1) {
                 hp--;
                 weapon->setIsDestroyed(true);
-                player->stats.updateScore(10);
+                player->stats.updateScore(WOUNDED_ENEMY);
             } else {
                 destroyed = true;
                 weapon->setIsDestroyed(true);
@@ -93,7 +93,7 @@ Enemy::destroy(std::vector<std::unique_ptr<Enemy>> &enemy, std::vector<std::uniq
         player->inventory.weaponVec[i]->removeObserver(this);
     }
     enemy.erase(iter1);
-    player->stats.updateScore(25);
+    player->stats.updateScore(DEAD_ENEMY);
 }
 
 Enemy::type Enemy::getId() const {
@@ -105,7 +105,7 @@ void Enemy::move() {
     distance = sqrt(pow(rect.getPosition().x - player->getRect().getPosition().x, 2) +
                     pow(rect.getPosition().y - player->getRect().getPosition().y, 2));
 
-    if (hp > 1 && distance < 300) {
+    if (hp > 1 && distance < FOLLOW_RANGE) {
         strategy = new Follow;
     } else {
         if (hp > 1) {

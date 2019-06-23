@@ -29,5 +29,5 @@ void Follow::setDirection(Enemy &enemy, Player &player) {
             enemy.setDirection(DynamicComponent::orientation::up);
     }
 
-    enemy.setSpeed(8);
+    enemy.setSpeed(FOLLOW_SPEED);
 }

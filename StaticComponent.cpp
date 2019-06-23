@@ -44,7 +44,7 @@ int StaticComponent::findTile() {
 
     int tileX=int(dx)/(16*2.5);
     int tileY=int(bottom)/(16*2.5);
-    return tileX+(tileY*110);
+    return tileX+(tileY*MAP_WIDTH);
 
 }
 

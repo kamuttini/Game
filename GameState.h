@@ -31,7 +31,7 @@ public:
 private:
     sf::View view;
     sf::View HUDview;
-    TileMap layer[4];
+    TileMap layer[nLAYERS];
     std::vector<Room*> room;
     Room* activeRoom;
     GameDataRef data;

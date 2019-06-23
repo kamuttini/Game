@@ -6,12 +6,13 @@
 #define GAME_HALLSHAPE_H
 
 #include "SFML/Graphics.hpp"
+#include "Def.h"
 
 class HallShape {
 public:
     HallShape();
     void draw(sf::RenderWindow& window) ;
-    sf::RectangleShape rect[5];
+    sf::RectangleShape rect[nHALLRECT];
     int i;
 };
 

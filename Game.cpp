@@ -4,18 +4,18 @@
 
 #include "Game.h"
 #include "MenuState.h"
-
+#include "Def.h"
 
 
 Game::Game(int width, int height, std::string title)
 
 {
     data->window.create(sf::VideoMode(width, height), title, sf::Style::Close | sf::Style::Titlebar);
-    data->window.setFramerateLimit(60);
+    data->window.setFramerateLimit(FRAME);
     data->machine.AddState(StateRef(new MenuState(this->data)));
 
     data->soundTrack.openFromFile("assets/music/Gerudo_Valley-The_Legend_of_Zelda-Ocarina_of_Time.wav");
-    data->soundTrack.setVolume(10);
+    data->soundTrack.setVolume(SOUNDTRACK_VOLUME);
     data->soundTrack.setLoop(true);
 
     this->Run();

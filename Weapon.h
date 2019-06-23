@@ -31,7 +31,7 @@ protected:
     sf::Vector2f targetDir;
     type ID;
     sf::Clock explosionClock;
-    sf::Time explosionTime=sf::seconds(1);
+    sf::Time explosionTime;
     bool exploded;
 };
 

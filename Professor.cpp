@@ -38,7 +38,7 @@ Professor::Professor(type id): ID(id), talking(false) {
     mTexture.loadFromFile(mfilename);
     message.setTexture(mTexture);
     message.setPosition(rect.getPosition().x+10,rect.getPosition().y-130);
-    displayTime=sf::seconds(2);
+    displayTime=PROF_MESSAGE_DISPLAY_TIME;
 }
 
 void Professor::talk() {

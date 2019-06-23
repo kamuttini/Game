@@ -11,7 +11,7 @@
 class GameCharacter: public DynamicComponent,public CollisionObserver{
 
 public:
-     GameCharacter(int s=10 ,int h=2);
+     GameCharacter(int s=10 ,int h=ENEMY_HP);
     typedef std::unique_ptr<Weapon>  weaponPtr;
     void update(Weapon* weapon) override =0;
     virtual void fight()=0;

@@ -22,7 +22,7 @@ ClassRoom::ClassRoom(Room::type ID): Room(ID), completed(false){
             sound.openFromFile("assets/music/win.flac");
             break;
     }
-    sound.setVolume(30);
+    sound.setVolume(SOUNDTRACK_VOLUME);
 }
 
 bool ClassRoom::activeUpdate(Player &player) {
@@ -39,7 +39,7 @@ bool ClassRoom::activeUpdate(Player &player) {
         else
             if(!completed) {
                 player.changeColMap();
-                player.stats.updateScore(80);
+                player.stats.updateScore(ROOM_COMPLETED);
                 completed=true;
                 sound.play();
                 return true;

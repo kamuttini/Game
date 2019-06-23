@@ -25,6 +25,7 @@ public:
     Inventory inventory;
 
 private:
+    float speed2;
     sf::Clock moveClock;
     sf::SoundBuffer token;
     sf::SoundBuffer damage;

@@ -17,6 +17,6 @@ void RandomMove::setDirection(Enemy &enemy, Player &player) {
         enemy.setDirection(DynamicComponent::orientation(rand() % 4));
         enemy.changeDirectionClock.restart();
     }
-    enemy.setSpeed(5);
+    enemy.setSpeed(RANDOMMOVE_SPEED);
 }
 

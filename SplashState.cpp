@@ -10,7 +10,7 @@ SplashState::SplashState(GameDataRef data1):    titleText("player moves with",60
                                                 data(data1){}
 
 void SplashState::Init() {
-    splashTime= sf::seconds(2.5);
+    splashTime= SPLASHSCREEN_TIME;
     texture.loadFromFile("assets/sprites/wasd.png");
     img.setTexture(texture);
 

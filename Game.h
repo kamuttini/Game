@@ -17,7 +17,6 @@
         StateMachine machine;
         sf::RenderWindow window;
         sf::Music soundTrack;
-        //assetManager assets;
     };
 
 

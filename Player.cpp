@@ -8,14 +8,14 @@
 #include "Game.h"
 
 
-Player::Player(HUD &hud1) : GameCharacter(18, 4),
-                                   stats(hud1)
-                                   {
+Player::Player(HUD &hud1) : GameCharacter(MIN_SPEED, PLAYER_HP),
+                            stats(hud1),
+                            speed2(MAX_SPEED)
+{
     rect.setPosition(PLAYER_START_POSITION);
     rect.setSize(sf::Vector2f(30,60));
     sprite = new Sprite("sprite8.png", *this, 2, 0, 3, 1, 9, 64, 65.25);
     sprite->setScale(sf::Vector2f(1.6, 1.6));
-    walkingDelay = sf::seconds(.1f);
     token.loadFromFile("assets/music/token.flac");
     damage.loadFromFile("assets/music/damage.ogg");
                                    }
@@ -45,9 +45,6 @@ void Player::getInput() {
             moveClock.restart();
             move();
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
-            hp +=1 ;
-        }
 
         walkingClock.restart();
     }
@@ -56,6 +53,13 @@ void Player::getInput() {
         isFighting = true;
         attackClock.restart();
     }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
+        hp +=1 ;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
+        std::swap(speed,speed2);
+    }
+
 }
 
 void Player::move() {
@@ -92,7 +96,7 @@ void Player::update(Weapon *weapon) {
             inventory.addToCollection(*weapon);
             weapon->setIsDestroyed(true);
             stats.updateWeapons(inventory.collectionSize());
-            stats.updateScore(5);
+            stats.updateScore(WEAPON_CAUGHT);
         } else {
             sound.setBuffer(damage);
             sound.play();

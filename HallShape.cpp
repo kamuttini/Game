@@ -19,7 +19,7 @@ HallShape::HallShape() {
 }
 
 void HallShape::draw(sf::RenderWindow &window) {
-    for(int i=0;i<5; i++)
+    for(int i=0;i<nHALLRECT; i++)
     {
         window.draw(rect[i]);
     }
