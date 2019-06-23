@@ -141,8 +141,8 @@ const sf::Vector2f &Room::getOrigin() const {
     if(ID==hall)
     {
         srand((clock()));
-        int i= rand()%5;
-        return hallShape->rect[i].getPosition();
+        hallShape->i= rand()%5;
+        return hallShape->rect[hallShape->i].getPosition();
     }
     else
         return origin;
@@ -152,8 +152,7 @@ const sf::Vector2f &Room::getDimension() const {
     if(ID==hall)
     {
         srand((clock()));
-        int i= rand()%5;
-        return hallShape->rect[i].getSize();
+        return hallShape->rect[hallShape->i].getSize();
     }
 
     else

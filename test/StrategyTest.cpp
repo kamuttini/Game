@@ -12,7 +12,7 @@
 
 class StrategyTest : public ::testing::Test {
 protected:
-    StrategyTest(): player(sidebar), enemy(&player, ID){};
+    StrategyTest(): player(sidebar), enemy(&player, ID, HALL_ORIGIN, HALL_DIMENSION){};
     ~StrategyTest() {};
     int calculateDistance();
     HUD sidebar;

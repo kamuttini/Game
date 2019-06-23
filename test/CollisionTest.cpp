@@ -6,9 +6,10 @@
 #include "/home/camut/CLionProjects/game1/Game/Player.h"
 
 
+
 class PlayerTest : public ::testing::Test {
 protected:
-    PlayerTest(): player(sidebar), weapon(Weapon::type::coffee), weaponToCollect(&player, Weapon::type::coffee) {};
+    PlayerTest(): player(sidebar), weapon(Weapon::type::coffee), weaponToCollect(player, Weapon::type::coffee, HALL_ORIGIN, HALL_DIMENSION) {};
     ~PlayerTest() override{};
     HUD sidebar;
     Player player;

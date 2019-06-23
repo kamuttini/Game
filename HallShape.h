@@ -12,6 +12,7 @@ public:
     HallShape();
     void draw(sf::RenderWindow& window) ;
     sf::RectangleShape rect[5];
+    int i;
 };
 
 

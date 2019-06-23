@@ -15,7 +15,7 @@ Player::Player(HUD &hud1) : GameCharacter(18, 4),
     rect.setSize(sf::Vector2f(30,60));
     sprite = new Sprite("sprite8.png", *this, 2, 0, 3, 1, 9, 64, 65.25);
     sprite->setScale(sf::Vector2f(1.6, 1.6));
-    walkingDelay = sf::seconds(.13f);
+    walkingDelay = sf::seconds(.1f);
     token.loadFromFile("assets/music/token.flac");
     damage.loadFromFile("assets/music/damage.ogg");
                                    }

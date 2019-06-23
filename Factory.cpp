@@ -65,7 +65,7 @@ std::unique_ptr<PlayerWeapon> Factory::createWeaponToCollect(Player *player,Room
             break;
     }
     std::unique_ptr<PlayerWeapon> weapon;
-    weapon = std::unique_ptr<PlayerWeapon>(new PlayerWeapon(player, ID,room.getOrigin(),room.getDimension()));
+    weapon = std::unique_ptr<PlayerWeapon>(new PlayerWeapon(*player, ID,room.getOrigin(),room.getDimension()));
     return weapon;
 }
 
