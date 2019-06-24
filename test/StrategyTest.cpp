@@ -4,10 +4,10 @@
 
 #include <cmath>
 #include "gtest/gtest.h"
-#include "/home/camut/CLionProjects/game1/Game/Enemy.h"
-#include "/home/camut/CLionProjects/game1/Game/RandomMove.h"
-#include "/home/camut/CLionProjects/game1/Game/Follow.h"
-#include "/home/camut/CLionProjects/game1/Game/Static.h"
+#include "../Enemy.h"
+#include "../RandomMove.h"
+#include "../Follow.h"
+#include "../Static.h"
 
 
 class StrategyTest : public ::testing::Test {
@@ -21,21 +21,20 @@ protected:
     Enemy::type ID=Enemy::type::student;
 
     void SetUp() override{
-        player.getRect().setPosition(100,100);
+        player.setPosition(2000,1900);
         enemy.setWalkingDelay(0);
     }
 };
 
 int StrategyTest::calculateDistance() {
-    return sqrt(pow(enemy.getRect().getPosition().x- player.getRect().getPosition().x, 2) + pow(enemy.getRect().getPosition().x- player.getRect().getPosition().x, 2));
+    return sqrt(pow(enemy.getPosition().x- player.getPosition().x, 2) + pow(enemy.getPosition().y- player.getPosition().y, 2));
 }
 
 TEST_F(StrategyTest, RandomMove) {
-    enemy.getRect().setPosition(900,900);
-
-    sf::Vector2f startPosition=enemy.getRect().getPosition();
+    enemy.setPosition(player.getPosition().x-FOLLOW_RANGE-50, player.getPosition().y);
+    sf::Vector2f startPosition=enemy.getPosition();
     enemy.move();
-    sf::Vector2f endPosition= enemy.getRect().getPosition();
+    sf::Vector2f endPosition= enemy.getPosition();
 
     const std::type_info& type_info = typeid(*enemy.getStrategy());
     EXPECT_TRUE(type_info== typeid(RandomMove));
@@ -43,12 +42,10 @@ TEST_F(StrategyTest, RandomMove) {
 }
 
 TEST_F(StrategyTest, Follow) {
-    enemy.getRect().setPosition(300,300);
-
+    enemy.setPosition(player.getPosition().x-FOLLOW_RANGE+50, player.getPosition().y);
     int startDistance=calculateDistance();
     enemy.move();
     int endDistance = calculateDistance();
-
     const std::type_info& type_info = typeid(*enemy.getStrategy());
     EXPECT_TRUE(type_info== typeid(Follow));
     ASSERT_TRUE(startDistance>endDistance);
@@ -57,9 +54,9 @@ TEST_F(StrategyTest, Follow) {
 
 TEST_F(StrategyTest, Static) {
     enemy.setHp(1);
-    sf::Vector2f startPosition=enemy.getRect().getPosition();
+    sf::Vector2f startPosition=enemy.getPosition();
     enemy.move();
-    EXPECT_TRUE(enemy.getRect().getPosition()==startPosition);
+    EXPECT_TRUE(enemy.getPosition()==startPosition);
     const std::type_info& type_info = typeid(*enemy.getStrategy());
     ASSERT_TRUE(type_info== typeid(Static));
 }

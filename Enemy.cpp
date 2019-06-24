@@ -28,9 +28,6 @@ void Enemy::fight() {
     distance = sqrt(pow(getPosition().x - player->getPosition().x, 2) +
                     pow(getPosition().y - player->getPosition().y, 2));
 
-    sf::Vector2f playerDir;
-    playerDir.x = (player->getPosition().x - getPosition().x) / distance;
-    playerDir.y = (player->getPosition().y - getPosition().y) / distance;
 
     if (attackClock.getElapsedTime() > attackDelay && distance < ATTACK_RANGE) {
         isFighting = true;
@@ -39,13 +36,20 @@ void Enemy::fight() {
 
     if (isFighting) {
         weaponVec.push_back(std::unique_ptr<Weapon>(
-                weaponFactory.createEnemyWeapon(targetList, playerDir, rect.getPosition(), this)));
+                weaponFactory.createEnemyWeapon(targetList, calculateDirection(distance), getPosition(), this)));
         isFighting = false;
     }
 
     for (int i = 0; i < weaponVec.size(); i++) {
         weaponVec[i]->attack();
     }
+}
+
+sf::Vector2f Enemy::calculateDirection(int distance) {
+    sf::Vector2f playerDir;
+    playerDir.x = (player->getPosition().x - getPosition().x) / distance;
+    playerDir.y = (player->getPosition().y - getPosition().y) / distance;
+    return playerDir;
 }
 
 
@@ -197,5 +201,6 @@ DynamicComponent::orientation Enemy::swapDirection() {
     }
     return fakeDirection;
 }
+
 
 

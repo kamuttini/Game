@@ -41,15 +41,15 @@ void Weapon::notify() {
 void Weapon::attack() {
     if(targetDir.x>0) {
         if(targetDir.x>targetDir.y)
-            direction=down;
+            direction=up;
         else
-            direction=left;
+            direction=right;
     }
     else {
         if(targetDir.x>targetDir.y)
-            direction=right;
+            direction=left;
         else
-        direction=up;
+        direction=down;
     }
     if(!checkBorders(direction))
         destroyed=true;

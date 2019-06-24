@@ -13,21 +13,7 @@ GameCharacter::GameCharacter(int s, int h) : DynamicComponent(s),
 }
 
 void GameCharacter::updateState() {
-
     fight();
-
-}
-
-void GameCharacter::setHp(int h) {
-    hp = h;
-}
-
-int GameCharacter::getHp() {
-    return hp;
-}
-
-void GameCharacter::setWalkingDelay(int val) {
-    walkingDelay=sf::seconds(val);
 }
 
 void GameCharacter::move() {
@@ -52,6 +38,18 @@ void GameCharacter::move() {
 
     rect.move(movement);
     sprite->animate();
+}
+
+void GameCharacter::setHp(int h) {
+    hp = h;
+}
+
+int GameCharacter::getHp() {
+    return hp;
+}
+
+void GameCharacter::setWalkingDelay(int val) {
+    walkingDelay=sf::seconds(val);
 }
 
 

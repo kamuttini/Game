@@ -21,6 +21,7 @@ public:
     void destroy(std::vector<std::unique_ptr<Enemy>> &enemy, std::vector<std::unique_ptr<Enemy>>::const_iterator iter1);
     void updateState() override;
     void update(Weapon *weapon) override;
+    sf::Vector2f calculateDirection(int distance);
     type getId() const;
     orientation swapDirection();
     std::string setSprite();

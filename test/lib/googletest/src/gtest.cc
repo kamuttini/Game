@@ -2350,7 +2350,7 @@ bool Test::HasSameFixtureClass() {
           << ",\n"
           << "test " << TEST_F_name << " is defined using TEST_F but\n"
           << "test " << TEST_name << " is defined using TEST.  You probably\n"
-          << "want to change the TEST to TEST_F or setDirection it to another test\n"
+          << "want to change the TEST to TEST_F or setOrientation it to another test\n"
           << "case.";
     } else {
       // Two fixture classes with the same name appear in two different

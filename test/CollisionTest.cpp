@@ -3,7 +3,7 @@
 //
 
 #include "gtest/gtest.h"
-#include "/home/camut/CLionProjects/game1/Game/Player.h"
+#include "../Player.h"
 
 
 
@@ -18,8 +18,8 @@ protected:
 
     void SetUp() override{
         weapon.addObserver(&player);
-        weapon.getRect().setPosition(player.getRect().getPosition());
-        weaponToCollect.getRect().setPosition(player.getRect().getPosition());
+        weapon.setPosition(player.getPosition().x, player.getPosition().y);
+        weaponToCollect.setPosition(player.getPosition().x, player.getPosition().y);
     }
 
 };
@@ -49,9 +49,9 @@ TEST_F(PlayerTest, MultipleCollisions) {
     player.setHp(4);
     Weapon weapon1(Weapon::type::book);
     weapon1.addObserver(&player);
-    weapon1.getRect().setPosition(player.getRect().getPosition());
+    weapon1.setPosition(player.getPosition().x, player.getPosition().y);
     Weapon weapon2(Weapon::type::pizza);
-    weapon2.getRect().setPosition(player.getRect().getPosition());
+    weapon2.setPosition(player.getPosition().x, player.getPosition().y);
     weapon2.addObserver(&player);
     weapon.notify();
     EXPECT_EQ(3,player.getHp());
