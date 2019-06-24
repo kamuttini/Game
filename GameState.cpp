@@ -23,7 +23,7 @@ void GameState::Init()
     hud= new HUD();
     player=new Player(*hud);
     data->soundTrack.play();
-    view.setCenter(player->getRect().getPosition());
+    view.setCenter(player->getPosition());
     this->data->window.setView(view);
     room.push_back(new Room(Room::type::hall));
     room.push_back(new Room(Room::type::canteen));
@@ -89,7 +89,7 @@ void GameState::Update()
 
 void GameState::Draw() {
     this->data->window.clear(BACKGROUNDCOLOR);
-    sf::Vector2f movement = player->getRect().getPosition() - view.getCenter();
+    sf::Vector2f movement = player->getPosition() - view.getCenter();
     view.move(movement.x * 0.1, movement.y * 0.1);
     this->data->window.setView(view);
 

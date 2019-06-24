@@ -25,12 +25,12 @@ Enemy::Enemy(Player *player1, type &ID1, sf::Vector2f origin, sf::Vector2f bound
 
 void Enemy::fight() {
     float distance;
-    distance = sqrt(pow(rect.getPosition().x - player->getRect().getPosition().x, 2) +
-                    pow(rect.getPosition().y - player->getRect().getPosition().y, 2));
+    distance = sqrt(pow(getPosition().x - player->getPosition().x, 2) +
+                    pow(getPosition().y - player->getPosition().y, 2));
 
     sf::Vector2f playerDir;
-    playerDir.x = (player->getRect().getPosition().x - rect.getPosition().x) / distance;
-    playerDir.y = (player->getRect().getPosition().y - rect.getPosition().y) / distance;
+    playerDir.x = (player->getPosition().x - getPosition().x) / distance;
+    playerDir.y = (player->getPosition().y - getPosition().y) / distance;
 
     if (attackClock.getElapsedTime() > attackDelay && distance < ATTACK_RANGE) {
         isFighting = true;
@@ -102,8 +102,8 @@ Enemy::type Enemy::getId() const {
 
 void Enemy::move() {
     float distance;
-    distance = sqrt(pow(rect.getPosition().x - player->getRect().getPosition().x, 2) +
-                    pow(rect.getPosition().y - player->getRect().getPosition().y, 2));
+    distance = sqrt(pow(getPosition().x - player->getPosition().x, 2) +
+                    pow(getPosition().y - player->getPosition().y, 2));
 
     if (hp > 1 && distance < FOLLOW_RANGE) {
         strategy = new Follow;

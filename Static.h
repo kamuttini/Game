@@ -12,12 +12,11 @@ class Static: public Strategy {
 public:
     Static()= default;
     ~Static()= default;
-    void setDirection(Enemy &enemy, Player &player) override;
+    void setDirection(Enemy &enemy, Player &player) override{
+        enemy.setOrientation(StaticComponent::orientation::null);
+    };
 };
 
-void Static::setDirection(Enemy &enemy, Player &player) {
- enemy.setDirection(StaticComponent::orientation::null);
-}
 
 
 #endif //GAME_STATIC_H

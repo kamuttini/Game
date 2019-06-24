@@ -19,12 +19,15 @@ public:
     ~StaticComponent() = default;
     void draw(sf::RenderWindow &window);
     int findTile();
+    bool checkPosition(int tileToCheck);
     void randomPosition(sf::Vector2f range, sf::Vector2f origin);
+
     orientation getDirection() const;
-    void setDirection(orientation direction);
+    void setOrientation(orientation direction);
     sf::RectangleShape &getRect();
     Sprite *getSprite() const;
     sf::Vector2f getPosition();
+    void setPosition(float x, float y);
 
 protected:
     int posX, posY;

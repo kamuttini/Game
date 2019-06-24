@@ -20,7 +20,7 @@ Sprite:: Sprite(std::string filename, StaticComponent &object, int down, int up,
 }
 
 void Sprite::update() {
-    sprite.setPosition(object.getRect().getPosition().x-(width/2), object.getRect().getPosition().y-(height/2));
+    sprite.setPosition(object.getPosition().x-(width/2), object.getPosition().y-(height/2));
 }
 
 void Sprite::draw(sf::RenderWindow &window) {

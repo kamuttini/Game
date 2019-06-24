@@ -11,7 +11,7 @@ PlayerWeapon::PlayerWeapon(Player &player,type id,sf::Vector2f origin, sf::Vecto
                                                                                                  caught(false)
 {
     randomPosition(bound,origin);
-    rect.setSize(sf::Vector2f(25.f,25.f));
+    rect.setSize(sf::Vector2f(10,10));
     CollisionObserver* target= &player;
     addObserver(target);
     displayTime=WEAPONTOCOLLECT_DISPLAY_TIME;

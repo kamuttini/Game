@@ -28,11 +28,10 @@ void StaticComponent::randomPosition(sf::Vector2f range, sf::Vector2f origin)
     posY=rand()%(y- miny+ 1) + miny;
     rect.setPosition(posX,posY);
 
-    int tileToCheck=findTile();
-    std::list<int>::iterator it =std::find(colMap->colTiles.begin(),colMap->colTiles.end(), tileToCheck);
-    if (it != colMap->colTiles.end())
+    if(!checkPosition(findTile()))
         randomPosition(range,origin);
 }
+
 int StaticComponent::findTile() {
 
     //Riconosce il tile per la collisione
@@ -54,7 +53,7 @@ sf::RectangleShape &StaticComponent::getRect()  {
 StaticComponent::orientation StaticComponent::getDirection() const {
     return direction;
 }
-void StaticComponent::setDirection(StaticComponent::orientation direction) {
+void StaticComponent::setOrientation(StaticComponent::orientation direction) {
     StaticComponent::direction = direction;
 }
 
@@ -64,5 +63,17 @@ Sprite *StaticComponent::getSprite() const {
 
 sf::Vector2f StaticComponent::getPosition() {
     return rect.getPosition();
+}
+
+void StaticComponent::setPosition(float x, float y) {
+    rect.setPosition(x,y);
+}
+
+bool StaticComponent::checkPosition(int tileToCheck) {
+    std::list<int>::iterator it =std::find(colMap->colTiles.begin(),colMap->colTiles.end(), tileToCheck);
+    if (it != colMap->colTiles.end())
+        return false;
+    else
+        return true;
 }
 
