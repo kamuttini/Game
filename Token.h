@@ -17,10 +17,11 @@ public:
     bool isActive() const;
     void setActive(bool active, Player* player= nullptr);
     void update();
-    void attachToPlayer();
     bool isCaught() const;
 
 private:
+    void attachToPlayer();
+
     Player* player;
     type ID;
     bool active;

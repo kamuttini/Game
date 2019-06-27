@@ -11,12 +11,12 @@
 class RandomMove: public Strategy {
 public:
 
-    RandomMove();
+    RandomMove()= default;
     ~RandomMove()=default;
     void setDirection(Enemy &enemy, Player &player) override;
 
 private:
-    sf::Time changeDirectionTime;
+    sf::Clock changeDirectionClock;
 };
 
 

@@ -19,11 +19,10 @@ public:
     enum type{canteen, hall, classroom1, classroom2, bar, classRoom3};
 
     explicit Room( type ID);
+    ~Room(){};
 
     virtual void update();
     virtual bool activeUpdate(Player &player);
-    void create(Player& player);
-    void destroy();
     virtual void draw(sf::RenderWindow& window);
 
     const sf::Vector2f &getOrigin() const;
@@ -35,6 +34,9 @@ public:
     std::vector<playerWeaponPtr> weaponToCollect;
 
 protected:
+    void create(Player& player);
+    void destroy();
+
     Factory factory;
     sf::Clock enemyClock;
     sf::Time enemyDelay=sf::seconds(4.f);

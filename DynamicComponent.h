@@ -14,13 +14,14 @@ class DynamicComponent: public StaticComponent {
 public:
     explicit DynamicComponent(float s);
     ~DynamicComponent(){};
-    bool checkBorders(orientation direction);
     bool isDestroyed() const;
     void setIsDestroyed(bool isDestroyed);
     void setSpeed(float s);
     void changeColMap();
 
 protected:
+    bool checkBorders(orientation direction);
+
     float speed;
     bool destroyed;
     int colIter;

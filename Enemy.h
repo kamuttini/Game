@@ -16,21 +16,22 @@ public:
 
     explicit Enemy(Player *player, type &ID,sf::Vector2f origin, sf::Vector2f bound);
     ~Enemy() {};
-    void fight() override;
-    void move() override;
     void destroy(std::vector<std::unique_ptr<Enemy>> &enemy, std::vector<std::unique_ptr<Enemy>>::const_iterator iter1);
     void updateState() override;
     void update(Weapon *weapon) override;
-    sf::Vector2f calculateDirection(int distance);
+
     type getId() const;
-    orientation swapDirection();
-    std::string setSprite();
-    Strategy* getStrategy() const;
+    const std::unique_ptr<Strategy> &getStrategy() const;
 
     std::vector<weaponPtr> weaponVec;
-    sf::Clock changeDirectionClock;
 
 private:
+    void fight() override;
+    void move() override;
+    std::string setSprite();
+    orientation swapDirection();
+    sf::Vector2f calculateDirection(int distance);
+
     Strategy* strategy;
     type ID;
     Factory weaponFactory;

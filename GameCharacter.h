@@ -14,18 +14,20 @@ public:
      GameCharacter(int s=10 ,int h=ENEMY_HP);
     typedef std::unique_ptr<Weapon>  weaponPtr;
     void update(Weapon* weapon) override =0;
-    virtual void fight()=0;
-    virtual void move();
     virtual void updateState();
     void setHp(int hp);
     int getHp();
-    void setWalkingDelay(int val);
+
     std::list<CollisionObserver*> targetList;
 
-
 protected:
+    virtual void fight()=0;
+    virtual void move();
+    void setWalkingDelay(int val);
+
     int hp;
     bool isFighting;
+
     sf::Vector2f movement;
     sf::Clock attackClock;
     sf::Time attackDelay;

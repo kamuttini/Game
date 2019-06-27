@@ -19,13 +19,15 @@ public:
     ~Professor(){};
     bool checkToken();
     void talk();
-    void changeText();
     bool isTalking();
     void stopTalking();
-    sf::Sprite message;
     Token *getToken() const;
 
+    sf::Sprite message;
+
 private:
+    void changeText();
+
     type ID;
     bool talking;
     sf::Texture mTexture;

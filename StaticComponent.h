@@ -16,26 +16,28 @@ public:
     enum orientation { down, up,left,right, null};
 
     explicit StaticComponent(orientation dir = down);
-    ~StaticComponent() = default;
+    ~StaticComponent()= default;
     void draw(sf::RenderWindow &window);
-    int findTile();
-    bool checkPosition(int tileToCheck);
-    void randomPosition(sf::Vector2f range, sf::Vector2f origin);
 
     orientation getDirection() const;
     void setOrientation(orientation direction);
     sf::RectangleShape &getRect();
-    Sprite *getSprite() const;
     sf::Vector2f getPosition();
     void setPosition(float x, float y);
 
 protected:
-    int posX, posY;
-    float sx,dx,top,bottom;
+    int findTile();
+    void randomPosition(sf::Vector2f range, sf::Vector2f origin);
+
     sf::RectangleShape rect;
     orientation direction;
     Sprite *sprite;
     TileMap* colMap;
+
+private:
+    bool checkPosition(int tileToCheck);
+    int posX, posY;
+    float sx,dx,top,bottom;
 
 };
 

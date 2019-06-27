@@ -26,9 +26,9 @@ public:
     void HandleInput() override ;
     void Update()  override;
     void Draw() override ;
-    void checkRoom();
 
 private:
+    void checkRoom();
     sf::View view;
     sf::View HUDview;
     TileMap layer[nLAYERS];

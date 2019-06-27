@@ -15,16 +15,17 @@ class Player: public GameCharacter {
 public:
     explicit Player (HUD& hud);
     ~Player(){};
-    void move() override ;
     void getInput();
     void update(Weapon* weapon) override;
-    void fight() override;
-    void updateTarget(CollisionObserver *enemy);
+    void move() override ;
     void updateState()override;
+    void updateTarget(CollisionObserver *enemy);
     HUD& stats;
     Inventory inventory;
 
 private:
+    void fight() override;
+
     float speed2;
     sf::Clock moveClock;
     sf::SoundBuffer token;
