@@ -54,11 +54,8 @@ TEST_F(PlayerTest, MultipleCollisions) {
     weapon2.setPosition(player.getPosition().x, player.getPosition().y);
     weapon2.addObserver(&player);
     weapon.notify();
-    EXPECT_EQ(3,player.getHp());
     weapon1.notify();
-    EXPECT_EQ(2,player.getHp());
     weapon2.notify();
-    EXPECT_EQ(1,player.getHp());
     ASSERT_FALSE(player.isDestroyed())<< "player is dead";
 }
 

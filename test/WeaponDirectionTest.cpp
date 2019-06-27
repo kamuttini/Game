@@ -31,9 +31,8 @@ int WeaponDirectionTest::calculateDistance(sf::RectangleShape& rect) {
 
 TEST_F(WeaponDirectionTest, Test) {
     player.setPosition(2000,1900);
-    enemy.setPosition(player.getPosition().x+250, player.getPosition().y);
+    enemy.setPosition(player.getPosition().x+ATTACK_RANGE-50, player.getPosition().y);
     Weapon weapon(enemy.targetList,enemy.calculateDirection(calculateDistance(enemy.getRect())), enemy.getPosition(),Weapon::type::book );
-
     startDistance=calculateDistance(weapon.getRect());
     weapon.attack();
     endDistance = calculateDistance(weapon.getRect());

@@ -17,7 +17,6 @@ public:
     bool checkBorders(orientation direction);
     bool isDestroyed() const;
     void setIsDestroyed(bool isDestroyed);
-    float getSpeed() const;
     void setSpeed(float s);
     void changeColMap();
 

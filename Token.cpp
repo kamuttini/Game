@@ -41,6 +41,7 @@ void Token::update() {
         if(player->getRect().getGlobalBounds().intersects(rect.getGlobalBounds())) {
             attachToPlayer();
             caught=true;
+            sprite->setScale(sf::Vector2f(0.7,0.7));
         }
     if(caught)
         attachToPlayer();
@@ -50,7 +51,6 @@ void Token::attachToPlayer() {
 
     rect.setPosition(player->getPosition().x+10,player->getPosition().y+40);
     sprite->update();
-    sprite->setScale(sf::Vector2f(0.7,0.7));
 }
 
 bool Token::isCaught() const {

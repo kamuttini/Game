@@ -22,9 +22,9 @@ protected:
 
 
 TEST_F(TileMapCollisionTest, Test) {
-    player.setPosition(PLAYER_START_POSITION);
+    player.setPosition(CLASSROOM1_ORIGIN.x+350,CLASSROOM1_ORIGIN.y+140);
     srand((clock()));
-    player.setOrientation(DynamicComponent::orientation(rand() % 4));
+    player.setOrientation(DynamicComponent::orientation::right);
     while(testClock.getElapsedTime()<testTime) {
         player.move();
     }

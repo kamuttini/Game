@@ -18,10 +18,6 @@ void DynamicComponent::setIsDestroyed(bool isDestroyed) {
     DynamicComponent::destroyed = isDestroyed;
 }
 
-float DynamicComponent::getSpeed() const {
-    return speed;
-}
-
 
 bool DynamicComponent::checkBorders( orientation direction) {
 

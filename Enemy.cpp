@@ -96,8 +96,8 @@ Enemy::destroy(std::vector<std::unique_ptr<Enemy>> &enemy, std::vector<std::uniq
     for (int i = 0; i < player->inventory.weaponVec.size(); i++) {
         player->inventory.weaponVec[i]->removeObserver(this);
     }
-    enemy.erase(iter1);
     player->stats.updateScore(DEAD_ENEMY);
+    enemy.erase(iter1);
 }
 
 Enemy::type Enemy::getId() const {
