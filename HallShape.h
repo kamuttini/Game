@@ -11,6 +11,7 @@
 class HallShape {
 public:
     HallShape();
+    ~HallShape(){};
     void draw(sf::RenderWindow& window) ;
     sf::RectangleShape rect[nHALLRECT];
     int i;

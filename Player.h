@@ -16,8 +16,7 @@ public:
     explicit Player (HUD& hud);
     ~Player(){};
     void getInput();
-    void update(Weapon* weapon) override;
-    void move() override ;
+    void update(Weapon& weapon) override;
     void updateState()override;
     void updateTarget(CollisionObserver *enemy);
     HUD& stats;

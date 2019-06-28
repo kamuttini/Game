@@ -39,14 +39,12 @@ protected:
 
     Factory factory;
     sf::Clock enemyClock;
-    sf::Time enemyDelay=sf::seconds(4.f);
     sf::Clock playerWeaponClock;
-    sf::Time playerWeaponDelay=sf::seconds(2.5f);
     sf::Vector2f origin;
     sf::Vector2f dimension;
     type ID;
-    sf::RectangleShape* rect;
-    HallShape* hallShape;
+    std::unique_ptr<sf::RectangleShape> rect;
+    std::unique_ptr<HallShape> hallShape;
     int maxEnemyN;
 };
 

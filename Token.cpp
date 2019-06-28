@@ -5,7 +5,10 @@
 #include "Token.h"
 #include "Def.h"
 
-Token::Token(type id) : ID(id), active(false), caught(false) {
+Token::Token(type id) : ID(id),
+                        active(false),
+                        caught(false)
+{
     rect.setSize(sf::Vector2f(32, 32));
     std::string filename;
 
@@ -23,8 +26,7 @@ Token::Token(type id) : ID(id), active(false), caught(false) {
             filename = "token3.png";
             break;
     }
-
-    sprite = new Sprite(filename, *this);
+    sprite = std::make_unique<Sprite>(filename, *this);
 }
 
 bool Token::isActive() const {
@@ -42,6 +44,7 @@ void Token::update() {
             attachToPlayer();
             caught=true;
             sprite->setScale(sf::Vector2f(0.7,0.7));
+
         }
     if(caught)
         attachToPlayer();

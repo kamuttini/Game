@@ -14,10 +14,9 @@ typedef std::unique_ptr<Weapon>  weaponPtr;
 
 class Inventory {
 public:
-
     Inventory();
     ~Inventory(){};
-    void addToCollection(Weapon weapon);
+    void addToCollection(Weapon& weapon);
     void removeFromCollection();
     void useWeapon(std::list<CollisionObserver*>& targetList, sf::Vector2f targetDir, sf::Vector2f position);
     int collectionSize();
@@ -27,7 +26,7 @@ public:
 
 private:
     Factory weaponFactory;
-    std::vector<weaponPtr> weaponCollection;
+    std::vector<Weapon::type> weaponCollection;
 };
 
 

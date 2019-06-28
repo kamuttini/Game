@@ -32,9 +32,12 @@ bool DynamicComponent::checkBorders( orientation direction) {
         case right:
             tileToCheck+=1;
             break;
+
+        default:
+            break;
     }
 
-    std::list<int>::iterator it =std::find(colMap->colTiles.begin(),colMap->colTiles.end(), tileToCheck);
+    auto it =std::find(colMap->colTiles.begin(), colMap->colTiles.end(), tileToCheck);
     if (it != colMap->colTiles.end())
         return false;
     else
@@ -51,10 +54,10 @@ void DynamicComponent::changeColMap(){
     switch (colIter)
     {
         case 0:
-            colMap=new TileMap("colMap2.txt",true);
+            colMap=std::make_unique<TileMap>("colMap2.txt",true);
             break;
         case 1:
-            colMap=new TileMap("colMap3.txt",true);
+            colMap=std::make_unique<TileMap>("colMap3.txt",true);
             break;
     }
     if(colIter==0)

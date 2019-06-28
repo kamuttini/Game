@@ -33,7 +33,7 @@ Professor::Professor(type id): ID(id), talking(false) {
     }
 
     rect.setPosition(position);
-    sprite = new Sprite(filename,*this,0,0,0,0,0,32,64);
+    sprite = std::make_unique<Sprite>(filename,*this,0,0,0,0,0,32,64);
     sprite->setScale(sf::Vector2f(2,2));
     mTexture.loadFromFile(mfilename);
     message.setTexture(mTexture);
@@ -62,6 +62,7 @@ bool Professor::checkToken() {
         token->setActive(false);
         changeText();
         talk();
+        delete(token);
         return true;
     }
     else

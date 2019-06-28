@@ -18,7 +18,7 @@ public:
     void update()override;
 
 private:
-    Professor *professor;
+    std::unique_ptr<Professor> professor;
     sf::Music sound;
     bool completed;
 };

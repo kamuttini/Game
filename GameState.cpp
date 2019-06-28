@@ -20,8 +20,7 @@ void GameState::Init()
 {
     view.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
     HUDview.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
-    hud= new HUD();
-    player=new Player(*hud);
+    player=std::make_unique<Player> (hud);
     data->soundTrack.play();
     view.setCenter(player->getPosition());
     this->data->window.setView(view);
@@ -73,7 +72,7 @@ void GameState::Update()
             case 2:
                 Draw();
                 sf::sleep(sf::seconds(2));
-                this->data->machine.AddState(StateRef(new WinGameOverState(hud->getScore(), this->data)), true);
+                this->data->machine.AddState(StateRef(new WinGameOverState(hud.getScore(), this->data)), true);
                 break;
         }
         mapLevel+=1;
@@ -83,7 +82,7 @@ void GameState::Update()
             room[i]->update();
 
     if(player->isDestroyed()){                                                                                         //end game
-        this->data->machine.AddState(StateRef(new GameOverState(hud->getScore(), this->data)), true);
+        this->data->machine.AddState(StateRef(new GameOverState(hud.getScore(), this->data)), true);
     }
 }
 
@@ -111,7 +110,7 @@ void GameState::Draw() {
     }
     this->data->window.setView(HUDview);
 
-    hud->draw(this->data->window);
+    hud.draw(this->data->window);
     if (player->inventory.alert.isDisplay()) {
         player->inventory.alert.draw(this->data->window);
         player->inventory.alert.stopDisplaying();
@@ -125,7 +124,7 @@ void GameState::checkRoom() {
     bool find=false;
     for(int i=1;  i<room.size();i++)
         if (room[i]->getRect().getGlobalBounds().intersects(player->getRect().getGlobalBounds())) {
-            activeRoom = room[i];
+            activeRoom =room[i];
             find=true;
         }
         if(!find)

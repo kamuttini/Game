@@ -14,11 +14,13 @@ class Enemy : public GameCharacter {
 public:
     enum type {student, barMan, chef};
 
-    explicit Enemy(Player *player, type &ID,sf::Vector2f origin, sf::Vector2f bound);
-    ~Enemy() {};
+    explicit Enemy(Player &player, type &ID,sf::Vector2f origin, sf::Vector2f bound);
+    ~Enemy()= default;
     void destroy(std::vector<std::unique_ptr<Enemy>> &enemy, std::vector<std::unique_ptr<Enemy>>::const_iterator iter1);
     void updateState() override;
-    void update(Weapon *weapon) override;
+    void update(Weapon &weapon) override;
+    void move() override;
+    sf::Vector2f calculateDirection(int distance);
 
     type getId() const;
     const std::unique_ptr<Strategy> &getStrategy() const;
@@ -27,15 +29,13 @@ public:
 
 private:
     void fight() override;
-    void move() override;
     std::string setSprite();
     orientation swapDirection();
-    sf::Vector2f calculateDirection(int distance);
 
-    Strategy* strategy;
+    std::unique_ptr<Strategy> strategy;
     type ID;
     Factory weaponFactory;
-    Player *player;
+    Player& player;
 };
 
 

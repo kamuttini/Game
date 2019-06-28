@@ -8,17 +8,17 @@ ClassRoom::ClassRoom(Room::type ID): Room(ID), completed(false){
     switch (ID)
     {
         case classroom1:
-            professor=new Professor(Professor::type::prof1);
+            professor=std::make_unique<Professor>(Professor::type::prof1);
             sound.openFromFile("assets/music/completed.wav");
             break;
 
         case classroom2:
-            professor=new Professor(Professor::type::prof2);
+            professor=std::make_unique<Professor>(Professor::type::prof2);
             sound.openFromFile("assets/music/completed.wav");
             break;
 
         case classRoom3:
-            professor=new Professor(Professor::type::prof3);
+            professor=std::make_unique<Professor>(Professor::type::prof3);
             sound.openFromFile("assets/music/win.flac");
             break;
     }
@@ -27,24 +27,25 @@ ClassRoom::ClassRoom(Room::type ID): Room(ID), completed(false){
 
 bool ClassRoom::activeUpdate(Player &player) {
 
-    Room::activeUpdate(player);
     if(professor->getToken()->isActive())
         professor->getToken()->update();
 
     if(player.getRect().getGlobalBounds().intersects(professor->getRect().getGlobalBounds())){
-        if(!professor->checkToken()) {
-            professor->talk();
-            professor->getToken()->setActive(true,&player);
-        }
-        else
-            if(!completed) {
+        if(!completed) {
+            if (!professor->checkToken()) {
+                professor->talk();
+                professor->getToken()->setActive(true, &player);
+            } else {
                 player.changeColMap();
                 player.stats.updateScore(ROOM_COMPLETED);
-                completed=true;
+                completed = true;
                 sound.play();
                 return true;
             }
+        }
     }
+    Room::activeUpdate(player);
+
     return false;
 }
 

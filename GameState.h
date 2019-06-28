@@ -29,14 +29,15 @@ public:
 
 private:
     void checkRoom();
+
     sf::View view;
     sf::View HUDview;
     TileMap layer[nLAYERS];
-    std::vector<Room*> room;
+    std::vector<std::unique_ptr<Room>> room;
     Room* activeRoom;
     GameDataRef data;
-    HUD* hud;
-    Player* player;
+    HUD hud;
+    std::unique_ptr<Player> player;
     int mapLevel;
 };
 

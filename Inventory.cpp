@@ -11,14 +11,14 @@ Inventory::Inventory():alert("Weapon inventory is empty!")
 }
 
 
-void Inventory::addToCollection(Weapon weaponCaught) {
-    weaponCollection.push_back(weaponCaught.clone());
+void Inventory::addToCollection(Weapon& weaponCaught) {
+    weaponCollection.push_back(weaponCaught.getId());
 }
 
 
 void Inventory::useWeapon(std::list<CollisionObserver*>& targetList, sf::Vector2f targetDir, sf::Vector2f position) {
     if(!weaponCollection.empty()) {
-        Weapon::type ID=weaponCollection[0]->getId();
+        Weapon::type ID=weaponCollection[0];
         weaponVec.push_back(weaponFactory.createPlayerWeapon(ID,targetList, targetDir, position));
         removeFromCollection();
     }
@@ -27,8 +27,8 @@ void Inventory::useWeapon(std::list<CollisionObserver*>& targetList, sf::Vector2
 }
 
 void Inventory::removeFromCollection() {
-    std::vector<std::unique_ptr<Weapon>>::const_iterator iter = weaponCollection.begin();
-    weaponCollection[0]->destroy(weaponCollection, iter);
+
+    weaponCollection.erase(weaponCollection.begin());
 }
 
 int Inventory::collectionSize() {

@@ -5,7 +5,7 @@
 #include "StaticComponent.h"
 #include "Sprite.h"
 
-StaticComponent:: StaticComponent(orientation dir): colMap(new TileMap("colMap.txt", true)),
+StaticComponent:: StaticComponent(orientation dir): colMap(std::make_unique<TileMap>("colMap.txt", true)),
                                                     direction(dir){
 
     rect.setSize(sf::Vector2f(30.f,51.f));
@@ -57,9 +57,6 @@ void StaticComponent::setOrientation(StaticComponent::orientation direction) {
     StaticComponent::direction = direction;
 }
 
-Sprite *StaticComponent::getSprite() const {
-    return sprite;
-}
 
 sf::Vector2f StaticComponent::getPosition() {
     return rect.getPosition();
@@ -70,10 +67,11 @@ void StaticComponent::setPosition(float x, float y) {
 }
 
 bool StaticComponent::checkPosition(int tileToCheck) {
-    std::list<int>::iterator it =std::find(colMap->colTiles.begin(),colMap->colTiles.end(), tileToCheck);
+    auto it =std::find(colMap->colTiles.begin(), colMap->colTiles.end(), tileToCheck);
     if (it != colMap->colTiles.end())
         return false;
     else
         return true;
 }
+
 

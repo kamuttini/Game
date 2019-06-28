@@ -29,7 +29,7 @@ public:
 
 private:
     void Run();
-    GameDataRef data=std::make_shared<GameData>();
+    GameDataRef data;
 
 };
 

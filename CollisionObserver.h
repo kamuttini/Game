@@ -14,7 +14,7 @@ class CollisionObserver {
 public:
     CollisionObserver()= default;
     virtual ~CollisionObserver()= default;
-    virtual void update(Weapon* weapon)=0;
+    virtual void update(Weapon& weapon)=0;
 
 };
 

@@ -16,7 +16,7 @@ public:
     enum orientation { down, up,left,right, null};
 
     explicit StaticComponent(orientation dir = down);
-    ~StaticComponent()= default;
+    ~StaticComponent(){};
     void draw(sf::RenderWindow &window);
 
     orientation getDirection() const;
@@ -31,8 +31,8 @@ protected:
 
     sf::RectangleShape rect;
     orientation direction;
-    Sprite *sprite;
-    TileMap* colMap;
+    std::unique_ptr<Sprite> sprite;
+    std::unique_ptr<TileMap> colMap;
 
 private:
     bool checkPosition(int tileToCheck);

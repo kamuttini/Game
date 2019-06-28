@@ -15,7 +15,7 @@ PlayerWeapon::PlayerWeapon(Player &player,type id,sf::Vector2f origin, sf::Vecto
     CollisionObserver* target= &player;
     addObserver(target);
     displayTime=WEAPONTOCOLLECT_DISPLAY_TIME;
-    sprite= new Sprite(setSprite(), *this);
+    sprite= std::make_unique<Sprite>(setSprite(), *this);
     sprite->setScale(sf::Vector2f(0.8,0.8));
 }
 

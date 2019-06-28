@@ -19,6 +19,8 @@
 #define EXPLOSION_TIME sf::seconds(1)
 #define WEAPONTOCOLLECT_DISPLAY_TIME sf::seconds(12)
 #define WALKING_DELAY sf::seconds(.1f)
+#define ENEMY_SPAWN_TIME sf::seconds(4.f)
+#define WEAPON_SPAWN_TIME sf::seconds(2.5f)
 
 
 //TILEMAP
@@ -41,6 +43,7 @@
 #define FOLLOW_RANGE 300
 #define FOLLOW_SPEED 8
 #define RANDOMMOVE_SPEED 5
+#define CHANGE_DIRECTION_TIME sf::seconds(3)
 
 //ROOMS
 #define CANTEEN_DIMENSION sf::Vector2f(940,800)

@@ -10,7 +10,7 @@ Text::Text(const std::string text1,int size,sf::Color color): display(false) {
     text.setString(text1);
     text.setFillColor(color);
     text.setCharacterSize(size);
-    displayTime=sf::seconds(0.6f);
+    displayTime=sf::seconds(1);
 }
 
 void Text::setPosition(float x, float y) {
@@ -32,7 +32,7 @@ void Text::startDisplaying() {
 
 
 void Text::stopDisplaying(){
-    if(display==true && displayClock.getElapsedTime()> displayTime)
+    if(display && displayClock.getElapsedTime()> displayTime)
         display=false;
 }
 bool Text::isDisplay() const {

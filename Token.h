@@ -13,7 +13,7 @@ class Token: public StaticComponent {
 public:
     enum type{calculator,license,computer};
     explicit Token(type id);
-    ~Token(){};
+    ~Token()= default;
     bool isActive() const;
     void setActive(bool active, Player* player= nullptr);
     void update();

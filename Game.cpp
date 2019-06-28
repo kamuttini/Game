@@ -10,6 +10,7 @@
 Game::Game(int width, int height, std::string title)
 
 {
+    data=std::make_shared<GameData>();
     data->window.create(sf::VideoMode(width, height), title, sf::Style::Close | sf::Style::Titlebar);
     data->window.setFramerateLimit(FRAME);
     data->machine.AddState(StateRef(new MenuState(this->data)));

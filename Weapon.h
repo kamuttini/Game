@@ -15,13 +15,11 @@ public:
 
     Weapon(std::list<CollisionObserver *> &targetList, sf::Vector2f targetDir, sf::Vector2f position, type ID, float s = 3);
     Weapon(type ID, float s=7);
-    ~Weapon(){};
-
+    ~Weapon()= default;
     void attack();
     void removeObserver(CollisionObserver* o) override;
     void notify() override;
     void destroy(std::vector<std::unique_ptr<Weapon>>& enemy,std::vector<std::unique_ptr<Weapon>>::const_iterator iter1);
-    std::unique_ptr<Weapon> clone() const;
 
     type getId() const;
 

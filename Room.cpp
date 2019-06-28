@@ -43,34 +43,32 @@ Room::Room(type ID1) : ID(ID1) {
             break;
     }
     if(ID!= hall) {
-        rect = new sf::RectangleShape;
+        rect = std::make_unique<sf::RectangleShape>(dimension);
         rect->setPosition(origin);
-        rect->setSize(dimension);
     }
     else
-        hallShape=new HallShape;
+        hallShape=std::make_unique<HallShape> ();
 }
 
 
 void Room::update() {
-    destroy();
-    for (int i = 0; i <enemyVec.size(); i++)                                                                               //generate enemyWeapon
+    for (int i = 0; i <enemyVec.size(); i++)
         enemyVec[i]->updateState();
 
+    destroy();
 }
 
 
 bool Room::activeUpdate(Player &player) {
+
     create(player);
-    destroy();
     int i = 0;
     for (i = 0; i < weaponToCollect.size(); i++) {
         weaponToCollect[i]->notify();
         weaponToCollect[i]->updateState();
     }
 
-    for (i = 0; i <
-                enemyVec.size(); i++)                                                                               //generate enemyWeapon
+    for (i = 0; i <enemyVec.size(); i++)                                                                               //generate enemyWeapon
         enemyVec[i]->updateState();
 
     std::vector<std::unique_ptr<PlayerWeapon>>::const_iterator iter3 = weaponToCollect.begin();                         //delete weapon if collision detected
@@ -79,20 +77,22 @@ bool Room::activeUpdate(Player &player) {
             weaponToCollect[i]->destroy(weaponToCollect, iter3);
         iter3++;
     }
+
+    destroy();
+
     return false;
 }
 
 
 void Room::create(Player &player) {
 
-    if (enemyVec.size() <= maxEnemyN && enemyClock.getElapsedTime() >=enemyDelay)                                                                        //generate enemy
+    if (enemyVec.size() <= maxEnemyN && enemyClock.getElapsedTime() >=ENEMY_SPAWN_TIME)                                          //generate enemy
     {
-        enemyVec.push_back(factory.createEnemy(&player, *this));
+        enemyVec.push_back(factory.createEnemy(player, *this));
         enemyClock.restart();
     }
 
-    if (playerWeaponClock.getElapsedTime() >=
-        playerWeaponDelay)                                                        //generate playerWeapon
+    if (playerWeaponClock.getElapsedTime() >= WEAPON_SPAWN_TIME)                                                        //generate playerWeapon
     {
         weaponToCollect.push_back(factory.createWeaponToCollect(&player, *this));
         playerWeaponClock.restart();
@@ -117,10 +117,6 @@ void Room::destroy() {
     std::vector<std::unique_ptr<Enemy>>::const_iterator iter1;                                                          //delete enemy if collision detected
     int i = 0;
     for (iter1 = enemyVec.begin(); iter1 != enemyVec.end(); iter1++) {
-        if (enemyVec[i]->isDestroyed()) {
-            enemyVec[i]->destroy(enemyVec, iter1);
-            break;
-        }
         std::vector<std::unique_ptr<Weapon>>::const_iterator iter2;
         for (int j = 0; j != enemyVec[i]->weaponVec.size(); j++) {
             iter2 = enemyVec[i]->weaponVec.begin();
@@ -130,9 +126,14 @@ void Room::destroy() {
             }
             iter2++;
         }
+        if (enemyVec[i]->isDestroyed()) {
+            enemyVec[i]->destroy(enemyVec, iter1);
+            break;
+        }
         i++;
     }
 }
+
 const sf::Vector2f &Room::getOrigin() const {
     if(ID==hall)
     {

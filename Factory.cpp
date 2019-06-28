@@ -70,7 +70,7 @@ std::unique_ptr<PlayerWeapon> Factory::createWeaponToCollect(Player *player,Room
 }
 
 
-std::unique_ptr<Enemy> Factory::createEnemy(Player *player, Room& room) {
+std::unique_ptr<Enemy> Factory::createEnemy(Player &player, Room& room) {
     Enemy::type ID;
     switch (room.getId())
     {

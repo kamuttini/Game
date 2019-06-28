@@ -6,16 +6,11 @@
 #include "RandomMove.h"
 #include "Enemy.h"
 
-RandomMove::RandomMove() {
-   changeDirectionTime = sf::seconds(3);
-}
-
-
 void RandomMove::setDirection(Enemy &enemy, Player &player) {
-    if (enemy.changeDirectionClock.getElapsedTime() > changeDirectionTime) {
+    if (changeDirectionClock.getElapsedTime() > CHANGE_DIRECTION_TIME) {
         srand(clock());
         enemy.setOrientation(DynamicComponent::orientation(rand() % 4));
-        enemy.changeDirectionClock.restart();
+        changeDirectionClock.restart();
     }
     enemy.setSpeed(RANDOMMOVE_SPEED);
 }

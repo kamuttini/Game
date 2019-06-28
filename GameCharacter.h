@@ -7,23 +7,25 @@
 
 #include "DynamicComponent.h"
 #include "Weapon.h"
+typedef std::unique_ptr<Weapon>  weaponPtr;
 
 class GameCharacter: public DynamicComponent,public CollisionObserver{
 
 public:
      GameCharacter(int s=10 ,int h=ENEMY_HP);
-    typedef std::unique_ptr<Weapon>  weaponPtr;
-    void update(Weapon* weapon) override =0;
+     ~GameCharacter()= default;
+    void update(Weapon& weapon) override =0;
     virtual void updateState();
+
     void setHp(int hp);
     int getHp();
+    void setWalkingDelay(int val);
 
     std::list<CollisionObserver*> targetList;
 
 protected:
     virtual void fight()=0;
     virtual void move();
-    void setWalkingDelay(int val);
 
     int hp;
     bool isFighting;
