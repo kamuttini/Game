@@ -35,9 +35,16 @@ bool ClassRoom::activeUpdate(Player &player) {
             if (!professor->checkToken()) {
                 professor->talk();
                 professor->getToken()->setActive(true, &player);
-            } else {
+            }
+            else {
                 player.changeColMap();
-                player.stats.updateScore(ROOM_COMPLETED);
+                player.stats->updateScore(ROOM_COMPLETED);
+                if(player.getLevelKills()==0)
+                {
+                    player.Pacifista();
+                    player.notify();
+                }
+                player.setKilled(true);
                 completed = true;
                 sound.play();
                 return true;

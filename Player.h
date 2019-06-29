@@ -8,23 +8,34 @@
 
 #include "GameCharacter.h"
 #include "Inventory.h"
-#include "HUD.h"
+#include "Subject.h"
+#include "Badge.h"
 
-
-class Player: public GameCharacter {
+class Player: public GameCharacter, public Subject {
 public:
-    explicit Player (HUD& hud);
-    ~Player(){};
+    explicit Player ();
+    ~Player()= default;
+    void addObserver(PlayerObserver* o) override ;
     void getInput();
     void update(Weapon& weapon) override;
     void updateState()override;
     void updateTarget(CollisionObserver *enemy);
-    HUD& stats;
+    void setKilled(bool=false);
+    int getLevelKills();
+    void Pacifista();
+    void notify()override ;
+
     Inventory inventory;
+    PlayerObserver* stats;
 
 private:
     void fight() override;
+    void move() override ;
+    void removeObserver(PlayerObserver* o) override;
 
+    int kills;
+    int levelkills;
+    bool pacifista;
     float speed2;
     sf::Clock moveClock;
     sf::SoundBuffer token;

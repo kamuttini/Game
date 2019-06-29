@@ -6,10 +6,10 @@
 #define GAME_WEAPON_H
 
 #include "DynamicComponent.h"
-#include "Subject.h"
+#include "CollisionSubject.h"
 
 
-class Weapon: public DynamicComponent, public Subject  {
+class Weapon: public DynamicComponent, public CollisionSubject  {
 public:
     enum type{pizza,coffee,book};
 

@@ -8,22 +8,24 @@
 
 #include <SFML/Graphics.hpp>
 #include "Text.h"
-class Player;
-class HUD {
+#include "PlayerObserver.h"
+#include "Badge.h"
 
+class Player;
+class HUD: public PlayerObserver{
 public:
     HUD();
-    ~HUD(){};
+    ~HUD()= default;;
     void draw(sf::RenderWindow& window);
-    void updateHp() ;
-    void updateWeapons(int weapons);
-    void updateScore(int bonus);
+    void update(int kills, int weapon, int hp, bool pacifista)override ;
+    void updateScore(int bonus) override ;
     int getScore();
+    const Badge *getBadge() const;
 
 private:
     int score;
-    int hp;
-    Text text[4];
+    Text text[5];
+    Badge badge[3];
     sf::Texture rHeart;
     sf::Texture bHeart;
     sf::Sprite hearts[3];

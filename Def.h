@@ -12,6 +12,7 @@
 #define SPLASHSCREEN_TIME sf::seconds(2.5)
 #define nLAYERS 4
 #define WEAPONALER_POSITION 260,200
+#define BADGE_TEXT_POSITION 450,200
 #define SOUNDTRACK_VOLUME 32
 
 //TIMES
@@ -68,5 +69,10 @@
 #define WOUNDED_ENEMY 10
 #define DEAD_ENEMY 25
 #define WEAPON_CAUGHT 5
+
+//BADGE
+#define KILLS 5
+#define SECCHIONE 18
+
 
 #endif //GAME_DEF_H

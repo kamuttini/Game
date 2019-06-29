@@ -14,6 +14,7 @@
 #include "Room.h"
 #include "Professor.h"
 #include "Token.h"
+#include "HUD.h"
 #include <SFML/Graphics.hpp>
 
 
@@ -36,8 +37,8 @@ private:
     std::vector<std::unique_ptr<Room>> room;
     Room* activeRoom;
     GameDataRef data;
-    HUD hud;
     std::unique_ptr<Player> player;
+    std::unique_ptr<HUD> hud;
     int mapLevel;
 };
 

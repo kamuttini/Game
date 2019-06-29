@@ -8,13 +8,15 @@
 #include "Game.h"
 
 
-Player::Player(HUD &hud1) : GameCharacter(MIN_SPEED, PLAYER_HP),
-                            stats(hud1),
-                            speed2(MAX_SPEED)
+Player::Player() :  GameCharacter(MIN_SPEED, PLAYER_HP),
+                    speed2(MAX_SPEED),
+                    kills(0),
+                    levelkills(0),
+                    pacifista(false)
 {
     rect.setPosition(PLAYER_START_POSITION);
     rect.setSize(sf::Vector2f(30,60));
-    sprite = new Sprite("sprite8.png", *this, 2, 0, 3, 1, 9, 64, 65.25);
+    sprite= std::make_unique<Sprite> ("sprite8.png", *this, 2, 0, 3, 1, 9, 64, 65.25);
     sprite->setScale(sf::Vector2f(1.6, 1.6));
     token.loadFromFile("assets/music/token.flac");
     damage.loadFromFile("assets/music/damage.ogg");
@@ -78,7 +80,7 @@ void Player::fight() {
 
     for (int i = 0; i < inventory.weaponVec.size(); i++) {
         inventory.weaponVec[i]->attack();
-        stats.updateWeapons(inventory.collectionSize());
+        notify();
     }
 }
 
@@ -87,29 +89,28 @@ void Player::updateTarget(CollisionObserver *enemy) {
     targetList.push_back(enemy);
 }
 
-void Player::update(Weapon *weapon) {
-    if (weapon->getRect().getGlobalBounds().intersects(rect.getGlobalBounds())) {
-        const std::type_info &type_info = typeid(*weapon);
+void Player::update(Weapon &weapon) {
+    if (weapon.getRect().getGlobalBounds().intersects(rect.getGlobalBounds())) {
+        const std::type_info &type_info = typeid(weapon);
         if (type_info == typeid(PlayerWeapon)) {
             sound.setBuffer(token);
             sound.play();
-            inventory.addToCollection(*weapon);
-            weapon->setIsDestroyed(true);
-            stats.updateWeapons(inventory.collectionSize());
-            stats.updateScore(WEAPON_CAUGHT);
+            inventory.addToCollection(weapon);
+            weapon.setIsDestroyed(true);
+            notify();
         } else {
             sound.setBuffer(damage);
             sound.play();
             if (hp > 1) {
                 hp--;
-                weapon->setIsDestroyed(true);
-                stats.updateHp();
+                weapon.setIsDestroyed(true);
+                notify();
 
             } else {
                 hp--;
                 destroyed = true;
-                weapon->setIsDestroyed(true);
-                stats.updateHp();
+                weapon.setIsDestroyed(true);
+                notify();
                 sf::sleep(sf::seconds(1));
             }
         }
@@ -120,7 +121,7 @@ void Player::update(Weapon *weapon) {
 void Player::updateState() {
     GameCharacter::updateState();
     inventory.updateState();
-    if(moveClock.getElapsedTime()<sf::seconds(0.4))
+    if(moveClock.getElapsedTime()<sf::seconds(0.5))
     {
         if (walkingClock.getElapsedTime() >= walkingDelay)
         {
@@ -129,6 +130,36 @@ void Player::updateState() {
         }
 
     }
+}
+
+void Player::addObserver(PlayerObserver *o) {
+    stats=o;
+}
+
+void Player::notify() {
+    stats->update(kills, inventory.collectionSize(), hp, pacifista);
+}
+
+void Player::removeObserver(PlayerObserver *o) {
+    delete(o);
+}
+
+void Player::setKilled(bool val) {
+    if(!val) {
+        kills += 1;
+        levelkills += 1;
+        notify();
+    }
+    else
+    levelkills=0;
+}
+
+int Player::getLevelKills() {
+    return levelkills;
+}
+
+void Player::Pacifista() {
+    pacifista=true;
 }
 
 
