@@ -11,7 +11,7 @@
 class WinGameOverState: public GameOverState {
 public:
     WinGameOverState(int score, GameDataRef data);
-    ~WinGameOverState(){};
+    ~WinGameOverState()= default;;
     void Init() override ;
     void HandleInput() override ;
     void Draw() override ;

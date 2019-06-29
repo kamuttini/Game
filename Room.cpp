@@ -52,8 +52,8 @@ Room::Room(type ID1) : ID(ID1) {
 
 
 void Room::update() {
-    for (int i = 0; i <enemyVec.size(); i++)
-        enemyVec[i]->updateState();
+    for (auto & i : enemyVec)
+        i->updateState();
 
     destroy();
 }

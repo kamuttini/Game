@@ -25,7 +25,7 @@ Enemy::Enemy(Player &player1, type &ID1, sf::Vector2f origin, sf::Vector2f bound
 }
 
 void Enemy::fight() {
-    float distance;
+    int distance;
     distance = sqrt(pow(getPosition().x - player.getPosition().x, 2) +
                     pow(getPosition().y - player.getPosition().y, 2));
 
@@ -203,7 +203,6 @@ DynamicComponent::orientation Enemy::swapDirection() {
 const std::unique_ptr<Strategy> &Enemy::getStrategy() const {
     return strategy;
 }
-
 
 
 

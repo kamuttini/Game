@@ -13,13 +13,13 @@
 class Enemy;
 GameState::GameState(GameDataRef data1) :   data(data1),
                                             layer{TileMap("map1.txt"),TileMap("map2.txt"),TileMap("map3.txt"), TileMap("map4.txt")},
-                                            mapLevel(0),
-                                            player(new Player()),
-                                            hud(new HUD())
+                                            mapLevel(0)
                                            {}
 
 void GameState::Init()
 {
+    hud=std::make_unique<HUD> ();
+    player=std::make_unique<Player>();
     player->addObserver(hud.get());
     view.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
     HUDview.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
@@ -53,6 +53,9 @@ void GameState::HandleInput()
             case sf::Event::Closed:
                 this->data->window.close();
                 break;
+
+            default:
+                break;
         }
     }
 }
@@ -81,9 +84,9 @@ void GameState::Update()
     }
 
 
-    for(int i=0; i<room.size(); i++)
-        if(activeRoom!=room[i].get())
-            room[i].get()->update();
+    for(auto & i : room)
+        if(activeRoom!=i.get())
+            i.get()->update();
 
     if(player->isDestroyed()){                                                                                         //end game
         this->data->machine.AddState(StateRef(new GameOverState(hud->getScore(), this->data)), true);
@@ -96,21 +99,21 @@ void GameState::Draw() {
     view.move(movement.x * 0.1, movement.y * 0.1);
     this->data->window.setView(view);
 
-    for (int i = 0; i < nLAYERS; i++)
-        this->data->window.draw(layer[i]);
+    for (const auto & i : layer)
+        this->data->window.draw(i);
 
-    for(int i=0; i<room.size();i++)
+    for(auto & i : room)
     {
-        room[i]->draw(this->data->window);
+        i->draw(this->data->window);
     }
-    for (int i = 0; i < player->inventory.weaponVec.size(); i++)
-        player->inventory.weaponVec[i]->draw(this->data->window);
+    for (auto & i : player->inventory.weaponVec)
+        i->draw(this->data->window);
 
 
     player->draw(this->data->window);
-    for(int i=0; i<room.size();i++)
+    for(auto & i : room)
     {
-        room[i]->draw(this->data->window);
+        i->draw(this->data->window);
     }
     this->data->window.setView(HUDview);
 

@@ -24,7 +24,6 @@ Game::Game(int width, int height, std::string title)
 
 void Game::Run()
 {
-
     while (this->data->window.isOpen())
     {
         this->data->machine.ProcessStateChanges();

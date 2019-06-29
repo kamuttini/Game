@@ -19,8 +19,8 @@
 class PauseState: public State {
 
 public:
-    PauseState(GameDataRef data);
-    ~PauseState(){};
+    explicit PauseState(GameDataRef data);
+    ~PauseState()= default;;
     void Init() override ;
     void HandleInput() override ;
     void Update()  override;

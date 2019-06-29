@@ -13,8 +13,8 @@
 
 class MenuState: public State {
 public:
-    MenuState(GameDataRef data);
-    ~MenuState(){};
+    explicit MenuState(GameDataRef data);
+    ~MenuState()= default;;
     void Init() override ;
     void HandleInput() override ;
     void Update()  override;

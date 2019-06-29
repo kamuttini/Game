@@ -11,7 +11,7 @@
 class Text {
 public:
     explicit Text(std::string text1, int size=50, sf::Color color=sf::Color::White);
-    ~Text(){};
+    ~Text()= default;
     void setPosition(float x, float y);
     sf::Vector2f getPosition();
     void draw(sf::RenderWindow& window);

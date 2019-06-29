@@ -51,7 +51,11 @@ void MenuState::HandleInput() {
                     case sf::Keyboard::Return:
                         this->data->machine.AddState(StateRef(new SplashState(data)), true);
                         break;
+                    default:
+                        break;
                 }
+            default:
+                break;
         }
     }
 }

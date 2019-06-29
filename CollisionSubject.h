@@ -12,7 +12,7 @@
 class CollisionSubject {
 public:
     CollisionSubject()= default;
-    virtual ~CollisionSubject(){};
+    virtual ~CollisionSubject()= default;;
     virtual void addObserver (CollisionObserver* o) = 0;
     virtual void removeObserver(CollisionObserver* o) = 0;
     virtual void notify() =0;

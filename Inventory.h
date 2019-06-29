@@ -15,7 +15,7 @@ typedef std::unique_ptr<Weapon>  weaponPtr;
 class Inventory {
 public:
     Inventory();
-    ~Inventory(){};
+    ~Inventory()= default;;
     void addToCollection(Weapon& weapon);
     void removeFromCollection();
     void useWeapon(std::list<CollisionObserver*>& targetList, sf::Vector2f targetDir, sf::Vector2f position);
