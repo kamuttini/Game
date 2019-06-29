@@ -8,9 +8,8 @@
 class TileMapCollisionTest: public ::testing::Test {
 public:
 protected:
-    TileMapCollisionTest():player(sidebar), testTime(sf::seconds(5)) {};
+    TileMapCollisionTest():player(), testTime(sf::seconds(5)) {};
     ~TileMapCollisionTest(){};
-    HUD sidebar;
     Player player;
     sf::Clock testClock;
     sf::Time testTime;
@@ -28,6 +27,8 @@ TEST_F(TileMapCollisionTest, Test) {
     while(testClock.getElapsedTime()<testTime) {
         player.move();
     }
-    EXPECT_FALSE(player.checkBorders(player.getDirection()));
-    ASSERT_TRUE(player.checkPosition(player.findTile()));
+    sf::Vector2f startPosition=player.getPosition();
+    player.move();
+    sf::Vector2f endPosition= player.getPosition();
+    ASSERT_TRUE(startPosition==endPosition);
 }

@@ -12,10 +12,9 @@
 
 class StrategyTest : public ::testing::Test {
 protected:
-    StrategyTest(): player(sidebar), enemy(&player, ID, HALL_ORIGIN, HALL_DIMENSION){};
+    StrategyTest(): player(), enemy(player, ID, HALL_ORIGIN, HALL_DIMENSION){};
     ~StrategyTest() {};
     int calculateDistance();
-    HUD sidebar;
     Player player;
     Enemy enemy;
     Enemy::type ID=Enemy::type::student;
@@ -33,7 +32,7 @@ int StrategyTest::calculateDistance() {
 TEST_F(StrategyTest, RandomMove) {
     enemy.setPosition(player.getPosition().x-FOLLOW_RANGE-50, player.getPosition().y);
     sf::Vector2f startPosition=enemy.getPosition();
-    enemy.move();
+    enemy.updateState();
     sf::Vector2f endPosition= enemy.getPosition();
 
     const std::type_info& type_info = typeid(*enemy.getStrategy());
@@ -44,7 +43,7 @@ TEST_F(StrategyTest, RandomMove) {
 TEST_F(StrategyTest, Follow) {
     enemy.setPosition(player.getPosition().x-FOLLOW_RANGE+50, player.getPosition().y);
     int startDistance=calculateDistance();
-    enemy.move();
+    enemy.updateState();
     int endDistance = calculateDistance();
     const std::type_info& type_info = typeid(*enemy.getStrategy());
     EXPECT_TRUE(type_info== typeid(Follow));
@@ -55,7 +54,7 @@ TEST_F(StrategyTest, Follow) {
 TEST_F(StrategyTest, Static) {
     enemy.setHp(1);
     sf::Vector2f startPosition=enemy.getPosition();
-    enemy.move();
+    enemy.updateState();
     EXPECT_TRUE(enemy.getPosition()==startPosition);
     const std::type_info& type_info = typeid(*enemy.getStrategy());
     ASSERT_TRUE(type_info== typeid(Static));

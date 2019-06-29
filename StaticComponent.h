@@ -24,6 +24,7 @@ public:
     sf::RectangleShape &getRect();
     sf::Vector2f getPosition();
     void setPosition(float x, float y);
+    const std::unique_ptr<TileMap> &getColMap() const;
 
 protected:
     int findTile();
@@ -34,7 +35,6 @@ protected:
     std::unique_ptr<Sprite> sprite;
     std::unique_ptr<TileMap> colMap;
 
-private:
     bool checkPosition(int tileToCheck);
     int posX, posY;
     float sx,dx,top,bottom;

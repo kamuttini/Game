@@ -16,6 +16,7 @@ public:
     bool activeUpdate(Player &player) override;
     void draw(sf::RenderWindow &window) override;
     void update()override;
+    const std::unique_ptr<Professor> &getProfessor() const;
 
 private:
     std::unique_ptr<Professor> professor;

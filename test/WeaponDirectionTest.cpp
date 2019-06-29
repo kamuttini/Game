@@ -7,12 +7,12 @@
 class WeaponDirectionTest: public ::testing::Test {
 public:
 protected:
-    WeaponDirectionTest(): player(sidebar), enemy(&player, ID, HALL_ORIGIN, HALL_DIMENSION){};
+    WeaponDirectionTest(): enemy(player, ID, HALL_ORIGIN, HALL_DIMENSION){};
     ~WeaponDirectionTest(){};
     int calculateDistance(sf::RectangleShape& rect);
-    HUD sidebar;
     Player player;
     Enemy enemy;
+
     int startDistance;
     int endDistance;
     Enemy::type ID=Enemy::type::student;
@@ -31,7 +31,7 @@ int WeaponDirectionTest::calculateDistance(sf::RectangleShape& rect) {
 
 TEST_F(WeaponDirectionTest, Test) {
     player.setPosition(2000,1900);
-    enemy.setPosition(player.getPosition().x+ATTACK_RANGE-50, player.getPosition().y);
+    enemy.setPosition(player.getPosition().x-ATTACK_RANGE+100, player.getPosition().y);
     Weapon weapon(enemy.targetList,enemy.calculateDirection(calculateDistance(enemy.getRect())), enemy.getPosition(),Weapon::type::book );
     startDistance=calculateDistance(weapon.getRect());
     weapon.attack();

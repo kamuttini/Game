@@ -72,3 +72,7 @@ void ClassRoom::update() {
     if(professor->getToken()->isActive())
         professor->getToken()->update();
 }
+
+const std::unique_ptr<Professor> &ClassRoom::getProfessor() const {
+    return professor;
+}

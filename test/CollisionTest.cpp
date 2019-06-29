@@ -4,19 +4,19 @@
 
 #include "gtest/gtest.h"
 #include "../Player.h"
-
+#include "../HUD.h"
 
 
 class PlayerTest : public ::testing::Test {
 protected:
-    PlayerTest(): player(sidebar), weapon(Weapon::type::coffee), weaponToCollect(player, Weapon::type::coffee, HALL_ORIGIN, HALL_DIMENSION) {};
+    PlayerTest(): player(), weapon(Weapon::type::coffee), weaponToCollect(player, Weapon::type::coffee, HALL_ORIGIN, HALL_DIMENSION) {};
     ~PlayerTest() override{};
-    HUD sidebar;
+    HUD hud;
     Player player;
     Weapon weapon;
     PlayerWeapon weaponToCollect;
-
     void SetUp() override{
+        player.addObserver(&hud);
         weapon.addObserver(&player);
         weapon.setPosition(player.getPosition().x, player.getPosition().y);
         weaponToCollect.setPosition(player.getPosition().x, player.getPosition().y);

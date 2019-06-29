@@ -16,21 +16,23 @@ public:
     explicit Player ();
     ~Player()= default;
     void addObserver(PlayerObserver* o) override ;
+    void notify()override ;
     void getInput();
     void update(Weapon& weapon) override;
     void updateState()override;
     void updateTarget(CollisionObserver *enemy);
+    void move() override ;
+
     void setKilled(bool=false);
     int getLevelKills();
     void Pacifista();
-    void notify()override ;
+
 
     Inventory inventory;
     PlayerObserver* stats;
 
 private:
     void fight() override;
-    void move() override ;
     void removeObserver(PlayerObserver* o) override;
 
     int kills;

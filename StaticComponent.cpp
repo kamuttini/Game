@@ -74,4 +74,8 @@ bool StaticComponent::checkPosition(int tileToCheck) {
         return true;
 }
 
+const std::unique_ptr<TileMap> &StaticComponent::getColMap() const {
+    return colMap;
+}
+
 

@@ -18,13 +18,13 @@ public:
     ~Weapon()= default;
     void attack();
     void removeObserver(CollisionObserver* o) override;
+    void addObserver(CollisionObserver* o) override ;
     void notify() override;
     void destroy(std::vector<std::unique_ptr<Weapon>>& enemy,std::vector<std::unique_ptr<Weapon>>::const_iterator iter1);
 
     type getId() const;
 
 protected:
-    void addObserver(CollisionObserver* o) override ;
     std::string setSprite();
 
     std::list<CollisionObserver*> characters;
