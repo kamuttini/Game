@@ -11,23 +11,26 @@
 #include "Text.h"
 #include "Player.h"
 
-class Professor: public StaticComponent {
+class Professor: public StaticComponent, public PositionSubject {
 public:
     enum type {prof1,prof2,prof3};
 
     explicit Professor(type id);
-    ~Professor(){};
+    ~Professor(){delete(token);};
     bool checkToken();
+    void addPositionObserver (PositionObserver* o) override;
+    void notifyPosition() override;;
     void talk();
     bool isTalking();
     void stopTalking();
     Token *getToken() const;
 
     sf::Sprite message;
-
 private:
     void changeText();
+    void removePositionObserver(PositionObserver* o) override {};
 
+    PositionObserver* map;
     type ID;
     bool talking;
     sf::Texture mTexture;

@@ -68,6 +68,7 @@ void Player::move() {
     if(checkBorders(direction)) {
         GameCharacter::move();
         movement /= speed;
+        notifyPosition();
     }
 }
 
@@ -160,6 +161,14 @@ int Player::getLevelKills() {
 
 void Player::Pacifista() {
     pacifista=true;
+}
+
+void Player::addPositionObserver(PositionObserver *o) {
+    map=o;
+}
+
+void Player::notifyPosition() {
+    map->update(rect,0, true);
 }
 
 

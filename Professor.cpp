@@ -38,7 +38,6 @@ Professor::Professor(type id): ID(id), talking(false) {
     mTexture.loadFromFile(mfilename);
     message.setTexture(mTexture);
     message.setPosition(rect.getPosition().x+10,rect.getPosition().y-130);
-    displayTime=PROF_MESSAGE_DISPLAY_TIME;
 }
 
 void Professor::talk() {
@@ -49,7 +48,7 @@ void Professor::talk() {
 }
 
 void Professor::stopTalking() {
-    if(talking && displayClock.getElapsedTime()>displayTime)
+    if(talking && displayClock.getElapsedTime()>PROF_MESSAGE_DISPLAY_TIME)
         talking=false;
 }
 
@@ -66,7 +65,9 @@ bool Professor::checkToken() {
         return true;
     }
     else
+    {
         return false;
+    }
 }
 
 Token *Professor::getToken() const {
@@ -89,6 +90,14 @@ void Professor::changeText() {
     }
     mTexture.loadFromFile(filename);
     message.setTexture(mTexture);
+}
+
+void Professor::addPositionObserver(PositionObserver *o) {
+    map=o;
+}
+
+void Professor::notifyPosition() {
+        map->update(rect,1);
 }
 
 

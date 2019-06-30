@@ -8,10 +8,11 @@
 
 #include "Room.h"
 #include "Professor.h"
+#include "Map.h"
 
 class ClassRoom: public Room {
 public:
-    explicit ClassRoom(type ID);
+    explicit ClassRoom(type ID, Map& map);
     ~ClassRoom() {};
     bool activeUpdate(Player &player) override;
     void draw(sf::RenderWindow &window) override;

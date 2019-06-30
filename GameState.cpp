@@ -20,6 +20,7 @@ void GameState::Init()
 {
     hud=std::make_unique<HUD> ();
     player=std::make_unique<Player>();
+    player->addPositionObserver(&map);
     player->addObserver(hud.get());
     view.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
     HUDview.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
@@ -29,9 +30,9 @@ void GameState::Init()
     room.push_back(std::make_unique<Room>(Room::type::hall));
     room.push_back(std::make_unique<Room>(Room::type::canteen));
     room.push_back(std::make_unique<Room>(Room::type::bar));
-    room.push_back(std::make_unique<ClassRoom>(Room::type::classroom1));
-    room.push_back(std::make_unique<ClassRoom>(Room::type::classroom2));
-    room.push_back(std::make_unique<ClassRoom>(Room::type::classRoom3));
+    room.push_back(std::make_unique<ClassRoom>(Room::type::classroom1, map));
+    room.push_back(std::make_unique<ClassRoom>(Room::type::classroom2, map));
+    room.push_back(std::make_unique<ClassRoom>(Room::type::classRoom3, map));
 }
 
 void GameState::HandleInput()
@@ -70,9 +71,11 @@ void GameState::Update()
         switch (mapLevel) {
             case 0:
                 layer[1] = TileMap("map2_v2.txt");
+                dynamic_cast<ClassRoom *>(room[4].get())->getProfessor()->notifyPosition();
                 break;
             case 1:
                 layer[1] = TileMap("map2_v3.txt");
+                dynamic_cast<ClassRoom *>(room[5].get())->getProfessor()->notifyPosition();
                 break;
             case 2:
                 Draw();
@@ -122,6 +125,7 @@ void GameState::Draw() {
         player->inventory.alert.draw(this->data->window);
         player->inventory.alert.stopDisplaying();
     }
+    map.draw(this->data->window);
 
     this->data->window.display();
 }

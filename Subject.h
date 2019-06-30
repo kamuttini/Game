@@ -6,9 +6,6 @@
 
 #ifndef GAME_BADGESUBJECT_H
 #define GAME_BADGESUBJECT_H
-
-#endif //GAME_BADGESUBJECT_H
-
 class Subject {
 public:
     Subject()= default;
@@ -18,3 +15,6 @@ public:
     virtual void notify() =0;
 
 };
+
+#endif //GAME_BADGESUBJECT_H
+

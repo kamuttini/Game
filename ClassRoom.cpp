@@ -4,7 +4,7 @@
 
 #include "ClassRoom.h"
 
-ClassRoom::ClassRoom(Room::type ID): Room(ID), completed(false){
+ClassRoom::ClassRoom(Room::type ID, Map& map): Room(ID), completed(false){
     switch (ID)
     {
         case classroom1:
@@ -23,6 +23,10 @@ ClassRoom::ClassRoom(Room::type ID): Room(ID), completed(false){
             break;
     }
     sound.setVolume(SOUNDTRACK_VOLUME);
+    professor->addPositionObserver(&map);
+    professor->getToken()->addPositionObserver(&map);
+    if(ID==classroom1)
+        professor->notifyPosition();
 }
 
 bool ClassRoom::activeUpdate(Player &player) {

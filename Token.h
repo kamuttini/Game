@@ -9,7 +9,7 @@
 #include "StaticComponent.h"
 #include "Player.h"
 
-class Token: public StaticComponent {
+class Token: public StaticComponent, public PositionSubject  {
 public:
     enum type{calculator,license,computer};
     explicit Token(type id);
@@ -18,13 +18,18 @@ public:
     void setActive(bool active, Player* player= nullptr);
     void update();
     bool isCaught() const;
+    void addPositionObserver (PositionObserver* o) override;
 
 private:
     void attachToPlayer();
+    void removePositionObserver(PositionObserver* o) override {};
+    void notifyPosition() override;;
 
+    PositionObserver* map;
     Player* player;
     type ID;
     bool active;
+    bool displayMap;
     bool caught;
 
 };

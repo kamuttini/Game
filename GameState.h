@@ -15,6 +15,7 @@
 #include "Professor.h"
 #include "Token.h"
 #include "HUD.h"
+#include "Map.h"
 #include <SFML/Graphics.hpp>
 
 
@@ -34,6 +35,7 @@ private:
     sf::View view;
     sf::View HUDview;
     TileMap layer[nLAYERS];
+    Map map;
     std::vector<std::unique_ptr<Room>> room;
     Room* activeRoom;
     GameDataRef data;

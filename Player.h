@@ -9,13 +9,15 @@
 #include "GameCharacter.h"
 #include "Inventory.h"
 #include "Subject.h"
-#include "Badge.h"
+#include "PositionSubject.h"
+#include "PositionObserver.h"
 
-class Player: public GameCharacter, public Subject {
+class Player: public GameCharacter, public Subject, public PositionSubject {
 public:
     explicit Player ();
     ~Player()= default;
     void addObserver(PlayerObserver* o) override ;
+    void addPositionObserver (PositionObserver* o) override;
     void notify()override ;
     void getInput();
     void update(Weapon& weapon) override;
@@ -34,7 +36,10 @@ public:
 private:
     void fight() override;
     void removeObserver(PlayerObserver* o) override;
+    void removePositionObserver(PositionObserver* o) override {};
+    void notifyPosition() override;;
 
+    PositionObserver* map;
     int kills;
     int levelkills;
     bool pacifista;

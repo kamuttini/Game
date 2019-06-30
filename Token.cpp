@@ -35,6 +35,8 @@ bool Token::isActive() const {
 
 void Token::setActive(bool active1, Player* player1) {
     active = active1;
+    displayMap=active1;
+    notifyPosition();
     player=player1;
 }
 
@@ -54,10 +56,20 @@ void Token::attachToPlayer() {
 
     rect.setPosition(player->getPosition().x+10,player->getPosition().y+40);
     sprite->update();
+    displayMap=false;
+    notifyPosition();
 }
 
 bool Token::isCaught() const {
     return caught;
+}
+
+void Token::addPositionObserver(PositionObserver *o) {
+    map=o;
+}
+
+void Token::notifyPosition() {
+    map->update(rect,2,displayMap);
 }
 
 
