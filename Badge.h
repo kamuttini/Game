@@ -14,14 +14,15 @@ class Badge {
 public:
     enum type{killer,secchione, pacifista};
     explicit Badge(type ID);
-    ~Badge(){delete(text);};
+    ~Badge(){delete(badgeText);};
     void draw(sf::RenderWindow& window);
     void setActive(bool val);
     bool isActive() const;
 
 private:
-    sf::RectangleShape rect;
-    Text* text;
+    sf::Texture texture;
+    sf::Sprite badgeSprite;
+    Text* badgeText;
     bool active;
 };
 

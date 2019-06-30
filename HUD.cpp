@@ -7,7 +7,7 @@
 #include "Player.h"
 
 HUD::HUD ():  text{Text("HP"),Text("Weapons: 0"),Text("CFU: 0"),Text("Kills: 0"),Text("PRESS P TO PAUSE",30)},
-              badge{Badge(Badge::type::killer),Badge(Badge::type::pacifista),Badge(Badge::type::secchione)},
+              badge{Badge(Badge::type::killer),Badge(Badge::type::secchione),Badge(Badge::type::pacifista)},
               score(0)
 {
     hp=4;
@@ -48,14 +48,20 @@ void HUD::update(int kills1, int weapon1, int hp1, bool pacifista) {
         text[3].text.setString("Kills: " + std::to_string(kills));
         updateScore(DEAD_ENEMY);
         if(kills==KILLS && !badge[0].isActive())
+        {
             badge[0].setActive(true);
+            updateScore(BADGE_ACHIEVED);
+        }
     }
     if (weaponCaught != weapon1) {
         weaponCaught = weapon1;
         text[1].text.setString("Weapons: " + std::to_string(weaponCaught));
         updateScore(WEAPON_CAUGHT);
         if(!badge[1].isActive() && weaponCaught>SECCHIONE )
+        {
             badge[1].setActive(true);
+            updateScore(BADGE_ACHIEVED);
+        }
     }
     if (hp1 != hp) {
         hp = hp1;
@@ -63,7 +69,10 @@ void HUD::update(int kills1, int weapon1, int hp1, bool pacifista) {
             hearts[hp - 1].setTexture(bHeart);
     }
     if(pacifista && !badge[2].isActive())
+    {
         badge[2].setActive(true);
+        updateScore(BADGE_ACHIEVED);
+    }
 }
 
 

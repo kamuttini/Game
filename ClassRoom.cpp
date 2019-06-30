@@ -73,8 +73,9 @@ void ClassRoom::draw(sf::RenderWindow &window) {
 
 void ClassRoom::update() {
     Room::update();
-    if(professor->getToken()->isActive())
-        professor->getToken()->update();
+    if(!completed)
+        if(professor->getToken()->isActive())
+            professor->getToken()->update();
 }
 
 const std::unique_ptr<Professor> &ClassRoom::getProfessor() const {

@@ -69,10 +69,11 @@
 #define WOUNDED_ENEMY 10
 #define DEAD_ENEMY 25
 #define WEAPON_CAUGHT 5
+#define BADGE_ACHIEVED 30
 
 //BADGE
 #define KILLS 5
-#define SECCHIONE 18
+#define SECCHIONE 10
 
 
 #endif //GAME_DEF_H

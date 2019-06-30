@@ -16,7 +16,7 @@ public:
     enum type {prof1,prof2,prof3};
 
     explicit Professor(type id);
-    ~Professor(){delete(token);};
+    ~Professor(){};
     bool checkToken();
     void addPositionObserver (PositionObserver* o) override;
     void notifyPosition() override;;

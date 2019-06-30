@@ -4,6 +4,7 @@
 
 #include "gtest/gtest.h"
 #include "../Enemy.h"
+#include "../Map.h"
 
 class TileMapCollisionTest: public ::testing::Test {
 public:
@@ -13,6 +14,7 @@ protected:
     Player player;
     sf::Clock testClock;
     sf::Time testTime;
+    Map map;
 
     void TearDown() override {
         std::cout<< "PLAYER-TILEMAP COLLISION TESTED ON RANDOM MOVEMENT FOR 5 SECONDS THAT VERIFIES PLAYER'S IN A WALKABLE TILE AND THAT HE CANNOT KEEP WALKING IN THE RANDOM DIRECTION DUE TO THE PRESENCE OF A COLLISION TILE";
@@ -21,6 +23,7 @@ protected:
 
 
 TEST_F(TileMapCollisionTest, Test) {
+    player.addPositionObserver(&map);
     player.setPosition(CLASSROOM1_ORIGIN.x+350,CLASSROOM1_ORIGIN.y+140);
     srand((clock()));
     player.setOrientation(DynamicComponent::orientation::right);

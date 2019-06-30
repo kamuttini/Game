@@ -9,12 +9,13 @@
 
 class BadgeTest : public ::testing::Test {
 protected:
-    BadgeTest(): weapon(player,PlayerWeapon::type::book,HALL_ORIGIN,HALL_DIMENSION), classRoom(ClassRoom::type::classroom1){};
+    BadgeTest(): weapon(player,PlayerWeapon::type::book,HALL_ORIGIN,HALL_DIMENSION), classRoom(ClassRoom::type::classroom2, map){};
     ~BadgeTest(){};
     HUD hud;
     Player player;
     PlayerWeapon weapon;
     ClassRoom classRoom;
+    Map map;
     void SetUp() override {
         player.addObserver(&hud);
     }
