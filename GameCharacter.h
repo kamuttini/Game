@@ -13,7 +13,7 @@ class GameCharacter: public DynamicComponent,public CollisionObserver{
 
 public:
      explicit GameCharacter(int s=10 ,int h=ENEMY_HP);
-     ~GameCharacter()= default;
+     virtual ~GameCharacter()= default;
     void update(Weapon& weapon) override =0;
     virtual void updateState();
 

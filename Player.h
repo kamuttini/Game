@@ -29,7 +29,6 @@ public:
     int getLevelKills();
     void Pacifista();
 
-
     Inventory inventory;
     PlayerObserver* stats;
 

@@ -16,7 +16,7 @@ public:
     enum orientation { down, up,left,right, null};
 
     explicit StaticComponent(orientation dir = down);
-    ~StaticComponent(){};
+    virtual ~StaticComponent()= default;
     void draw(sf::RenderWindow &window);
 
     orientation getDirection() const;
